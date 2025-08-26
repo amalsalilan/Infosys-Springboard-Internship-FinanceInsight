@@ -1,31 +1,39 @@
-### Custom NER Model
-## Overview
+### NER Training with spaCy
 
-This project trains a custom Named Entity Recognition (NER) model using spaCy. The model is trained on a small annotated dataset to recognize entities like Persons, Organizations, Locations, Titles/Occupations, and Landmarks.
+This repo contains two Colab notebooks for training a Named Entity Recognition (NER) model on Finance data.
 
-## Files
+## Notebooks
 
-1. ner_training_text.txt -> Training text 
+CPU + No Transformer → Trains spaCy’s ner pipeline (lighter, faster, works without GPU).
 
-2. training_data.json -> Json file containing the annotated version of ner_training_text.txt. NOTE: Annotation is done using the open source tool: https://arunmozhi.in/ner-annotator/
+GPU + Transformer → Uses Hugging Face transformer with spaCy for higher accuracy (requires GPU runtime).
 
-3. NER.ipynb -> Notebook to train the model and evaluate it.
+## Labels Used
 
-4. config.cfg -> Contains the necessary information (required for training) like:
-   1. CPU/GPU for training.
-   2. Which spacy model is being used.
-   3. Optimize for efficiency or accuracy etc.
-   NOTE: config file can be generated with the help of command or by using the site: https://spacy.io/        
+NOTE: Annotation can be done using the open source tool https://arunmozhi.in/ner-annotator/
 
-5. training_data.spacy: Generated docBin object required for actually training the model.
+STOCK
 
-## ENTITIES RECOGNIZED
+REVENUE
 
-1. PERSON: Name of a person
-2. ORG: Any organization
-3. LOC: A specific place in a city/country.
-4. OCC: Occupation
-5. GPE: City/Country
-6. DATE: Day, month, year.
+MARKET_CAP
+
+EARNINGS
+
+DIVIDEND
+
+EVENT
+
+MERGER
+
+## Usage
+
+Open Colab.
+
+Upload the two JSON files in either notebooks depending upon:
+
+1. Run CPU notebook if you don’t need transformer/GPU.
+
+2. Run GPU notebook (set runtime → GPU) for transformer-based accuracy.
 
 
