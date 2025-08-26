@@ -1,6 +1,6 @@
 ### NER Training with spaCy
 
-This repo contains two Colab notebooks for training a Named Entity Recognition (NER) model on Finance data.
+This repo contains two Colab notebooks for training a Named Entity Recognition (NER) model on Finance/Contract data.
 
 ## Notebooks
 
@@ -12,20 +12,23 @@ GPU + Transformer → Uses Hugging Face transformer with spaCy for higher accura
 
 NOTE: Annotation can be done using the open source tool https://arunmozhi.in/ner-annotator/
 
-STOCK
+ORG — Organization / Company name
 
-REVENUE
+GPE — Geo-political entity (city/state/country/address block)
 
-MARKET_CAP
+DATE — Dates (day/month/year)
 
-EARNINGS
+MONEY — Monetary amounts
 
-DIVIDEND
+DURATION — Contract duration (e.g., "12 months")
 
-EVENT
+NOTICE — Termination notice period phrase
 
-MERGER
+CONTRACT_REF — Contract/Reference number
 
+ROLE — role string used in the contract context (e.g., "Service Provider")
+
+MISC — other miscellaneous legal references (e.g., Companies Act citation)
 ## Usage
 
 Open Colab.
