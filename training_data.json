@@ -1,0 +1,135 @@
+{
+  "classes": ["ORG", "DATE", "PRODUCTS", "LOCATION", "AMT", "PERSON"],
+  "annotations": [
+    [
+      "In Q2 2024, JPMorgan Chase reported revenue of 39.2 billion U.S. dollars. CEO Jamie Dimon highlighted strong growth in investment banking services across North America. \r",
+      {
+        "entities": [
+          [3, 10, "DATE"],
+          [12, 26, "ORG"],
+          [47, 73, "AMT"],
+          [78, 89, "PERSON"],
+          [120, 149, "PRODUCTS"],
+          [157, 170, "LOCATION"]
+        ]
+      }
+    ],
+    [
+      "Goldman Sachs earned 12.7 billion U.S. dollars in Q1 2024 from trading and asset management in Europe. David Solomon noted increased client activity in derivatives. \r",
+      {
+        "entities": [
+          [0, 13, "ORG"],
+          [20, 46, "AMT"],
+          [50, 57, "DATE"],
+          [63, 91, "PRODUCTS"],
+          [95, 101, "LOCATION"],
+          [103, 116, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "In Q3 2023, Morgan Stanley generated 13.5 billion U.S. dollars through wealth management operations in Asia. CEO James Gorman emphasized the resilience of advisory services. \r",
+      {
+        "entities": [
+          [3, 10, "DATE"],
+          [12, 26, "ORG"],
+          [37, 63, "AMT"],
+          [71, 89, "PRODUCTS"],
+          [103, 107, "LOCATION"],
+          [112, 125, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "Citigroup posted revenue of 19.4 billion U.S. dollars in Q2 2023, driven by strong credit card lending in the United States. Jane Fraser said digital banking adoption remained robust. \r",
+      {
+        "entities": [
+          [0, 8, "ORG"],
+          [25, 51, "AMT"],
+          [55, 62, "DATE"],
+          [75, 90, "PRODUCTS"],
+          [98, 111, "LOCATION"],
+          [113, 124, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "In Q1 2024, Bank of America reported revenue of 26.1 billion U.S. dollars from consumer banking operations in North America. Brian Moynihan highlighted strong mortgage demand. \r",
+      {
+        "entities": [
+          [3, 10, "DATE"],
+          [12, 28, "ORG"],
+          [49, 75, "AMT"],
+          [85, 102, "PRODUCTS"],
+          [106, 119, "LOCATION"],
+          [121, 136, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "Wells Fargo achieved revenue of 20.8 billion U.S. dollars in Q4 2023, supported by commercial lending growth in the United States. CEO Charles Scharf emphasized efficiency improvements. \r",
+      {
+        "entities": [
+          [0, 11, "ORG"],
+          [32, 58, "AMT"],
+          [62, 69, "DATE"],
+          [83, 100, "PRODUCTS"],
+          [110, 123, "LOCATION"],
+          [128, 142, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "HSBC generated 15.9 billion U.S. dollars in Q2 2023 from global retail banking in Europe. Noel Quinn stated that digital transformation initiatives were accelerating. \r",
+      {
+        "entities": [
+          [0, 4, "ORG"],
+          [14, 40, "AMT"],
+          [44, 51, "DATE"],
+          [57, 79, "PRODUCTS"],
+          [83, 89, "LOCATION"],
+          [91, 101, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "Barclays reported revenue of 13.2 billion U.S. dollars in Q3 2023 from investment services in the United Kingdom. C.S. Venkatakrishnan pointed to stable trading income. \r",
+      {
+        "entities": [
+          [0, 8, "ORG"],
+          [29, 55, "AMT"],
+          [59, 66, "DATE"],
+          [72, 91, "PRODUCTS"],
+          [95, 110, "LOCATION"],
+          [112, 134, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "In Q1 2024, Deutsche Bank posted revenue of 14.7 billion U.S. dollars from corporate banking in Germany. Christian Sewing highlighted strong fee-based services. \r",
+      {
+        "entities": [
+          [3, 10, "DATE"],
+          [12, 26, "ORG"],
+          [43, 69, "AMT"],
+          [75, 92, "PRODUCTS"],
+          [96, 103, "LOCATION"],
+          [105, 121, "PERSON"]
+        ]
+      }
+    ],
+    [
+      "Visa earned 8.9 billion U.S. dollars in Q4 2023 from payment processing across North America. CEO Ryan McInerney emphasized growth in contactless transactions. \r",
+      {
+        "entities": [
+          [0, 4, "ORG"],
+          [12, 38, "AMT"],
+          [42, 49, "DATE"],
+          [55, 73, "PRODUCTS"],
+          [82, 95, "LOCATION"],
+          [100, 115, "PERSON"]
+        ]
+      }
+    ]
+  ]
+}
