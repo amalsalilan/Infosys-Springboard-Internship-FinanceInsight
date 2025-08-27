@@ -1,60 +1,76 @@
-FINANCE NER TRAINING
+# Finance NER Training
 
-This project provides a Named Entity Recognition (NER) model designed for financial and business texts. The training is performed entirely on CPU, making it lightweight and accessible without requiring a GPU.
+Welcome to the Finance NER Training project! This repository contains resources and instructions to build a Named Entity Recognition (NER) model tailored for financial and business texts. The training process is optimized for CPU environments, making it accessible for anyone with basic hardware.
 
-OBJECTIVE
+---
+
+## 🚀 Objective
 
 Automatically extract important financial entities such as company names, monetary values, reporting dates, executives, products, and locations from financial reports, news articles, and related documents.
 
-ENTITY LABELS USED
+---
 
-ORG – Company or institution names
-DATE – Reporting periods, fiscal quarters, or years
-PRODUCTS – Financial or tech products mentioned
-LOCATION – Geographical references (countries, regions, markets)
-AMT – Monetary amounts in different formats
-PERSON – Names of executives or individuals quoted
+## 🏷️ Entity Labels
 
-WORKFLOW
+The model supports the following entity types:
 
-ANNOTATION
-Financial texts are annotated using NER Annotator. The annotated data is exported in spaCy JSON format.
+- **ORG** – Company or institution names
+- **DATE** – Reporting periods, fiscal quarters, or years
+- **PRODUCTS** – Financial or tech products mentioned
+- **LOCATION** – Geographical references (countries, regions, markets)
+- **AMT** – Monetary amounts in different formats
+- **PERSON** – Names of executives or individuals quoted
 
-TRAINING
-The dataset is fed into spaCy’s standard NER pipeline (no transformer). Training runs efficiently on CPU and produces a model that can recognize financial entities.
+---
 
-EVALUATION
-The model is tested against validation data to measure precision, recall, and F1-score.
+## 🔄 Workflow
 
-USAGE
+1. **Annotation**
+   - Annotate financial texts using [NER Annotator](https://github.com/jeniyat/ner-annotator) or a similar tool.
+   - Export the annotated data in spaCy JSON format.
 
-Once trained, the model can be used in financial analysis tools, contract parsing systems, or research projects.
+2. **Training**
+   - Use the provided notebook to train the NER model with the annotated dataset.
+   - Training is performed using spaCy’s standard NER pipeline (no transformer required).
+   - Runs efficiently on CPU.
 
-EXAMPLE
+3. **Evaluation**
+   - The model is evaluated using validation data.
+   - Reports precision, recall, and F1-score metrics.
 
-Input Text:
-Apple reported 25.3 billion U.S. dollars in Q1 2024, with Tim Cook emphasizing strong iPhone demand in Asia.
+4. **Usage**
+   - Deploy the trained model in financial analysis tools, contract parsing systems, or research projects.
 
-Extracted Entities:
-ORG – Apple
-AMT – 25.3 billion U.S. dollars
-DATE – Q1 2024
-PERSON – Tim Cook
-PRODUCTS – iPhone
-LOCATION – Asia
+---
 
-GETTING STARTED
+## 💡 Example
 
-Open the CPU training notebook in Colab.
+**Input Text:**  
+> Apple reported 25.3 billion U.S. dollars in Q1 2024, with Tim Cook emphasizing strong iPhone demand in Asia.
 
-Upload your annotated JSON dataset.
+**Extracted Entities:**
+- `ORG` – Apple
+- `AMT` – 25.3 billion U.S. dollars
+- `DATE` – Q1 2024
+- `PERSON` – Tim Cook
+- `PRODUCTS` – iPhone
+- `LOCATION` – Asia
 
-Run the notebook cells step by step.
+---
 
-Save the trained model for later use.
+## 🛠️ Getting Started
 
-TOOLS
+1. **Open the CPU training notebook in Colab.**
+2. **Upload your annotated JSON dataset.**
+3. **Run the notebook cells step by step.**
+4. **Save the trained model for later use.**
 
-spaCy – for model training
-Colab (CPU runtime) – for running the training
-NER Annotator – for preparing labeled datasets
+---
+
+## 🧰 Tools Used
+
+- [spaCy](https://spacy.io/) – For model training
+- [Google Colab](https://colab.research.google.com/) (CPU runtime) – For running the training
+- [NER Annotator](https://github.com/jeniyat/ner-annotator) – For preparing labeled datasets
+
+---
