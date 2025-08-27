@@ -1,0 +1,4 @@
+{"classes":["DATE","MONEY","PERCENT","NAME","ORG"],
+"annotations":[["On March 15, 2023, Samantha Green, a financial analyst at Goldman Sachs, presented the company’s quarterly earnings report. The firm reported a revenue increase of 12% compared to the previous quarter, largely attributed to strong performance in its asset management division. Goldman Sachs also disclosed that it had invested $3.2 billion into sustainable energy projects, partnering with organizations like Tesla and NextEra Energy.\r",
+{"entities":[[3,17,"DATE"],[19,33,"NAME"],[58,71,"ORG"],[164,167,"PERCENT"],[327,339,"MONEY"],[409,414,"ORG"],[419,433,"ORG"]]}]]
+}
