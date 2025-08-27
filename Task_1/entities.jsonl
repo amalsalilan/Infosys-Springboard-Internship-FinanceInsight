@@ -1,0 +1,67 @@
+{"text": "2nd April, 2025", "label": "DATE", "start_char": 14, "end_char": 29}
+{"text": "Accra", "label": "GPE", "start_char": 30, "end_char": 35}
+{"text": "Government of Ghana", "label": "ORG", "start_char": 36, "end_char": 55}
+{"text": "National Landscape Forum on Natural Resource Management\nand Forest Economy", "label": "EVENT", "start_char": 65, "end_char": 139}
+{"text": "The Government of Ghana", "label": "ORG", "start_char": 177, "end_char": 200}
+{"text": "GoG", "label": "ORG", "start_char": 202, "end_char": 205}
+{"text": "the World Bank", "label": "ORG", "start_char": 226, "end_char": 240}
+{"text": "3-day", "label": "DATE", "start_char": 258, "end_char": 263}
+{"text": "National\n", "label": "EVENT", "start_char": 264, "end_char": 273}
+{"text": "Landscape Forum", "label": "EVENT", "start_char": 273, "end_char": 288}
+{"text": "Ghana", "label": "GPE", "start_char": 515, "end_char": 520}
+{"text": "Ghana", "label": "GPE", "start_char": 841, "end_char": 846}
+{"text": "GoG", "label": "ORG", "start_char": 1080, "end_char": 1083}
+{"text": "the World Bank", "label": "ORG", "start_char": 1249, "end_char": 1263}
+{"text": "the World Bank’s", "label": "ORG", "start_char": 1471, "end_char": 1487}
+{"text": "Global Program on Sustainability", "label": "ORG", "start_char": 1488, "end_char": 1520}
+{"text": "Government", "label": "ORG", "start_char": 1540, "end_char": 1550}
+{"text": "the System of Environmental-Economic Accounting", "label": "ORG", "start_char": 1658, "end_char": 1705}
+{"text": "Ghana", "label": "GPE", "start_char": 2060, "end_char": 2065}
+{"text": "Ghana", "label": "GPE", "start_char": 2156, "end_char": 2161}
+{"text": "one", "label": "CARDINAL", "start_char": 2165, "end_char": 2168}
+{"text": "Africa", "label": "LOC", "start_char": 2176, "end_char": 2182}
+{"text": "one", "label": "CARDINAL", "start_char": 2276, "end_char": 2279}
+{"text": "World", "label": "ORG", "start_char": 2348, "end_char": 2353}
+{"text": "Bank", "label": "ORG", "start_char": 2354, "end_char": 2358}
+{"text": "Ghana", "label": "GPE", "start_char": 2494, "end_char": 2499}
+{"text": "the Ministry of Environment, Science and Technology", "label": "ORG", "start_char": 2566, "end_char": 2617}
+{"text": "MEST", "label": "ORG", "start_char": 2619, "end_char": 2623}
+{"text": "the Ministry of\nLands and Natural Resources", "label": "ORG", "start_char": 2629, "end_char": 2672}
+{"text": "MLNR", "label": "ORG", "start_char": 2674, "end_char": 2678}
+{"text": "the Ghana Sustainable Land and Water Management", "label": "ORG", "start_char": 2686, "end_char": 2733}
+{"text": "Northern Ghana", "label": "LOC", "start_char": 3518, "end_char": 3532}
+{"text": "The Government of Ghana", "label": "ORG", "start_char": 3594, "end_char": 3617}
+{"text": "the Northern Savannah Zone", "label": "GPE", "start_char": 3728, "end_char": 3754}
+{"text": "Cocoa Forest Landscape", "label": "LOC", "start_char": 3759, "end_char": 3781}
+{"text": "the World Bank", "label": "ORG", "start_char": 3796, "end_char": 3810}
+{"text": "the Government\nof Ghana", "label": "ORG", "start_char": 3869, "end_char": 3892}
+{"text": "over 20 million dollars", "label": "MONEY", "start_char": 4614, "end_char": 4637}
+{"text": "60%", "label": "PERCENT", "start_char": 4644, "end_char": 4647}
+{"text": "3-day", "label": "DATE", "start_char": 4701, "end_char": 4706}
+{"text": "NCA", "label": "ORG", "start_char": 4812, "end_char": 4815}
+{"text": "Murtala Mohammed", "label": "PERSON", "start_char": 5017, "end_char": 5033}
+{"text": "the\nSustainable Development Goals", "label": "LAW", "start_char": 5499, "end_char": 5532}
+{"text": "Ghana", "label": "GPE", "start_char": 5580, "end_char": 5585}
+{"text": "the African Union Agenda 2063", "label": "LAW", "start_char": 5656, "end_char": 5685}
+{"text": "Emmanuel Armah-Kofi Buah", "label": "PERSON", "start_char": 5692, "end_char": 5716}
+{"text": "the World Bank", "label": "ORG", "start_char": 5786, "end_char": 5800}
+{"text": "World", "label": "ORG", "start_char": 5882, "end_char": 5887}
+{"text": "Bank", "label": "ORG", "start_char": 5888, "end_char": 5892}
+{"text": "the World Bank", "label": "ORG", "start_char": 6307, "end_char": 6321}
+{"text": "Robert Taliercio", "label": "PERSON", "start_char": 6323, "end_char": 6339}
+{"text": "Ghana", "label": "GPE", "start_char": 6363, "end_char": 6368}
+{"text": "Liberia", "label": "GPE", "start_char": 6370, "end_char": 6377}
+{"text": "Sierra Leone", "label": "GPE", "start_char": 6382, "end_char": 6394}
+{"text": "GoG", "label": "ORG", "start_char": 6413, "end_char": 6416}
+{"text": "three", "label": "CARDINAL", "start_char": 6451, "end_char": 6456}
+{"text": "Bank", "label": "ORG", "start_char": 6495, "end_char": 6499}
+{"text": "GoG", "label": "ORG", "start_char": 6526, "end_char": 6529}
+{"text": "Ghana", "label": "GPE", "start_char": 6766, "end_char": 6771}
+{"text": "Academia", "label": "ORG", "start_char": 6997, "end_char": 7005}
+{"text": "Civil Society Organizations", "label": "ORG", "start_char": 7007, "end_char": 7034}
+{"text": "Mawusi Mawuenyefia", "label": "PERSON", "start_char": 7186, "end_char": 7204}
+{"text": "Communications", "label": "ORG", "start_char": 7217, "end_char": 7231}
+{"text": "Ministry of Lands & Natural Resources", "label": "ORG", "start_char": 7232, "end_char": 7269}
+{"text": "Gloria Holm-Graves", "label": "PERSON", "start_char": 7292, "end_char": 7310}
+{"text": "Public Relations\n", "label": "ORG", "start_char": 7317, "end_char": 7334}
+{"text": "Ministry of Environment, Science and Technology", "label": "ORG", "start_char": 7334, "end_char": 7381}
