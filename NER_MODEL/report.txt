@@ -1,0 +1,18 @@
+                  NAME ENTITY RECOGNITION MODEL TRAINING
+> Used an online tool https://arunmozhi.in/ner-annotator/
+> Manually tagged Entities like:
+* NAME
+* ORG
+* DATE
+* MONEY
+* PERCENT
+> Exported the .json file.
+> Used an online tool https://colab.research.google.com/
+* Installed and imported libraries.
+* Text used – sample.txt
+* Uploaded training and validate JSON files.
+* Training a model using a loop with spaCy’s training utilities.
+* Initialized a base model en_core_web_lg.
+* Tested the trained model with sample text.
+
+
