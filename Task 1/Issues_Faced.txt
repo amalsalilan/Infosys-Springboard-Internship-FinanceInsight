@@ -1,0 +1,16 @@
+Issues Faced
+
+PDF Text Extraction
+Some PDFs had inconsistent formatting (e.g., broken words, extra spaces).
+I resolved this by using pdfplumber instead of basic PyPDF2 since it preserved structure better.
+
+NER Model Performance
+The pretrained model (dslim/bert-base-NER) sometimes misclassified organization names as miscellaneous entities.
+I kept the default model without fine-tuning to keep the task simple, but noted the limitation.
+
+Visualization with displaCy
+For large texts, displaCy visualization was hard to scroll. I solved this by testing on smaller text chunks.
+
+JSONL Output
+Initially, I was saving JSON instead of JSONL (multiple JSON objects line by line).
+Fixed it by writing each entity dictionary with json.dumps() followed by a newline.
