@@ -1,4 +1,2 @@
 # Infosys-Springboard-Internship-FinanceInsight
 
-
-
