@@ -1,12 +1,5 @@
-import sys
-
-# Redirect console output to a file
-with open("ner_output.txt", "w", encoding="utf-8") as f:
-    sys.stdout = f
-
 import torch
-from transformers import AutoTokenizer, AutoModelForTokenClassification
-from transformers import pipeline
+from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 import spacy
 from prettytable import PrettyTable
 import re
@@ -23,12 +16,14 @@ nlp = spacy.load("en_core_web_sm")
 # Sample text
 text = "Apple Inc reported a revenue of $20 billion in Q2 2023. Goldman Sachs invested $500 million in Tesla. The Reserve Bank of India announced a rate hike of 0.25% in March 2023."
 
+# --- Hugging Face BERT NER ---
 print("\n--- Hugging Face BERT NER ---")
 bert_results = ner_pipeline(text)
 bert_entities = [(ent['word'], ent['entity_group']) for ent in bert_results]
 for word, label in bert_entities:
     print(f"{word} -> {label}")
 
+# --- spaCy NER ---
 print("\n--- spaCy NER ---")
 doc = nlp(text)
 spacy_entities = [(ent.text, ent.label_) for ent in doc.ents]
@@ -61,3 +56,7 @@ for ent in sorted(all_entities):
     table.add_row([ent, bert_label, spacy_label, match])
 
 print(table)
+
+# --- (Optional) Save output to file ---
+with open("ner_output.txt", "w", encoding="utf-8") as f:
+    f.write(str(table))
