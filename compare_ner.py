@@ -1,3 +1,9 @@
+import sys
+
+# Redirect console output to a file
+with open("ner_output.txt", "w", encoding="utf-8") as f:
+    sys.stdout = f
+
 import torch
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
