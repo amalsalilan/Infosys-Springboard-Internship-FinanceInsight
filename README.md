@@ -1,7 +1,7 @@
 # Infosys-Springboard-Internship-FinanceInsight
 
 # Task 1 
-Regex Extraction Task (Internship Work)  
+# Regex Extraction Task (Internship Work)  
 
 This task was about extracting key contract information from a PDF agreement using Python and regular expressions.  
 
