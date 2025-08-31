@@ -28,8 +28,13 @@ Regex-task/
 - Printed results to console and also redirected output into `output.txt`  
 
 ---
+  
+## Requirements
+# Python standard library only
+# No external dependencies required
+python>=3.7
 
-## How to run  
+## How to run
 1. Install Python (>=3.7)  
 2. Put the text file (`Contract_Agreement_Summary.txt`) in the same folder as the script  
 3. Run the script:  
