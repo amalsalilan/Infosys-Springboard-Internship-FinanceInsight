@@ -74,7 +74,21 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_trf
 python extract_entities.py
 ```
+## Requirements
+- **Python 3.8+**
 
+- **Libraries**
+  - `spacy` (v3.8 or later)
+  - `pdfplumber`
+
+- **Models**
+  - `en_core_web_trf` (preferred, transformer-based model)
+  - `en_core_web_sm` (fallback if transformer model crashes)
+
+### Installation
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_trf
 ---
 
 ### Output files
