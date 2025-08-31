@@ -29,10 +29,10 @@ Regex-task/
 
 ---
   
-# Requirements
-Python standard library only
-No external dependencies required
-python>=3.7
+## Requirements
+1. Python standard library only
+2. No external dependencies required
+3. python>=3.7
 
 ## How to run
 1. Install Python (>=3.7)  
