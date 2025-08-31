@@ -29,9 +29,9 @@ Regex-task/
 
 ---
   
-## Requirements
-# Python standard library only
-# No external dependencies required
+# Requirements
+Python standard library only
+No external dependencies required
 python>=3.7
 
 ## How to run
