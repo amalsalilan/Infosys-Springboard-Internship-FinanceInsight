@@ -1,39 +1,45 @@
-# Infosys-Springboard-Internship-FinanceInsight
+# Custom NER Model Project
 
-This repository is part of the **Infosys Springboard Internship Project - Finance Insight**.  
-It focuses on building financial analytics and insights through data analysis, visualization, and automation.
+## Student
+**Name:** Thanseera S  
+**Branch/Year:** CSE (AI & ML), III Year
 
-## 🚀 Project Objectives
-- Analyze financial datasets.
-- Generate meaningful insights using Python libraries (Pandas, NumPy, Matplotlib, Seaborn, etc.).
-- Build dashboards/reports to present findings.
-- Provide recommendations for better financial decision-making.
+## Project Description
+This project is a custom Named Entity Recognition (NER) model using **spaCy**. It extracts entities like **COMPANY**, **ORG**, **SECTOR**, and others from text data. The project includes data annotation, model training, testing, and evaluation.
 
-## 📂 Repository Structure
-├── data/ # Raw & cleaned datasets
-├── notebooks/ # Jupyter notebooks for analysis
-├── scripts/ # Python scripts for automation
-├── reports/ # Generated reports or visualizations
-├── LICENSE # License file
-└── README.md # Project documentation
+## Files in the Repository
+- `annotations.json` → Annotated dataset used for training.  
+- `finance_data.txt` → Raw text used for testing and demonstration.  
+- `base_config.cfg` → spaCy configuration file used for training the model.  
+- `train.spacy` and `dev.spacy` → Preprocessed training and validation datasets (optional).  
+- `test_model.py` → Python script to test the trained model on any text input.  
+- `NER_PROJECT.ipynb` → Notebook showing full workflow: data annotation, training, testing, and evaluation.
 
-## 🔧 How to Use
-1. Clone the repository:
+## How to Run
+1. **Install spaCy** if not already installed:
    ```bash
-   git clone https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceInsight.git
-Run analysis scripts or open Jupyter notebooks.
+   pip install spacy
+   ```
+2. **Test the model** using the Python script:
+   ```bash
+   python test_model.py
+   ```
+3. **Optional:** Open the notebook `NER_PROJECT.ipynb` to see detailed steps including data annotation, model training, testing, and evaluation.
 
-🛠️ Tech Stack
+## Download Links
+You can download the trained models from Google Drive:
 
-Python
+- **Model Best:** [Download model-best](https://drive.google.com/drive/folders/1P0pyUBaoq5OUzlmeaTO612vHgCUnP2ES?usp=sharing)
+- **Model Last:**[Download model-last](https://drive.google.com/drive/folders/1GHb4RNVJFW-2Z38OZgEEpQq1Kawc_P5O?usp=drive_link)
 
-Pandas, NumPy
+## Notes
+- `model-best` contains the best-performing model from training.  
+- `model-last` is the last checkpoint from training.  
 
-Matplotlib, Seaborn
-
-Jupyter Notebook
-
-👩‍💻 Contributors
-
-Jahnavi Gajjela
-
+## Project Workflow
+1. Annotate data using `annotations.json`.  
+2. Convert annotations to `train.spacy` and `dev.spacy`.  
+3. Configure and train the NER model using `base_config.cfg`.  
+4. Evaluate model performance on the dev set.  
+5. Test the trained model on new text samples using `test_model.py`.  
+6. Optional: Deploy or integrate the model into applications.
