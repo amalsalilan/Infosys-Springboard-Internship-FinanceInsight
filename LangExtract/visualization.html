@@ -1,0 +1,194 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">company</span> <span class="lx-label" style="background-color:#C8E6C9;">date</span> <span class="lx-label" style="background-color:#FEF0C3;">financial_metric</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        On <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#C8E6C9;">September 1, 2024</span>, <span class="lx-highlight" data-idx="1" style="background-color:#D2E3FC;">HDFC Bank Ltd</span> (HDFCBANK.NS) announced that it had disbursed loans worth <span class="lx-highlight" data-idx="2" style="background-color:#FEF0C3;">₹5,200 crore</span> under its retail lending program. The loans carried an average interest rate of <span class="lx-highlight" data-idx="3" style="background-color:#FEF0C3;">8.5%</span> per annum, with a tenure of <span class="lx-highlight" data-idx="4" style="background-color:#FEF0C3;">5 years</span>. The announcement followed the <span class="lx-highlight" data-idx="5" style="background-color:#D2E3FC;">Reserve Bank of India</span>’s notification requiring banks to disclose retail lending data by the end of <span class="lx-highlight" data-idx="6" style="background-color:#C8E6C9;">Q2 FY2024</span>.
+
+Meanwhile, in global markets, the US dollar traded at <span class="lx-highlight" data-idx="7" style="background-color:#FEF0C3;">1.08</span> against the euro and <span class="lx-highlight" data-idx="8" style="background-color:#FEF0C3;">146.5</span> per Japanese yen, sparking concerns of possible intervention by the <span class="lx-highlight" data-idx="9" style="background-color:#D2E3FC;">Bank of Japan</span>. The S&amp;P 500 index closed at <span class="lx-highlight" data-idx="10" style="background-color:#FEF0C3;">4,520 points</span>, gaining <span class="lx-highlight" data-idx="11" style="background-color:#FEF0C3;">1.2%</span> on optimism around tech stocks, while <span class="lx-highlight" data-idx="12" style="background-color:#D2E3FC;">Infosys Ltd</span> (INFY) shares rose <span class="lx-highlight" data-idx="13" style="background-color:#FEF0C3;">2.3%</span> in New York trading, settling at <span class="lx-highlight" data-idx="14" style="background-color:#FEF0C3;">$18.40</span> per share.
+
+In corporate filings, <span class="lx-highlight" data-idx="15" style="background-color:#D2E3FC;">Reliance Industries Ltd</span> (RELIANCE.NS) reported a net profit of <span class="lx-highlight" data-idx="16" style="background-color:#FEF0C3;">₹16,200 crore</span> for the quarter ending <span class="lx-highlight" data-idx="17" style="background-color:#C8E6C9;">June 30, 2024</span>, compared to <span class="lx-highlight" data-idx="18" style="background-color:#FEF0C3;">₹14,800 crore</span> in the same quarter last year. <span class="lx-highlight" data-idx="19" style="background-color:#D2E3FC;">The company</span> also mentioned pending GST liabilities of <span class="lx-highlight" data-idx="20" style="background-color:#FEF0C3;">₹1,200 crore</span> and penalty provisions of <span class="lx-highlight" data-idx="21" style="background-color:#FEF0C3;">₹250 crore</span> related to its telecom business. Its CIN number L17110MH1973PLC019786 was cited in the regulatory filing with the <span class="lx-highlight" data-idx="22" style="background-color:#D2E3FC;">Ministry of Corporate Affairs</span>.
+
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="22" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/23</span> |
+          Pos <span id="posInfo">[3-20]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "date", "text": "September 1, 2024", "color": "#C8E6C9", "startPos": 3, "endPos": 20, "beforeText": "On ", "extractionText": "September 1, 2024", "afterText": ", HDFC Bank Ltd (HDFCBANK.NS) announced that it had disbursed loans worth \u20b95,200 crore under its retail lending program. The loans carried an average ", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">announcement_date</span>}</div>"}, {"index": 1, "class": "company", "text": "HDFC Bank Ltd", "color": "#D2E3FC", "startPos": 22, "endPos": 35, "beforeText": "On September 1, 2024, ", "extractionText": "HDFC Bank Ltd", "afterText": " (HDFCBANK.NS) announced that it had disbursed loans worth \u20b95,200 crore under its retail lending program. The loans carried an average interest rate o", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">stock_symbol</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">HDFCBANK.NS</span>}</div>"}, {"index": 2, "class": "financial_metric", "text": "\u20b95,200 crore", "color": "#FEF0C3", "startPos": 94, "endPos": 106, "beforeText": "On September 1, 2024, HDFC Bank Ltd (HDFCBANK.NS) announced that it had disbursed loans worth ", "extractionText": "\u20b95,200 crore", "afterText": " under its retail lending program. The loans carried an average interest rate of 8.5% per annum, with a tenure of 5 years. The announcement followed t", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">loan_amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 3, "class": "financial_metric", "text": "8.5%", "color": "#FEF0C3", "startPos": 187, "endPos": 191, "beforeText": "HDFCBANK.NS) announced that it had disbursed loans worth \u20b95,200 crore under its retail lending program. The loans carried an average interest rate of ", "extractionText": "8.5%", "afterText": " per annum, with a tenure of 5 years. The announcement followed the Reserve Bank of India\u2019s notification requiring banks to disclose retail lending da", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 4, "class": "financial_metric", "text": "5 years", "color": "#FEF0C3", "startPos": 220, "endPos": 227, "beforeText": "d disbursed loans worth \u20b95,200 crore under its retail lending program. The loans carried an average interest rate of 8.5% per annum, with a tenure of ", "extractionText": "5 years", "afterText": ". The announcement followed the Reserve Bank of India\u2019s notification requiring banks to disclose retail lending data by the end of Q2 FY2024.\n\nMeanwhi", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">tenure</span>}</div>"}, {"index": 5, "class": "company", "text": "Reserve Bank of India", "color": "#D2E3FC", "startPos": 259, "endPos": 280, "beforeText": "der its retail lending program. The loans carried an average interest rate of 8.5% per annum, with a tenure of 5 years. The announcement followed the ", "extractionText": "Reserve Bank of India", "afterText": "\u2019s notification requiring banks to disclose retail lending data by the end of Q2 FY2024.\n\nMeanwhile, in global markets, the US dollar traded at 1.08 a", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 6, "class": "date", "text": "Q2 FY2024", "color": "#C8E6C9", "startPos": 358, "endPos": 367, "beforeText": "a tenure of 5 years. The announcement followed the Reserve Bank of India\u2019s notification requiring banks to disclose retail lending data by the end of ", "extractionText": "Q2 FY2024", "afterText": ".\n\nMeanwhile, in global markets, the US dollar traded at 1.08 against the euro and 146.5 per Japanese yen, sparking concerns of possible intervention ", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">reporting_period_end</span>}</div>"}, {"index": 7, "class": "financial_metric", "text": "1.08", "color": "#FEF0C3", "startPos": 424, "endPos": 428, "beforeText": " India\u2019s notification requiring banks to disclose retail lending data by the end of Q2 FY2024.\n\nMeanwhile, in global markets, the US dollar traded at ", "extractionText": "1.08", "afterText": " against the euro and 146.5 per Japanese yen, sparking concerns of possible intervention by the Bank of Japan. The S&amp;P 500 index closed at 4,520 point", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">exchange_rate</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 8, "class": "financial_metric", "text": "146.5", "color": "#FEF0C3", "startPos": 450, "endPos": 455, "beforeText": "iring banks to disclose retail lending data by the end of Q2 FY2024.\n\nMeanwhile, in global markets, the US dollar traded at 1.08 against the euro and ", "extractionText": "146.5", "afterText": " per Japanese yen, sparking concerns of possible intervention by the Bank of Japan. The S&amp;P 500 index closed at 4,520 points, gaining 1.2% on optimism", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">exchange_rate</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">JPY</span>}</div>"}, {"index": 9, "class": "company", "text": "Bank of Japan", "color": "#D2E3FC", "startPos": 524, "endPos": 537, "beforeText": "while, in global markets, the US dollar traded at 1.08 against the euro and 146.5 per Japanese yen, sparking concerns of possible intervention by the ", "extractionText": "Bank of Japan", "afterText": ". The S&amp;P 500 index closed at 4,520 points, gaining 1.2% on optimism around tech stocks, while Infosys Ltd (INFY) shares rose 2.3% in New York trading", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 10, "class": "financial_metric", "text": "4,520 points", "color": "#FEF0C3", "startPos": 567, "endPos": 579, "beforeText": "ded at 1.08 against the euro and 146.5 per Japanese yen, sparking concerns of possible intervention by the Bank of Japan. The S&amp;P 500 index closed at ", "extractionText": "4,520 points", "afterText": ", gaining 1.2% on optimism around tech stocks, while Infosys Ltd (INFY) shares rose 2.3% in New York trading, settling at $18.40 per share.\n\nIn corpor", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">index_value</span>}</div>"}, {"index": 11, "class": "financial_metric", "text": "1.2%", "color": "#FEF0C3", "startPos": 589, "endPos": 593, "beforeText": "e euro and 146.5 per Japanese yen, sparking concerns of possible intervention by the Bank of Japan. The S&amp;P 500 index closed at 4,520 points, gaining ", "extractionText": "1.2%", "afterText": " on optimism around tech stocks, while Infosys Ltd (INFY) shares rose 2.3% in New York trading, settling at $18.40 per share.\n\nIn corporate filings, R", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">percentage_change</span>}</div>"}, {"index": 12, "class": "company", "text": "Infosys Ltd", "color": "#D2E3FC", "startPos": 632, "endPos": 643, "beforeText": " concerns of possible intervention by the Bank of Japan. The S&amp;P 500 index closed at 4,520 points, gaining 1.2% on optimism around tech stocks, while ", "extractionText": "Infosys Ltd", "afterText": " (INFY) shares rose 2.3% in New York trading, settling at $18.40 per share.\n\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a ne", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">stock_symbol</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">INFY</span>}</div>"}, {"index": 13, "class": "financial_metric", "text": "2.3%", "color": "#FEF0C3", "startPos": 663, "endPos": 667, "beforeText": "ion by the Bank of Japan. The S&amp;P 500 index closed at 4,520 points, gaining 1.2% on optimism around tech stocks, while Infosys Ltd (INFY) shares rose ", "extractionText": "2.3%", "afterText": " in New York trading, settling at $18.40 per share.\n\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a net profit of \u20b916,200 cror", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">percentage_change</span>}</div>"}, {"index": 14, "class": "financial_metric", "text": "$18.40", "color": "#FEF0C3", "startPos": 701, "endPos": 707, "beforeText": "index closed at 4,520 points, gaining 1.2% on optimism around tech stocks, while Infosys Ltd (INFY) shares rose 2.3% in New York trading, settling at ", "extractionText": "$18.40", "afterText": " per share.\n\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a net profit of \u20b916,200 crore for the quarter ending June 30, 2024, ", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">share_price</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 15, "class": "company", "text": "Reliance Industries Ltd", "color": "#D2E3FC", "startPos": 742, "endPos": 765, "beforeText": "% on optimism around tech stocks, while Infosys Ltd (INFY) shares rose 2.3% in New York trading, settling at $18.40 per share.\n\nIn corporate filings, ", "extractionText": "Reliance Industries Ltd", "afterText": " (RELIANCE.NS) reported a net profit of \u20b916,200 crore for the quarter ending June 30, 2024, compared to \u20b914,800 crore in the same quarter last year. T", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">stock_symbol</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">RELIANCE.NS</span>}</div>"}, {"index": 16, "class": "financial_metric", "text": "\u20b916,200 crore", "color": "#FEF0C3", "startPos": 805, "endPos": 818, "beforeText": "es rose 2.3% in New York trading, settling at $18.40 per share.\n\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a net profit of ", "extractionText": "\u20b916,200 crore", "afterText": " for the quarter ending June 30, 2024, compared to \u20b914,800 crore in the same quarter last year. The company also mentioned pending GST liabilities of ", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">net_profit</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 17, "class": "date", "text": "June 30, 2024", "color": "#C8E6C9", "startPos": 842, "endPos": 855, "beforeText": "tling at $18.40 per share.\n\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a net profit of \u20b916,200 crore for the quarter ending ", "extractionText": "June 30, 2024", "afterText": ", compared to \u20b914,800 crore in the same quarter last year. The company also mentioned pending GST liabilities of \u20b91,200 crore and penalty provisions o", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">reporting_period_end</span>}</div>"}, {"index": 18, "class": "financial_metric", "text": "\u20b914,800 crore", "color": "#FEF0C3", "startPos": 869, "endPos": 882, "beforeText": "\nIn corporate filings, Reliance Industries Ltd (RELIANCE.NS) reported a net profit of \u20b916,200 crore for the quarter ending June 30, 2024, compared to ", "extractionText": "\u20b914,800 crore", "afterText": " in the same quarter last year. The company also mentioned pending GST liabilities of \u20b91,200 crore and penalty provisions of \u20b9250 crore related to its", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">net_profit</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 19, "class": "company", "text": "The company", "color": "#D2E3FC", "startPos": 914, "endPos": 925, "beforeText": "d (RELIANCE.NS) reported a net profit of \u20b916,200 crore for the quarter ending June 30, 2024, compared to \u20b914,800 crore in the same quarter last year. ", "extractionText": "The company", "afterText": " also mentioned pending GST liabilities of \u20b91,200 crore and penalty provisions of \u20b9250 crore related to its telecom business. Its CIN number L17110MH1", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">CIN</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">L17110MH1973PLC019786</span>}</div>"}, {"index": 20, "class": "financial_metric", "text": "\u20b91,200 crore", "color": "#FEF0C3", "startPos": 968, "endPos": 980, "beforeText": " for the quarter ending June 30, 2024, compared to \u20b914,800 crore in the same quarter last year. The company also mentioned pending GST liabilities of ", "extractionText": "\u20b91,200 crore", "afterText": " and penalty provisions of \u20b9250 crore related to its telecom business. Its CIN number L17110MH1973PLC019786 was cited in the regulatory filing with th", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">liability</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>, <span class=\"lx-attr-key\">tax_type</span>: <span class=\"lx-attr-value\">GST</span>}</div>"}, {"index": 21, "class": "financial_metric", "text": "\u20b9250 crore", "color": "#FEF0C3", "startPos": 1007, "endPos": 1017, "beforeText": "compared to \u20b914,800 crore in the same quarter last year. The company also mentioned pending GST liabilities of \u20b91,200 crore and penalty provisions of ", "extractionText": "\u20b9250 crore", "afterText": " related to its telecom business. Its CIN number L17110MH1973PLC019786 was cited in the regulatory filing with the Ministry of Corporate Affairs.\n", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">penalty_provision</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 22, "class": "company", "text": "Ministry of Corporate Affairs", "color": "#D2E3FC", "startPos": 1132, "endPos": 1161, "beforeText": "nd penalty provisions of \u20b9250 crore related to its telecom business. Its CIN number L17110MH1973PLC019786 was cited in the regulatory filing with the ", "extractionText": "Ministry of Corporate Affairs", "afterText": ".\n", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
