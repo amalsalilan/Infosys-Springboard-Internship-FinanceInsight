@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contract Entities Overview</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #fafafa;
+      color: #222;
+      margin: 20px;
+      line-height: 1.7;
+    }
+    .highlight {
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .ACCOUNT_NUMBER { background: #ffe0e0; }
+    .CONTRACT_REFERENCE { background: #fff3cd; }
+    .DATE { background: #d4e6f1; }
+    .MONEY { background: #d5f5e3; }
+    .ORG { background: #fdebd0; }
+    .PERCENT { background: #ebdef0; }
+    .PERSON { background: #f5b7b1; }
+
+    h2, h3 {
+      margin-top: 25px;
+    }
+    sub {
+      font-size: 0.65em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h2>Entity Color Legend</h2>
+  <ul>
+    <li><span class="highlight ACCOUNT_NUMBER">ACCOUNT_NUMBER</span></li>
+    <li><span class="highlight CONTRACT_REFERENCE">CONTRACT_REFERENCE</span></li>
+    <li><span class="highlight DATE">DATE</span></li>
+    <li><span class="highlight MONEY">MONEY</span></li>
+    <li><span class="highlight ORG">ORG</span></li>
+    <li><span class="highlight PERCENT">PERCENT</span></li>
+    <li><span class="highlight PERSON">PERSON</span></li>
+  </ul>
+
+  <h3>Contract Summary (Annotated)</h3>
+  <p>
+    This agreement was executed on 
+    <span class="highlight DATE">5 July 2024 <sub>[DATE]</sub></span>
+    between 
+    <span class="highlight ORG">Alpha Technologies Pvt. Ltd. <sub>[ORG]</sub></span>,
+    headquartered at 
+    <span class="highlight ORG">#210, MG Road, Mumbai, India <sub>[ORG]</sub></span>,
+    and 
+    <span class="highlight ORG">Delta Innovations Inc. <sub>[ORG]</sub></span>,
+    based at 
+    <span class="highlight ORG">455 Market Street, San Francisco, CA 94105 <sub>[ORG]</sub></span>.
+    The contract commences on 
+    <span class="highlight DATE">1 August 2024 <sub>[DATE]</sub></span>
+    and is valued at 
+    <span class="highlight MONEY">USD 125,000.00 <sub>[MONEY]</sub></span>.
+    The term of the contract is 
+    <span class="highlight DATE">12 months <sub>[DATE]</sub></span>,
+    with a notice period of 
+    <span class="highlight DATE">30 days <sub>[DATE]</sub></span> for termination.
+    Governing law is that of 
+    <span class="highlight ORG">State of California, USA <sub>[ORG]</sub></span>,
+    with disputes handled in 
+    <span class="highlight ORG">San Francisco County courts <sub>[ORG]</sub></span>.
+    Reference: 
+    <span class="highlight CONTRACT_REFERENCE">CON-ALD-20240705 <sub>[CONTRACT_REFERENCE]</sub></span>.
+  </p>
+</body>
+</html>
