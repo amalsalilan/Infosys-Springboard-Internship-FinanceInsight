@@ -1,0 +1,193 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">account_number</span> <span class="lx-label" style="background-color:#C8E6C9;">company</span> <span class="lx-label" style="background-color:#FEF0C3;">date</span> <span class="lx-label" style="background-color:#F9DEDC;">duration</span> <span class="lx-label" style="background-color:#FFDDBE;">interest_rate</span> <span class="lx-label" style="background-color:#EADDFF;">monetary_value</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        On <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#FEF0C3;">Jan 10, 2024</span>, <span class="lx-highlight" data-idx="1" style="background-color:#C8E6C9;">ICICI Bank</span> sanctioned a home loan of <span class="lx-highlight" data-idx="2" style="background-color:#EADDFF;">INR 25,00,000</span> under loan account <span class="lx-highlight" data-idx="3" style="background-color:#D2E3FC;">987654321</span> with a tenure of <span class="lx-highlight" data-idx="4" style="background-color:#F9DEDC;">15 years</span> and an annual interest rate of <span class="lx-highlight" data-idx="5" style="background-color:#FFDDBE;">8</span>%.
+On <span class="lx-highlight" data-idx="6" style="background-color:#FEF0C3;">Feb 5, 2024</span>, <span class="lx-highlight" data-idx="7" style="background-color:#C8E6C9;">Axis Bank</span> imposed a late fee of <span class="lx-highlight" data-idx="8" style="background-color:#EADDFF;">INR 2,000</span> on credit card account <span class="lx-highlight" data-idx="9" style="background-color:#D2E3FC;">1122334455</span>.
+<span class="lx-highlight" data-idx="10" style="background-color:#C8E6C9;">Reliance Industries Ltd</span> paid GST of <span class="lx-highlight" data-idx="11" style="background-color:#EADDFF;">INR 50,000</span> on <span class="lx-highlight" data-idx="12" style="background-color:#FEF0C3;">March 12, 2023</span>, under GSTIN 27AAACR5055K1ZL.
+<span class="lx-highlight" data-idx="13" style="background-color:#C8E6C9;">SEBI</span> fined <span class="lx-highlight" data-idx="14" style="background-color:#C8E6C9;">ABC Securities</span> <span class="lx-highlight" data-idx="15" style="background-color:#EADDFF;">INR 1,50,000</span> on <span class="lx-highlight" data-idx="16" style="background-color:#FEF0C3;">Aug 18, 2022</span>, for regulatory violations.
+On <span class="lx-highlight" data-idx="17" style="background-color:#FEF0C3;">Dec 1, 2023</span>, <span class="lx-highlight" data-idx="18" style="background-color:#C8E6C9;">Tata Motors</span> issued an invoice of <span class="lx-highlight" data-idx="19" style="background-color:#EADDFF;">INR 12,75,000</span> with a payment due date of <span class="lx-highlight" data-idx="20" style="background-color:#FEF0C3;">Jan 15, 2024</span>.
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="20" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/21</span> |
+          Pos <span id="posInfo">[3-15]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "date", "text": "Jan 10, 2024", "color": "#FEF0C3", "startPos": 3, "endPos": 15, "beforeText": "On ", "extractionText": "Jan 10, 2024", "afterText": ", ICICI Bank sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb ", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">transaction date</span>}</div>"}, {"index": 1, "class": "company", "text": "ICICI Bank", "color": "#C8E6C9", "startPos": 17, "endPos": 27, "beforeText": "On Jan 10, 2024, ", "extractionText": "ICICI Bank", "afterText": " sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axi", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 2, "class": "monetary_value", "text": "INR 25,00,000", "color": "#EADDFF", "startPos": 54, "endPos": 67, "beforeText": "On Jan 10, 2024, ICICI Bank sanctioned a home loan of ", "extractionText": "INR 25,00,000", "afterText": " under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 o", "attributesHtml": "<div><strong>class:</strong> monetary_value</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">value_type</span>: <span class=\"lx-attr-value\">principal amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 3, "class": "account_number", "text": "987654321", "color": "#D2E3FC", "startPos": 87, "endPos": 96, "beforeText": "On Jan 10, 2024, ICICI Bank sanctioned a home loan of INR 25,00,000 under loan account ", "extractionText": "987654321", "afterText": " with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">loan account</span>}</div>"}, {"index": 4, "class": "duration", "text": "15 years", "color": "#F9DEDC", "startPos": 114, "endPos": 122, "beforeText": "On Jan 10, 2024, ICICI Bank sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of ", "extractionText": "15 years", "afterText": " and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries L", "attributesHtml": "<div><strong>class:</strong> duration</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">duration_type</span>: <span class=\"lx-attr-value\">loan tenure</span>}</div>"}, {"index": 5, "class": "interest_rate", "text": "8%", "color": "#FFDDBE", "startPos": 154, "endPos": 155, "beforeText": "an 10, 2024, ICICI Bank sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of ", "extractionText": "8", "afterText": "%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on Marc", "attributesHtml": "<div><strong>class:</strong> interest_rate</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 6, "class": "date", "text": "Feb 5, 2024", "color": "#FEF0C3", "startPos": 161, "endPos": 172, "beforeText": "2024, ICICI Bank sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn ", "extractionText": "Feb 5, 2024", "afterText": ", Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">transaction date</span>}</div>"}, {"index": 7, "class": "company", "text": "Axis Bank", "color": "#C8E6C9", "startPos": 174, "endPos": 183, "beforeText": "ank sanctioned a home loan of INR 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, ", "extractionText": "Axis Bank", "afterText": " imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AA", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 8, "class": "monetary_value", "text": "INR 2,000", "color": "#EADDFF", "startPos": 206, "endPos": 215, "beforeText": "R 25,00,000 under loan account 987654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of ", "extractionText": "INR 2,000", "afterText": " on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Secu", "attributesHtml": "<div><strong>class:</strong> monetary_value</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">value_type</span>: <span class=\"lx-attr-value\">late fee</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 9, "class": "account_number", "text": "1122334455", "color": "#D2E3FC", "startPos": 239, "endPos": 249, "beforeText": "7654321 with a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account ", "extractionText": "1122334455", "afterText": ".\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 202", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">credit card account</span>}</div>"}, {"index": 10, "class": "company", "text": "Reliance Industries Ltd", "color": "#C8E6C9", "startPos": 251, "endPos": 274, "beforeText": " a tenure of 15 years and an annual interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\n", "extractionText": "Reliance Industries Ltd", "afterText": " paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violati", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 11, "class": "monetary_value", "text": "INR 50,000", "color": "#EADDFF", "startPos": 287, "endPos": 297, "beforeText": "interest rate of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of ", "extractionText": "INR 50,000", "afterText": " on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Ta", "attributesHtml": "<div><strong>class:</strong> monetary_value</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">value_type</span>: <span class=\"lx-attr-value\">GST</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 12, "class": "date", "text": "March 12, 2023", "color": "#FEF0C3", "startPos": 301, "endPos": 315, "beforeText": "of 8%.\nOn Feb 5, 2024, Axis Bank imposed a late fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on ", "extractionText": "March 12, 2023", "afterText": ", under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued a", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">transaction date</span>}</div>"}, {"index": 13, "class": "company", "text": "SEBI", "color": "#C8E6C9", "startPos": 346, "endPos": 350, "beforeText": "te fee of INR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\n", "extractionText": "SEBI", "afterText": " fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of INR 12,75,000 with a p", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 14, "class": "company", "text": "ABC Securities", "color": "#C8E6C9", "startPos": 357, "endPos": 371, "beforeText": "NR 2,000 on credit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ", "extractionText": "ABC Securities", "afterText": " INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of INR 12,75,000 with a payment due date of Ja", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 15, "class": "monetary_value", "text": "INR 1,50,000", "color": "#EADDFF", "startPos": 372, "endPos": 384, "beforeText": "dit card account 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities ", "extractionText": "INR 1,50,000", "afterText": " on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of INR 12,75,000 with a payment due date of Jan 15, 2024.", "attributesHtml": "<div><strong>class:</strong> monetary_value</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">value_type</span>: <span class=\"lx-attr-value\">fine</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 16, "class": "date", "text": "Aug 18, 2022", "color": "#FEF0C3", "startPos": 388, "endPos": 400, "beforeText": " 1122334455.\nReliance Industries Ltd paid GST of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on ", "extractionText": "Aug 18, 2022", "afterText": ", for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of INR 12,75,000 with a payment due date of Jan 15, 2024.", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">transaction date</span>}</div>"}, {"index": 17, "class": "date", "text": "Dec 1, 2023", "color": "#FEF0C3", "startPos": 432, "endPos": 443, "beforeText": "T of INR 50,000 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn ", "extractionText": "Dec 1, 2023", "afterText": ", Tata Motors issued an invoice of INR 12,75,000 with a payment due date of Jan 15, 2024.", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">invoice date</span>}</div>"}, {"index": 18, "class": "company", "text": "Tata Motors", "color": "#C8E6C9", "startPos": 445, "endPos": 456, "beforeText": "00 on March 12, 2023, under GSTIN 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, ", "extractionText": "Tata Motors", "afterText": " issued an invoice of INR 12,75,000 with a payment due date of Jan 15, 2024.", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 19, "class": "monetary_value", "text": "INR 12,75,000", "color": "#EADDFF", "startPos": 478, "endPos": 491, "beforeText": " 27AAACR5055K1ZL.\nSEBI fined ABC Securities INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of ", "extractionText": "INR 12,75,000", "afterText": " with a payment due date of Jan 15, 2024.", "attributesHtml": "<div><strong>class:</strong> monetary_value</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">value_type</span>: <span class=\"lx-attr-value\">invoice total</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 20, "class": "date", "text": "Jan 15, 2024", "color": "#FEF0C3", "startPos": 519, "endPos": 531, "beforeText": "es INR 1,50,000 on Aug 18, 2022, for regulatory violations.\nOn Dec 1, 2023, Tata Motors issued an invoice of INR 12,75,000 with a payment due date of ", "extractionText": "Jan 15, 2024", "afterText": ".", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">due date</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
