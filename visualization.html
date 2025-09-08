@@ -1,0 +1,195 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">company</span> <span class="lx-label" style="background-color:#C8E6C9;">date</span> <span class="lx-label" style="background-color:#FEF0C3;">financial_metric</span> <span class="lx-label" style="background-color:#F9DEDC;">other_entity</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        On <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#C8E6C9;">October 5, 2024</span>, <span class="lx-highlight" data-idx="1" style="background-color:#D2E3FC;">ICICI Bank Ltd (ICICIBANK.NS)</span> announced that it had sanctioned home loans worth <span class="lx-highlight" data-idx="2" style="background-color:#FEF0C3;">₹4,800 crore</span> during <span class="lx-highlight" data-idx="3" style="background-color:#C8E6C9;">Q2 FY2024</span>. The loans carried an average interest rate of <span class="lx-highlight" data-idx="4" style="background-color:#FEF0C3;">8.2% per annum</span>, with repayment tenures ranging from <span class="lx-highlight" data-idx="5" style="background-color:#FEF0C3;">10 to 20 years</span>. The disclosure followed the <span class="lx-highlight" data-idx="6" style="background-color:#F9DEDC;">Securities and Exchange Board of India’s (SEBI)</span> new mandate requiring <span class="lx-highlight" data-idx="7" style="background-color:#F9DEDC;">lenders</span> to publish segment-wise lending data.
+
+In the global currency markets, the <span class="lx-highlight" data-idx="8" style="background-color:#F9DEDC;">British pound</span> traded at <span class="lx-highlight" data-idx="9" style="background-color:#FEF0C3;">1.25</span> against the <span class="lx-highlight" data-idx="10" style="background-color:#F9DEDC;">US <span class="lx-highlight" data-idx="11" style="background-color:#F9DEDC;">dollar</span></span>, while the <span class="lx-highlight" data-idx="12" style="background-color:#F9DEDC;">yen</span> weakened further to <span class="lx-highlight" data-idx="13" style="background-color:#FEF0C3;">148.2 per dollar</span>, prompting speculation of coordinated <span class="lx-highlight" data-idx="14" style="background-color:#F9DEDC;">central bank</span> action. The <span class="lx-highlight" data-idx="15" style="background-color:#F9DEDC;">NASDAQ Composite</span> closed at <span class="lx-highlight" data-idx="16" style="background-color:#FEF0C3;">14,950 points</span>, rising <span class="lx-highlight" data-idx="17" style="background-color:#FEF0C3;">1.5%</span> as semiconductor stocks led gains. Meanwhile, shares of <span class="lx-highlight" data-idx="18" style="background-color:#D2E3FC;">Tata Consultancy Services (TCS.NS)</span> advanced <span class="lx-highlight" data-idx="19" style="background-color:#FEF0C3;">2.1%</span> in New York trading, closing at <span class="lx-highlight" data-idx="20" style="background-color:#FEF0C3;">$34.20 per ADR</span>.
+
+In corporate earnings, <span class="lx-highlight" data-idx="21" style="background-color:#D2E3FC;">Adani Enterprises Ltd (ADANIENT.</span>NS) reported a consolidated net profit of <span class="lx-highlight" data-idx="22" style="background-color:#FEF0C3;">₹2,150 crore</span> for the quarter ending <span class="lx-highlight" data-idx="23" style="background-color:#C8E6C9;">September 30, 2024</span>, compared to <span class="lx-highlight" data-idx="24" style="background-color:#FEF0C3;">₹1,890 crore</span> in the same quarter last year. <span class="lx-highlight" data-idx="25" style="background-color:#D2E3FC;">The company</span> also disclosed pending regulatory dues of <span class="lx-highlight" data-idx="26" style="background-color:#FEF0C3;">₹320 crore</span> and provisioned <span class="lx-highlight" data-idx="27" style="background-color:#FEF0C3;">₹75 crore</span> for ongoing compliance matters. Its CIN number <span class="lx-highlight" data-idx="28" style="background-color:#FEF0C3;">L51100GJ1993PLC019067</span> was referenced in the <span class="lx-highlight" data-idx="29" style="background-color:#F9DEDC;">Ministry of Corporate Affairs</span> filing.
+
+
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="29" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/30</span> |
+          Pos <span id="posInfo">[3-18]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "date", "text": "October 5, 2024", "color": "#C8E6C9", "startPos": 3, "endPos": 18, "beforeText": "On ", "extractionText": "October 5, 2024", "afterText": ", ICICI Bank Ltd (ICICIBANK.NS) announced that it had sanctioned home loans worth \u20b94,800 crore during Q2 FY2024. The loans carried an average interest", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">announcement_date</span>}</div>"}, {"index": 1, "class": "company", "text": "ICICI Bank Ltd (ICICIBANK.NS)", "color": "#D2E3FC", "startPos": 20, "endPos": 49, "beforeText": "On October 5, 2024, ", "extractionText": "ICICI Bank Ltd (ICICIBANK.NS)", "afterText": " announced that it had sanctioned home loans worth \u20b94,800 crore during Q2 FY2024. The loans carried an average interest rate of 8.2% per annum, with r", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">ticker</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">ICICIBANK.NS</span>}</div>"}, {"index": 2, "class": "financial_metric", "text": "\u20b94,800 crore", "color": "#FEF0C3", "startPos": 100, "endPos": 112, "beforeText": "On October 5, 2024, ICICI Bank Ltd (ICICIBANK.NS) announced that it had sanctioned home loans worth ", "extractionText": "\u20b94,800 crore", "afterText": " during Q2 FY2024. The loans carried an average interest rate of 8.2% per annum, with repayment tenures ranging from 10 to 20 years. The disclosure fo", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">home_loan_sanctioned</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>, <span class=\"lx-attr-key\">fiscal_period</span>: <span class=\"lx-attr-value\">Q2 FY2024</span>}</div>"}, {"index": 3, "class": "date", "text": "Q2 FY2024", "color": "#C8E6C9", "startPos": 120, "endPos": 129, "beforeText": "On October 5, 2024, ICICI Bank Ltd (ICICIBANK.NS) announced that it had sanctioned home loans worth \u20b94,800 crore during ", "extractionText": "Q2 FY2024", "afterText": ". The loans carried an average interest rate of 8.2% per annum, with repayment tenures ranging from 10 to 20 years. The disclosure followed the Securi", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">fiscal_period</span>}</div>"}, {"index": 4, "class": "financial_metric", "text": "8.2% per annum", "color": "#FEF0C3", "startPos": 177, "endPos": 191, "beforeText": "ank Ltd (ICICIBANK.NS) announced that it had sanctioned home loans worth \u20b94,800 crore during Q2 FY2024. The loans carried an average interest rate of ", "extractionText": "8.2% per annum", "afterText": ", with repayment tenures ranging from 10 to 20 years. The disclosure followed the Securities and Exchange Board of India\u2019s (SEBI) new mandate requirin", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 5, "class": "financial_metric", "text": "10 to 20 years", "color": "#FEF0C3", "startPos": 229, "endPos": 243, "beforeText": "ned home loans worth \u20b94,800 crore during Q2 FY2024. The loans carried an average interest rate of 8.2% per annum, with repayment tenures ranging from ", "extractionText": "10 to 20 years", "afterText": ". The disclosure followed the Securities and Exchange Board of India\u2019s (SEBI) new mandate requiring lenders to publish segment-wise lending data.\n\nIn ", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">repayment_tenure</span>, <span class=\"lx-attr-key\">unit</span>: <span class=\"lx-attr-value\">years</span>}</div>"}, {"index": 6, "class": "other_entity", "text": "Securities and Exchange Board of India\u2019s (SEBI)", "color": "#F9DEDC", "startPos": 273, "endPos": 320, "beforeText": "FY2024. The loans carried an average interest rate of 8.2% per annum, with repayment tenures ranging from 10 to 20 years. The disclosure followed the ", "extractionText": "Securities and Exchange Board of India\u2019s (SEBI)", "afterText": " new mandate requiring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the US ", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">regulator</span>, <span class=\"lx-attr-key\">abbreviation</span>: <span class=\"lx-attr-value\">SEBI</span>}</div>"}, {"index": 7, "class": "other_entity", "text": "lenders", "color": "#F9DEDC", "startPos": 343, "endPos": 350, "beforeText": "with repayment tenures ranging from 10 to 20 years. The disclosure followed the Securities and Exchange Board of India\u2019s (SEBI) new mandate requiring ", "extractionText": "lenders", "afterText": " to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the US dollar, while the yen weakened", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">financial_institution</span>}</div>"}, {"index": 8, "class": "other_entity", "text": "British pound", "color": "#F9DEDC", "startPos": 426, "endPos": 439, "beforeText": "urities and Exchange Board of India\u2019s (SEBI) new mandate requiring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the ", "extractionText": "British pound", "afterText": " traded at 1.25 against the US dollar, while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. T", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">currency</span>}</div>"}, {"index": 9, "class": "financial_metric", "text": "1.25", "color": "#FEF0C3", "startPos": 450, "endPos": 454, "beforeText": "rd of India\u2019s (SEBI) new mandate requiring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at ", "extractionText": "1.25", "afterText": " against the US dollar, while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Compo", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">exchange_rate</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">GBP</span>, <span class=\"lx-attr-key\">unit</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 10, "class": "other_entity", "text": "US dollar", "color": "#F9DEDC", "startPos": 467, "endPos": 476, "beforeText": "BI) new mandate requiring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the ", "extractionText": "US dollar", "afterText": ", while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Composite closed at 14,950 ", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">currency</span>}</div>"}, {"index": 11, "class": "other_entity", "text": "dollar", "color": "#F9DEDC", "startPos": 470, "endPos": 476, "beforeText": " new mandate requiring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the US ", "extractionText": "dollar", "afterText": ", while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Composite closed at 14,950 ", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">currency</span>}</div>"}, {"index": 12, "class": "other_entity", "text": "yen", "color": "#F9DEDC", "startPos": 488, "endPos": 491, "beforeText": "ring lenders to publish segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the US dollar, while the ", "extractionText": "yen", "afterText": " weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Composite closed at 14,950 points, rising ", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">currency</span>}</div>"}, {"index": 13, "class": "financial_metric", "text": "148.2 per dollar", "color": "#FEF0C3", "startPos": 512, "endPos": 528, "beforeText": "segment-wise lending data.\n\nIn the global currency markets, the British pound traded at 1.25 against the US dollar, while the yen weakened further to ", "extractionText": "148.2 per dollar", "afterText": ", prompting speculation of coordinated central bank action. The NASDAQ Composite closed at 14,950 points, rising 1.5% as semiconductor stocks led gain", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">exchange_rate</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">JPY</span>, <span class=\"lx-attr-key\">unit</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 14, "class": "other_entity", "text": "central bank", "color": "#F9DEDC", "startPos": 567, "endPos": 579, "beforeText": "ets, the British pound traded at 1.25 against the US dollar, while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated ", "extractionText": "central bank", "afterText": " action. The NASDAQ Composite closed at 14,950 points, rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">financial_institution</span>}</div>"}, {"index": 15, "class": "other_entity", "text": "NASDAQ Composite", "color": "#F9DEDC", "startPos": 592, "endPos": 608, "beforeText": "aded at 1.25 against the US dollar, while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The ", "extractionText": "NASDAQ Composite", "afterText": " closed at 14,950 points, rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced 2.1% in New ", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">stock_index</span>}</div>"}, {"index": 16, "class": "financial_metric", "text": "14,950 points", "color": "#FEF0C3", "startPos": 619, "endPos": 632, "beforeText": " dollar, while the yen weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Composite closed at ", "extractionText": "14,950 points", "afterText": ", rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced 2.1% in New York trading, closing at", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">closing_value</span>, <span class=\"lx-attr-key\">unit</span>: <span class=\"lx-attr-value\">points</span>, <span class=\"lx-attr-key\">company</span>: <span class=\"lx-attr-value\">NASDAQ Composite</span>}</div>"}, {"index": 17, "class": "financial_metric", "text": "1.5%", "color": "#FEF0C3", "startPos": 641, "endPos": 645, "beforeText": " weakened further to 148.2 per dollar, prompting speculation of coordinated central bank action. The NASDAQ Composite closed at 14,950 points, rising ", "extractionText": "1.5%", "afterText": " as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced 2.1% in New York trading, closing at $34.20 per A", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">stock_change</span>, <span class=\"lx-attr-key\">company</span>: <span class=\"lx-attr-value\">NASDAQ Composite</span>}</div>"}, {"index": 18, "class": "company", "text": "Tata Consultancy Services (TCS.NS)", "color": "#D2E3FC", "startPos": 702, "endPos": 736, "beforeText": "of coordinated central bank action. The NASDAQ Composite closed at 14,950 points, rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of ", "extractionText": "Tata Consultancy Services (TCS.NS)", "afterText": " advanced 2.1% in New York trading, closing at $34.20 per ADR.\n\nIn corporate earnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">ticker</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">TCS.NS</span>}</div>"}, {"index": 19, "class": "financial_metric", "text": "2.1%", "color": "#FEF0C3", "startPos": 746, "endPos": 750, "beforeText": "AQ Composite closed at 14,950 points, rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced ", "extractionText": "2.1%", "afterText": " in New York trading, closing at $34.20 per ADR.\n\nIn corporate earnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net profit of \u20b92,", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">stock_change</span>, <span class=\"lx-attr-key\">company</span>: <span class=\"lx-attr-value\">Tata Consultancy Services (TCS.NS)</span>}</div>"}, {"index": 20, "class": "financial_metric", "text": "$34.20 per ADR", "color": "#FEF0C3", "startPos": 783, "endPos": 797, "beforeText": " rising 1.5% as semiconductor stocks led gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced 2.1% in New York trading, closing at ", "extractionText": "$34.20 per ADR", "afterText": ".\n\nIn corporate earnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net profit of \u20b92,150 crore for the quarter ending September 30, ", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">ADR_close</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">USD</span>, <span class=\"lx-attr-key\">company</span>: <span class=\"lx-attr-value\">Tata Consultancy Services (TCS.NS)</span>}</div>"}, {"index": 21, "class": "company", "text": "Adani Enterprises Ltd (ADANIENT.", "color": "#D2E3FC", "startPos": 823, "endPos": 855, "beforeText": " gains. Meanwhile, shares of Tata Consultancy Services (TCS.NS) advanced 2.1% in New York trading, closing at $34.20 per ADR.\n\nIn corporate earnings, ", "extractionText": "Adani Enterprises Ltd (ADANIENT.", "afterText": "NS) reported a consolidated net profit of \u20b92,150 crore for the quarter ending September 30, 2024, compared to \u20b91,890 crore in the same quarter last ye", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">ticker</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">ADANIENT.</span>}</div>"}, {"index": 22, "class": "financial_metric", "text": "\u20b92,150 crore", "color": "#FEF0C3", "startPos": 897, "endPos": 909, "beforeText": ".1% in New York trading, closing at $34.20 per ADR.\n\nIn corporate earnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net profit of ", "extractionText": "\u20b92,150 crore", "afterText": " for the quarter ending September 30, 2024, compared to \u20b91,890 crore in the same quarter last year. The company also disclosed pending regulatory dues", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">net_profit</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>, <span class=\"lx-attr-key\">fiscal_period</span>: <span class=\"lx-attr-value\">quarter ending September 30, 2024</span>}</div>"}, {"index": 23, "class": "date", "text": "September 30, 2024", "color": "#C8E6C9", "startPos": 933, "endPos": 951, "beforeText": "$34.20 per ADR.\n\nIn corporate earnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net profit of \u20b92,150 crore for the quarter ending ", "extractionText": "September 30, 2024", "afterText": ", compared to \u20b91,890 crore in the same quarter last year. The company also disclosed pending regulatory dues of \u20b9320 crore and provisioned \u20b975 crore f", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">quarter_end</span>}</div>"}, {"index": 24, "class": "financial_metric", "text": "\u20b91,890 crore", "color": "#FEF0C3", "startPos": 965, "endPos": 977, "beforeText": "rnings, Adani Enterprises Ltd (ADANIENT.NS) reported a consolidated net profit of \u20b92,150 crore for the quarter ending September 30, 2024, compared to ", "extractionText": "\u20b91,890 crore", "afterText": " in the same quarter last year. The company also disclosed pending regulatory dues of \u20b9320 crore and provisioned \u20b975 crore for ongoing compliance matt", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">net_profit</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>, <span class=\"lx-attr-key\">fiscal_period</span>: <span class=\"lx-attr-value\">same quarter last year</span>}</div>"}, {"index": 25, "class": "company", "text": "The company", "color": "#D2E3FC", "startPos": 1009, "endPos": 1020, "beforeText": "reported a consolidated net profit of \u20b92,150 crore for the quarter ending September 30, 2024, compared to \u20b91,890 crore in the same quarter last year. ", "extractionText": "The company", "afterText": " also disclosed pending regulatory dues of \u20b9320 crore and provisioned \u20b975 crore for ongoing compliance matters. Its CIN number L51100GJ1993PLC019067 w", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 26, "class": "financial_metric", "text": "\u20b9320 crore", "color": "#FEF0C3", "startPos": 1063, "endPos": 1073, "beforeText": " the quarter ending September 30, 2024, compared to \u20b91,890 crore in the same quarter last year. The company also disclosed pending regulatory dues of ", "extractionText": "\u20b9320 crore", "afterText": " and provisioned \u20b975 crore for ongoing compliance matters. Its CIN number L51100GJ1993PLC019067 was referenced in the Ministry of Corporate Affairs fi", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">regulatory_dues</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 27, "class": "financial_metric", "text": "\u20b975 crore", "color": "#FEF0C3", "startPos": 1090, "endPos": 1099, "beforeText": "er 30, 2024, compared to \u20b91,890 crore in the same quarter last year. The company also disclosed pending regulatory dues of \u20b9320 crore and provisioned ", "extractionText": "\u20b975 crore", "afterText": " for ongoing compliance matters. Its CIN number L51100GJ1993PLC019067 was referenced in the Ministry of Corporate Affairs filing.\n\n", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">provisioned_compliance</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 28, "class": "financial_metric", "text": "L51100GJ1993PLC019067", "color": "#FEF0C3", "startPos": 1147, "endPos": 1168, "beforeText": " last year. The company also disclosed pending regulatory dues of \u20b9320 crore and provisioned \u20b975 crore for ongoing compliance matters. Its CIN number ", "extractionText": "L51100GJ1993PLC019067", "afterText": " was referenced in the Ministry of Corporate Affairs filing.\n\n", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">CIN</span>}</div>"}, {"index": 29, "class": "other_entity", "text": "Ministry of Corporate Affairs", "color": "#F9DEDC", "startPos": 1191, "endPos": 1220, "beforeText": "ng regulatory dues of \u20b9320 crore and provisioned \u20b975 crore for ongoing compliance matters. Its CIN number L51100GJ1993PLC019067 was referenced in the ", "extractionText": "Ministry of Corporate Affairs", "afterText": " filing.\n\n", "attributesHtml": "<div><strong>class:</strong> other_entity</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">entity_type</span>: <span class=\"lx-attr-value\">government_agency</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
