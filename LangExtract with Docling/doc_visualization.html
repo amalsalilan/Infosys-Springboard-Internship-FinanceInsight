@@ -1,0 +1,197 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">account_number</span> <span class="lx-label" style="background-color:#C8E6C9;">company</span> <span class="lx-label" style="background-color:#FEF0C3;">date</span> <span class="lx-label" style="background-color:#F9DEDC;">financial_metric</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        # Financial Report - Q1 2025
+
+This Loan Agreement is executed on **<span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#FEF0C3;">5th January 2023</span>** between **<span class="lx-highlight" data-idx="1" style="background-color:#C8E6C9;">PQR Finance Ltd</span> (CIN: U67890DL2018PLC222222, PAN: BBBBP4321B)** and **<span class="lx-highlight" data-idx="2" style="background-color:#C8E6C9;">Sunrise Textiles Pvt Ltd</span>** . PQR Finance has sanctioned **Loan Account No. <span class="lx-highlight" data-idx="3" style="background-color:#D2E3FC;">876543210</span>** in favor of Sunrise Textiles, with a **principal sanctioned amount of <span class="lx-highlight" data-idx="4" style="background-color:#F9DEDC;">INR 25,00,000</span>** . The loan carries an **annual interest rate of <span class="lx-highlight" data-idx="5" style="background-color:#F9DEDC;">8.2</span>%** , and all charges are subject to **<span class="lx-highlight" data-idx="6" style="background-color:#F9DEDC;">18% GST</span>** on processing fees. The tenure of the loan is four years, with the **maturity date set to <span class="lx-highlight" data-idx="7" style="background-color:#FEF0C3;">5th January 2027</span>** .
+
+Another agreement was signed on **<span class="lx-highlight" data-idx="8" style="background-color:#FEF0C3;">12th March 2024</span>** between **<span class="lx-highlight" data-idx="9" style="background-color:#C8E6C9;">ABC Bank</span> (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **<span class="lx-highlight" data-idx="10" style="background-color:#C8E6C9;">XYZ Enterprises Ltd</span>** , where ABC Bank sanctioned **Loan Account No. <span class="lx-highlight" data-idx="11" style="background-color:#D2E3FC;">123456789</span>** with a **principal amount of <span class="lx-highlight" data-idx="12" style="background-color:#F9DEDC;">INR 50,00,000</span>** . The loan carries an **interest rate of <span class="lx-highlight" data-idx="13" style="background-color:#F9DEDC;">7.5% per annum</span>** , with **<span class="lx-highlight" data-idx="14" style="background-color:#F9DEDC;">18% GST</span> applicable on charges** , and the maturity date has been fixed as **<span class="lx-highlight" data-idx="15" style="background-color:#FEF0C3;">12th March 2029</span>** .
+
+On **<span class="lx-highlight" data-idx="16" style="background-color:#FEF0C3;">20th June 2022</span>** , **<span class="lx-highlight" data-idx="17" style="background-color:#C8E6C9;">Delta Housing Finance Ltd</span> (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **<span class="lx-highlight" data-idx="18" style="background-color:#C8E6C9;">Evergreen Constructions Ltd</span>** and opened **Loan Account No. <span class="lx-highlight" data-idx="19" style="background-color:#D2E3FC;">456789123</span>** . The **sanctioned principal amount was <span class="lx-highlight" data-idx="20" style="background-color:#F9DEDC;">INR 1,20,00,000</span>** , with an **annual interest rate of <span class="lx-highlight" data-idx="21" style="background-color:#F9DEDC;">9.0</span>%** . The applicable charges were subject to **<span class="lx-highlight" data-idx="22" style="background-color:#F9DEDC;">12% GST</span>** , and the agreement specifies a **maturity date of <span class="lx-highlight" data-idx="23" style="background-color:#FEF0C3;">20th June 2032</span>** .
+
+Another facility agreement dated **<span class="lx-highlight" data-idx="24" style="background-color:#FEF0C3;">10th November 2021</span>** was executed between **<span class="lx-highlight" data-idx="25" style="background-color:#C8E6C9;">Heritage Bank of India</span> (CIN: U11111WB2010PLC444444, PAN: DDDDP9876D)** and **<span class="lx-highlight" data-idx="26" style="background-color:#C8E6C9;">Lotus Pharmaceuticals Ltd</span>** . The bank sanctioned **Loan Account No. <span class="lx-highlight" data-idx="27" style="background-color:#D2E3FC;">321654987</span>** with a **principal amount of <span class="lx-highlight" data-idx="28" style="background-color:#F9DEDC;">INR 75,00,000</span>** , carrying an **interest rate of <span class="lx-highlight" data-idx="29" style="background-color:#F9DEDC;">6.9%</span> annually** . The charges included a **<span class="lx-highlight" data-idx="30" style="background-color:#F9DEDC;">5%</span> service fee plus <span class="lx-highlight" data-idx="31" style="background-color:#F9DEDC;">18% GST</span>** , with a **loan tenure of six years** , ending on **<span class="lx-highlight" data-idx="32" style="background-color:#FEF0C3;">10th November 2027</span>** . Both parties mutually accepted and signed the agreement, thereby confirming the terms and obligations set forth.
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="32" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/33</span> |
+          Pos <span id="posInfo">[67-83]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "date", "text": "5th January 2023", "color": "#FEF0C3", "startPos": 67, "endPos": 83, "beforeText": "# Financial Report - Q1 2025\n\nThis Loan Agreement is executed on **", "extractionText": "5th January 2023", "afterText": "** between **PQR Finance Ltd (CIN: U67890DL2018PLC222222, PAN: BBBBP4321B)** and **Sunrise Textiles Pvt Ltd** . PQR Finance has sanctioned **Loan Acco", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">effective_date</span>}</div>"}, {"index": 1, "class": "company", "text": "PQR Finance Ltd", "color": "#C8E6C9", "startPos": 96, "endPos": 111, "beforeText": "# Financial Report - Q1 2025\n\nThis Loan Agreement is executed on **5th January 2023** between **", "extractionText": "PQR Finance Ltd", "afterText": " (CIN: U67890DL2018PLC222222, PAN: BBBBP4321B)** and **Sunrise Textiles Pvt Ltd** . PQR Finance has sanctioned **Loan Account No. 876543210** in favor", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">CIN</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">U67890DL2018PLC222222</span>, <span class=\"lx-attr-key\">PAN</span>: <span class=\"lx-attr-value\">BBBBP4321B</span>}</div>"}, {"index": 2, "class": "company", "text": "Sunrise Textiles Pvt Ltd", "color": "#C8E6C9", "startPos": 166, "endPos": 190, "beforeText": "rt - Q1 2025\n\nThis Loan Agreement is executed on **5th January 2023** between **PQR Finance Ltd (CIN: U67890DL2018PLC222222, PAN: BBBBP4321B)** and **", "extractionText": "Sunrise Textiles Pvt Ltd", "afterText": "** . PQR Finance has sanctioned **Loan Account No. 876543210** in favor of Sunrise Textiles, with a **principal sanctioned amount of INR 25,00,000** .", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 3, "class": "account_number", "text": "876543210", "color": "#D2E3FC", "startPos": 241, "endPos": 250, "beforeText": "en **PQR Finance Ltd (CIN: U67890DL2018PLC222222, PAN: BBBBP4321B)** and **Sunrise Textiles Pvt Ltd** . PQR Finance has sanctioned **Loan Account No. ", "extractionText": "876543210", "afterText": "** in favor of Sunrise Textiles, with a **principal sanctioned amount of INR 25,00,000** . The loan carries an **annual interest rate of 8.2%** , and ", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">loan_account</span>}</div>"}, {"index": 4, "class": "financial_metric", "text": "INR 25,00,000", "color": "#F9DEDC", "startPos": 323, "endPos": 336, "beforeText": " Textiles Pvt Ltd** . PQR Finance has sanctioned **Loan Account No. 876543210** in favor of Sunrise Textiles, with a **principal sanctioned amount of ", "extractionText": "INR 25,00,000", "afterText": "** . The loan carries an **annual interest rate of 8.2%** , and all charges are subject to **18% GST** on processing fees. The tenure of the loan is f", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">principal_sanctioned_amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 5, "class": "financial_metric", "text": "8.2%", "color": "#F9DEDC", "startPos": 387, "endPos": 390, "beforeText": "No. 876543210** in favor of Sunrise Textiles, with a **principal sanctioned amount of INR 25,00,000** . The loan carries an **annual interest rate of ", "extractionText": "8.2", "afterText": "%** , and all charges are subject to **18% GST** on processing fees. The tenure of the loan is four years, with the **maturity date set to 5th January", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 6, "class": "financial_metric", "text": "18% GST", "color": "#F9DEDC", "startPos": 429, "endPos": 436, "beforeText": "es, with a **principal sanctioned amount of INR 25,00,000** . The loan carries an **annual interest rate of 8.2%** , and all charges are subject to **", "extractionText": "18% GST", "afterText": "** on processing fees. The tenure of the loan is four years, with the **maturity date set to 5th January 2027** .\n\nAnother agreement was signed on **1", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">tax</span>, <span class=\"lx-attr-key\">tax_type</span>: <span class=\"lx-attr-value\">GST</span>}</div>"}, {"index": 7, "class": "date", "text": "5th January 2027", "color": "#FEF0C3", "startPos": 529, "endPos": 545, "beforeText": "rate of 8.2%** , and all charges are subject to **18% GST** on processing fees. The tenure of the loan is four years, with the **maturity date set to ", "extractionText": "5th January 2027", "afterText": "** .\n\nAnother agreement was signed on **12th March 2024** between **ABC Bank (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **XYZ Enterprises Ltd", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">maturity_date</span>}</div>"}, {"index": 8, "class": "date", "text": "12th March 2024", "color": "#FEF0C3", "startPos": 585, "endPos": 600, "beforeText": "T** on processing fees. The tenure of the loan is four years, with the **maturity date set to 5th January 2027** .\n\nAnother agreement was signed on **", "extractionText": "12th March 2024", "afterText": "** between **ABC Bank (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **XYZ Enterprises Ltd** , where ABC Bank sanctioned **Loan Account No. 12345", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">effective_date</span>}</div>"}, {"index": 9, "class": "company", "text": "ABC Bank", "color": "#C8E6C9", "startPos": 613, "endPos": 621, "beforeText": "tenure of the loan is four years, with the **maturity date set to 5th January 2027** .\n\nAnother agreement was signed on **12th March 2024** between **", "extractionText": "ABC Bank", "afterText": " (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **XYZ Enterprises Ltd** , where ABC Bank sanctioned **Loan Account No. 123456789** with a **princ", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">CIN</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">U12345MH2020PLC111111</span>, <span class=\"lx-attr-key\">PAN</span>: <span class=\"lx-attr-value\">AAAPA1234A</span>}</div>"}, {"index": 10, "class": "company", "text": "XYZ Enterprises Ltd", "color": "#C8E6C9", "startPos": 676, "endPos": 695, "beforeText": "to 5th January 2027** .\n\nAnother agreement was signed on **12th March 2024** between **ABC Bank (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **", "extractionText": "XYZ Enterprises Ltd", "afterText": "** , where ABC Bank sanctioned **Loan Account No. 123456789** with a **principal amount of INR 50,00,000** . The loan carries an **interest rate of 7.", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 11, "class": "account_number", "text": "123456789", "color": "#D2E3FC", "startPos": 745, "endPos": 754, "beforeText": " 2024** between **ABC Bank (CIN: U12345MH2020PLC111111, PAN: AAAPA1234A)** and **XYZ Enterprises Ltd** , where ABC Bank sanctioned **Loan Account No. ", "extractionText": "123456789", "afterText": "** with a **principal amount of INR 50,00,000** . The loan carries an **interest rate of 7.5% per annum** , with **18% GST applicable on charges** , a", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">loan_account</span>}</div>"}, {"index": 12, "class": "financial_metric", "text": "INR 50,00,000", "color": "#F9DEDC", "startPos": 786, "endPos": 799, "beforeText": "2020PLC111111, PAN: AAAPA1234A)** and **XYZ Enterprises Ltd** , where ABC Bank sanctioned **Loan Account No. 123456789** with a **principal amount of ", "extractionText": "INR 50,00,000", "afterText": "** . The loan carries an **interest rate of 7.5% per annum** , with **18% GST applicable on charges** , and the maturity date has been fixed as **12th", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">principal_amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 13, "class": "financial_metric", "text": "7.5% per annum", "color": "#F9DEDC", "startPos": 843, "endPos": 857, "beforeText": "td** , where ABC Bank sanctioned **Loan Account No. 123456789** with a **principal amount of INR 50,00,000** . The loan carries an **interest rate of ", "extractionText": "7.5% per annum", "afterText": "** , with **18% GST applicable on charges** , and the maturity date has been fixed as **12th March 2029** .\n\nOn **20th June 2022** , **Delta Housing F", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 14, "class": "financial_metric", "text": "18% GST", "color": "#F9DEDC", "startPos": 869, "endPos": 876, "beforeText": "tioned **Loan Account No. 123456789** with a **principal amount of INR 50,00,000** . The loan carries an **interest rate of 7.5% per annum** , with **", "extractionText": "18% GST", "afterText": " applicable on charges** , and the maturity date has been fixed as **12th March 2029** .\n\nOn **20th June 2022** , **Delta Housing Finance Ltd (CIN: U5", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">tax</span>, <span class=\"lx-attr-key\">tax_type</span>: <span class=\"lx-attr-value\">GST</span>}</div>"}, {"index": 15, "class": "date", "text": "12th March 2029", "color": "#FEF0C3", "startPos": 945, "endPos": 960, "beforeText": ",000** . The loan carries an **interest rate of 7.5% per annum** , with **18% GST applicable on charges** , and the maturity date has been fixed as **", "extractionText": "12th March 2029", "afterText": "** .\n\nOn **20th June 2022** , **Delta Housing Finance Ltd (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **Evergreen C", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">maturity_date</span>}</div>"}, {"index": 16, "class": "date", "text": "20th June 2022", "color": "#FEF0C3", "startPos": 971, "endPos": 985, "beforeText": "an **interest rate of 7.5% per annum** , with **18% GST applicable on charges** , and the maturity date has been fixed as **12th March 2029** .\n\nOn **", "extractionText": "20th June 2022", "afterText": "** , **Delta Housing Finance Ltd (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **Evergreen Constructions Ltd** and op", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">effective_date</span>}</div>"}, {"index": 17, "class": "company", "text": "Delta Housing Finance Ltd", "color": "#C8E6C9", "startPos": 992, "endPos": 1017, "beforeText": " 7.5% per annum** , with **18% GST applicable on charges** , and the maturity date has been fixed as **12th March 2029** .\n\nOn **20th June 2022** , **", "extractionText": "Delta Housing Finance Ltd", "afterText": " (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **Evergreen Constructions Ltd** and opened **Loan Account No. 45678912", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">CIN</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">U54321KA2015PLC333333</span>, <span class=\"lx-attr-key\">PAN</span>: <span class=\"lx-attr-value\">CCCCP7654C</span>}</div>"}, {"index": 18, "class": "company", "text": "Evergreen Constructions Ltd", "color": "#C8E6C9", "startPos": 1099, "endPos": 1126, "beforeText": " March 2029** .\n\nOn **20th June 2022** , **Delta Housing Finance Ltd (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **", "extractionText": "Evergreen Constructions Ltd", "afterText": "** and opened **Loan Account No. 456789123** . The **sanctioned principal amount was INR 1,20,00,000** , with an **annual interest rate of 9.0%** . Th", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 19, "class": "account_number", "text": "456789123", "color": "#D2E3FC", "startPos": 1159, "endPos": 1168, "beforeText": "ance Ltd (CIN: U54321KA2015PLC333333, PAN: CCCCP7654C)** entered into an agreement with **Evergreen Constructions Ltd** and opened **Loan Account No. ", "extractionText": "456789123", "afterText": "** . The **sanctioned principal amount was INR 1,20,00,000** , with an **annual interest rate of 9.0%** . The applicable charges were subject to **12%", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">loan_account</span>}</div>"}, {"index": 20, "class": "financial_metric", "text": "INR 1,20,00,000", "color": "#F9DEDC", "startPos": 1211, "endPos": 1226, "beforeText": "C)** entered into an agreement with **Evergreen Constructions Ltd** and opened **Loan Account No. 456789123** . The **sanctioned principal amount was ", "extractionText": "INR 1,20,00,000", "afterText": "** , with an **annual interest rate of 9.0%** . The applicable charges were subject to **12% GST** , and the agreement specifies a **maturity date of ", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">principal_amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 21, "class": "financial_metric", "text": "9.0%", "color": "#F9DEDC", "startPos": 1265, "endPos": 1268, "beforeText": "uctions Ltd** and opened **Loan Account No. 456789123** . The **sanctioned principal amount was INR 1,20,00,000** , with an **annual interest rate of ", "extractionText": "9.0", "afterText": "%** . The applicable charges were subject to **12% GST** , and the agreement specifies a **maturity date of 20th June 2032** .\n\nAnother facility agree", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 22, "class": "financial_metric", "text": "12% GST", "color": "#F9DEDC", "startPos": 1315, "endPos": 1322, "beforeText": "123** . The **sanctioned principal amount was INR 1,20,00,000** , with an **annual interest rate of 9.0%** . The applicable charges were subject to **", "extractionText": "12% GST", "afterText": "** , and the agreement specifies a **maturity date of 20th June 2032** .\n\nAnother facility agreement dated **10th November 2021** was executed between", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">tax</span>, <span class=\"lx-attr-key\">tax_type</span>: <span class=\"lx-attr-value\">GST</span>}</div>"}, {"index": 23, "class": "date", "text": "20th June 2032", "color": "#FEF0C3", "startPos": 1376, "endPos": 1390, "beforeText": "** , with an **annual interest rate of 9.0%** . The applicable charges were subject to **12% GST** , and the agreement specifies a **maturity date of ", "extractionText": "20th June 2032", "afterText": "** .\n\nAnother facility agreement dated **10th November 2021** was executed between **Heritage Bank of India (CIN: U11111WB2010PLC444444, PAN: DDDDP987", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">maturity_date</span>}</div>"}, {"index": 24, "class": "date", "text": "10th November 2021", "color": "#FEF0C3", "startPos": 1431, "endPos": 1449, "beforeText": "licable charges were subject to **12% GST** , and the agreement specifies a **maturity date of 20th June 2032** .\n\nAnother facility agreement dated **", "extractionText": "10th November 2021", "afterText": "** was executed between **Heritage Bank of India (CIN: U11111WB2010PLC444444, PAN: DDDDP9876D)** and **Lotus Pharmaceuticals Ltd** . The bank sanction", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">effective_date</span>}</div>"}, {"index": 25, "class": "company", "text": "Heritage Bank of India", "color": "#C8E6C9", "startPos": 1475, "endPos": 1497, "beforeText": ", and the agreement specifies a **maturity date of 20th June 2032** .\n\nAnother facility agreement dated **10th November 2021** was executed between **", "extractionText": "Heritage Bank of India", "afterText": " (CIN: U11111WB2010PLC444444, PAN: DDDDP9876D)** and **Lotus Pharmaceuticals Ltd** . The bank sanctioned **Loan Account No. 321654987** with a **princ", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">identifier_type</span>: <span class=\"lx-attr-value\">CIN</span>, <span class=\"lx-attr-key\">identifier</span>: <span class=\"lx-attr-value\">U11111WB2010PLC444444</span>, <span class=\"lx-attr-key\">PAN</span>: <span class=\"lx-attr-value\">DDDP9876D</span>}</div>"}, {"index": 26, "class": "company", "text": "Lotus Pharmaceuticals Ltd", "color": "#C8E6C9", "startPos": 1552, "endPos": 1577, "beforeText": "r facility agreement dated **10th November 2021** was executed between **Heritage Bank of India (CIN: U11111WB2010PLC444444, PAN: DDDDP9876D)** and **", "extractionText": "Lotus Pharmaceuticals Ltd", "afterText": "** . The bank sanctioned **Loan Account No. 321654987** with a **principal amount of INR 75,00,000** , carrying an **interest rate of 6.9% annually** ", "attributesHtml": "<div><strong>class:</strong> company</div><div><strong>attributes:</strong> {}</div>"}, {"index": 27, "class": "account_number", "text": "321654987", "color": "#D2E3FC", "startPos": 1621, "endPos": 1630, "beforeText": "n **Heritage Bank of India (CIN: U11111WB2010PLC444444, PAN: DDDDP9876D)** and **Lotus Pharmaceuticals Ltd** . The bank sanctioned **Loan Account No. ", "extractionText": "321654987", "afterText": "** with a **principal amount of INR 75,00,000** , carrying an **interest rate of 6.9% annually** . The charges included a **5% service fee plus 18% GS", "attributesHtml": "<div><strong>class:</strong> account_number</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">account_type</span>: <span class=\"lx-attr-value\">loan_account</span>}</div>"}, {"index": 28, "class": "financial_metric", "text": "INR 75,00,000", "color": "#F9DEDC", "startPos": 1662, "endPos": 1675, "beforeText": "2010PLC444444, PAN: DDDDP9876D)** and **Lotus Pharmaceuticals Ltd** . The bank sanctioned **Loan Account No. 321654987** with a **principal amount of ", "extractionText": "INR 75,00,000", "afterText": "** , carrying an **interest rate of 6.9% annually** . The charges included a **5% service fee plus 18% GST** , with a **loan tenure of six years** , e", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">principal_amount</span>, <span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">INR</span>}</div>"}, {"index": 29, "class": "financial_metric", "text": "6.9%", "color": "#F9DEDC", "startPos": 1711, "endPos": 1715, "beforeText": "rmaceuticals Ltd** . The bank sanctioned **Loan Account No. 321654987** with a **principal amount of INR 75,00,000** , carrying an **interest rate of ", "extractionText": "6.9%", "afterText": " annually** . The charges included a **5% service fee plus 18% GST** , with a **loan tenure of six years** , ending on **10th November 2027** . Both p", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">interest_rate</span>, <span class=\"lx-attr-key\">rate_type</span>: <span class=\"lx-attr-value\">annual</span>}</div>"}, {"index": 30, "class": "financial_metric", "text": "5%", "color": "#F9DEDC", "startPos": 1754, "endPos": 1756, "beforeText": "Loan Account No. 321654987** with a **principal amount of INR 75,00,000** , carrying an **interest rate of 6.9% annually** . The charges included a **", "extractionText": "5%", "afterText": " service fee plus 18% GST** , with a **loan tenure of six years** , ending on **10th November 2027** . Both parties mutually accepted and signed the a", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">service_fee</span>}</div>"}, {"index": 31, "class": "financial_metric", "text": "18% GST", "color": "#F9DEDC", "startPos": 1774, "endPos": 1781, "beforeText": "654987** with a **principal amount of INR 75,00,000** , carrying an **interest rate of 6.9% annually** . The charges included a **5% service fee plus ", "extractionText": "18% GST", "afterText": "** , with a **loan tenure of six years** , ending on **10th November 2027** . Both parties mutually accepted and signed the agreement, thereby confirm", "attributesHtml": "<div><strong>class:</strong> financial_metric</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">metric_type</span>: <span class=\"lx-attr-value\">tax</span>, <span class=\"lx-attr-key\">tax_type</span>: <span class=\"lx-attr-value\">GST</span>}</div>"}, {"index": 32, "class": "date", "text": "10th November 2027", "color": "#FEF0C3", "startPos": 1836, "endPos": 1854, "beforeText": "ng an **interest rate of 6.9% annually** . The charges included a **5% service fee plus 18% GST** , with a **loan tenure of six years** , ending on **", "extractionText": "10th November 2027", "afterText": "** . Both parties mutually accepted and signed the agreement, thereby confirming the terms and obligations set forth.", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">maturity_date</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
