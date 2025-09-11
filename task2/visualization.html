@@ -1,0 +1,197 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">Address</span> <span class="lx-label" style="background-color:#C8E6C9;">Amount</span> <span class="lx-label" style="background-color:#FEF0C3;">Artifact</span> <span class="lx-label" style="background-color:#F9DEDC;">Date</span> <span class="lx-label" style="background-color:#FFDDBE;">Event</span> <span class="lx-label" style="background-color:#EADDFF;">Invoice</span> <span class="lx-label" style="background-color:#C4E9E4;">Location</span> <span class="lx-label" style="background-color:#FCE4EC;">Material</span> <span class="lx-label" style="background-color:#E8EAED;">Measurement</span> <span class="lx-label" style="background-color:#DDE8E8;">Monument</span> <span class="lx-label" style="background-color:#D2E3FC;">Object</span> <span class="lx-label" style="background-color:#C8E6C9;">Organization</span> <span class="lx-label" style="background-color:#FEF0C3;">Person</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+
+On <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#F9DEDC;">June 12, 1600</span>, <span class="lx-highlight" data-idx="1" style="background-color:#FEF0C3;">Romeo</span> gifted <span class="lx-highlight" data-idx="2" style="background-color:#FEF0C3;">Juliet</span> a <span class="lx-highlight" data-idx="3" style="background-color:#FEF0C3;">necklace</span> worth <span class="lx-highlight" data-idx="4" style="background-color:#C8E6C9;">50 ducats</span>, confessing his eternal love under the moonlight.
+On <span class="lx-highlight" data-idx="5" style="background-color:#F9DEDC;">March 15, 44 BC</span>, <span class="lx-highlight" data-idx="6" style="background-color:#FEF0C3;">Julius Caesar</span> was <span class="lx-highlight" data-idx="7" style="background-color:#FFDDBE;">assassinated</span> in <span class="lx-highlight" data-idx="8" style="background-color:#C4E9E4;">Rome</span> by <span class="lx-highlight" data-idx="9" style="background-color:#FEF0C3;">Brutus</span> and <span class="lx-highlight" data-idx="10" style="background-color:#FEF0C3;">Cassius</span>, an act remembered as the ultimate betrayal.
+Invoice <span class="lx-highlight" data-idx="11" style="background-color:#EADDFF;">#4521</span>, dated <span class="lx-highlight" data-idx="12" style="background-color:#F9DEDC;">10th September 2023</span>, shows that <span class="lx-highlight" data-idx="13" style="background-color:#FEF0C3;">Nora Helmer</span> paid <span class="lx-highlight" data-idx="14" style="background-color:#C8E6C9;">$250</span> to <span class="lx-highlight" data-idx="15" style="background-color:#C8E6C9;">Torvald &amp; Co. Bank</span> for <span class="lx-highlight" data-idx="16" style="background-color:#D2E3FC;">household furniture</span>.
+On <span class="lx-highlight" data-idx="17" style="background-color:#F9DEDC;">January 26, 1950</span>, the <span class="lx-highlight" data-idx="18" style="background-color:#FEF0C3;">Constitution of India</span> <span class="lx-highlight" data-idx="19" style="background-color:#FFDDBE;">came into effect</span>, establishing <span class="lx-highlight" data-idx="20" style="background-color:#FEF0C3;">Dr. Rajendra Prasad</span> as the first President of the Republic.
+<span class="lx-highlight" data-idx="21" style="background-color:#FEF0C3;">Elon Musk</span> announced on <span class="lx-highlight" data-idx="22" style="background-color:#F9DEDC;">May 5, 2022</span>, that <span class="lx-highlight" data-idx="23" style="background-color:#C8E6C9;">Tesla</span> <span class="lx-highlight" data-idx="24" style="background-color:#FFDDBE;">invested</span> <span class="lx-highlight" data-idx="25" style="background-color:#C8E6C9;">$1.5 billion</span> in <span class="lx-highlight" data-idx="26" style="background-color:#D2E3FC;">Bitcoin</span>, marking one of the largest corporate cryptocurrency purchases.
+<span class="lx-highlight" data-idx="27" style="background-color:#D2E3FC;">221B Baker Street</span>, <span class="lx-highlight" data-idx="28" style="background-color:#C4E9E4;">London</span>, was the residence of <span class="lx-highlight" data-idx="29" style="background-color:#FEF0C3;">Sherlock Holmes</span>, where <span class="lx-highlight" data-idx="30" style="background-color:#FEF0C3;">Dr. Watson</span> admired his <span class="lx-highlight" data-idx="31" style="background-color:#FEF0C3;">violin</span>.
+The <span class="lx-highlight" data-idx="32" style="background-color:#DDE8E8;">Eiffel Tower</span> in <span class="lx-highlight" data-idx="33" style="background-color:#C4E9E4;">Paris</span> stands <span class="lx-highlight" data-idx="34" style="background-color:#E8EAED;">300 meters</span> tall and weighs approximately <span class="lx-highlight" data-idx="35" style="background-color:#E8EAED;">10,100 tons</span> of <span class="lx-highlight" data-idx="36" style="background-color:#FCE4EC;">iron</span>.
+
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="36" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/37</span> |
+          Pos <span id="posInfo">[4-17]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "Date", "text": "June 12, 1600", "color": "#F9DEDC", "startPos": 4, "endPos": 17, "beforeText": "\nOn ", "extractionText": "June 12, 1600", "afterText": ", Romeo gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated ", "attributesHtml": "<div><strong>class:</strong> Date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">historical</span>}</div>"}, {"index": 1, "class": "Person", "text": "Romeo", "color": "#FEF0C3", "startPos": 19, "endPos": 24, "beforeText": "\nOn June 12, 1600, ", "extractionText": "Romeo", "afterText": " gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">giver</span>}</div>"}, {"index": 2, "class": "Person", "text": "Juliet", "color": "#FEF0C3", "startPos": 32, "endPos": 38, "beforeText": "\nOn June 12, 1600, Romeo gifted ", "extractionText": "Juliet", "afterText": " a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">receiver</span>}</div>"}, {"index": 3, "class": "Artifact", "text": "necklace", "color": "#FEF0C3", "startPos": 41, "endPos": 49, "beforeText": "\nOn June 12, 1600, Romeo gifted Juliet a ", "extractionText": "necklace", "afterText": " worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and Cassius, a", "attributesHtml": "<div><strong>class:</strong> Artifact</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">gift</span>}</div>"}, {"index": 4, "class": "Amount", "text": "50 ducats", "color": "#C8E6C9", "startPos": 56, "endPos": 65, "beforeText": "\nOn June 12, 1600, Romeo gifted Juliet a necklace worth ", "extractionText": "50 ducats", "afterText": ", confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and Cassius, an act remembered", "attributesHtml": "<div><strong>class:</strong> Amount</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">ducats</span>}</div>"}, {"index": 5, "class": "Date", "text": "March 15, 44 BC", "color": "#F9DEDC", "startPos": 119, "endPos": 134, "beforeText": "\nOn June 12, 1600, Romeo gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn ", "extractionText": "March 15, 44 BC", "afterText": ", Julius Caesar was assassinated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, ", "attributesHtml": "<div><strong>class:</strong> Date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">historical</span>}</div>"}, {"index": 6, "class": "Person", "text": "Julius Caesar", "color": "#FEF0C3", "startPos": 136, "endPos": 149, "beforeText": "\nOn June 12, 1600, Romeo gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, ", "extractionText": "Julius Caesar", "afterText": " was assassinated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">victim</span>}</div>"}, {"index": 7, "class": "Event", "text": "assassinated", "color": "#FFDDBE", "startPos": 154, "endPos": 166, "beforeText": "June 12, 1600, Romeo gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was ", "extractionText": "assassinated", "afterText": " in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250", "attributesHtml": "<div><strong>class:</strong> Event</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">political</span>}</div>"}, {"index": 8, "class": "Location", "text": "Rome", "color": "#C4E9E4", "startPos": 170, "endPos": 174, "beforeText": "omeo gifted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in ", "extractionText": "Rome", "afterText": " by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torv", "attributesHtml": "<div><strong>class:</strong> Location</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">city</span>}</div>"}, {"index": 9, "class": "Person", "text": "Brutus", "color": "#FEF0C3", "startPos": 178, "endPos": 184, "beforeText": "ted Juliet a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by ", "extractionText": "Brutus", "afterText": " and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. ", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">perpetrator</span>}</div>"}, {"index": 10, "class": "Person", "text": "Cassius", "color": "#FEF0C3", "startPos": 189, "endPos": 196, "beforeText": "a necklace worth 50 ducats, confessing his eternal love under the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and ", "extractionText": "Cassius", "afterText": ", an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for hou", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">perpetrator</span>}</div>"}, {"index": 11, "class": "Invoice", "text": "#4521", "color": "#EADDFF", "startPos": 250, "endPos": 255, "beforeText": " the moonlight.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice ", "extractionText": "#4521", "afterText": ", dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of ", "attributesHtml": "<div><strong>class:</strong> Invoice</div><div><strong>attributes:</strong> {}</div>"}, {"index": 12, "class": "Date", "text": "10th September 2023", "color": "#F9DEDC", "startPos": 263, "endPos": 282, "beforeText": "t.\nOn March 15, 44 BC, Julius Caesar was assassinated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated ", "extractionText": "10th September 2023", "afterText": ", shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of India came into effect, est", "attributesHtml": "<div><strong>class:</strong> Date</div><div><strong>attributes:</strong> {}</div>"}, {"index": 13, "class": "Person", "text": "Nora Helmer", "color": "#FEF0C3", "startPos": 295, "endPos": 306, "beforeText": "esar was assassinated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that ", "extractionText": "Nora Helmer", "afterText": " paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra P", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">payer</span>}</div>"}, {"index": 14, "class": "Amount", "text": "$250", "color": "#C8E6C9", "startPos": 312, "endPos": 316, "beforeText": "ated in Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid ", "extractionText": "$250", "afterText": " to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra Prasad as t", "attributesHtml": "<div><strong>class:</strong> Amount</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 15, "class": "Organization", "text": "Torvald & Co. Bank", "color": "#C8E6C9", "startPos": 320, "endPos": 338, "beforeText": "Rome by Brutus and Cassius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to ", "extractionText": "Torvald &amp; Co. Bank", "afterText": " for household furniture.\nOn January 26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra Prasad as the first President of ", "attributesHtml": "<div><strong>class:</strong> Organization</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">payee</span>}</div>"}, {"index": 16, "class": "Object", "text": "household furniture", "color": "#D2E3FC", "startPos": 343, "endPos": 362, "beforeText": "ius, an act remembered as the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for ", "extractionText": "household furniture", "afterText": ".\nOn January 26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk ", "attributesHtml": "<div><strong>class:</strong> Object</div><div><strong>attributes:</strong> {}</div>"}, {"index": 17, "class": "Date", "text": "January 26, 1950", "color": "#F9DEDC", "startPos": 367, "endPos": 383, "beforeText": "s the ultimate betrayal.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn ", "extractionText": "January 26, 1950", "afterText": ", the Constitution of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2", "attributesHtml": "<div><strong>class:</strong> Date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">historical</span>}</div>"}, {"index": 18, "class": "Artifact", "text": "Constitution of India", "color": "#FEF0C3", "startPos": 389, "endPos": 410, "beforeText": "l.\nInvoice #4521, dated 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the ", "extractionText": "Constitution of India", "afterText": " came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla invested $1", "attributesHtml": "<div><strong>class:</strong> Artifact</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">document</span>}</div>"}, {"index": 19, "class": "Event", "text": "came into effect", "color": "#FFDDBE", "startPos": 411, "endPos": 427, "beforeText": "d 10th September 2023, shows that Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of India ", "extractionText": "came into effect", "afterText": ", establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla invested $1.5 billion in Bit", "attributesHtml": "<div><strong>class:</strong> Event</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">legal</span>}</div>"}, {"index": 20, "class": "Person", "text": "Dr. Rajendra Prasad", "color": "#FEF0C3", "startPos": 442, "endPos": 461, "beforeText": "at Nora Helmer paid $250 to Torvald &amp; Co. Bank for household furniture.\nOn January 26, 1950, the Constitution of India came into effect, establishing ", "extractionText": "Dr. Rajendra Prasad", "afterText": " as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla invested $1.5 billion in Bitcoin, marking one of the largest c", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">President</span>}</div>"}, {"index": 21, "class": "Person", "text": "Elon Musk", "color": "#FEF0C3", "startPos": 502, "endPos": 511, "beforeText": " furniture.\nOn January 26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\n", "extractionText": "Elon Musk", "afterText": " announced on May 5, 2022, that Tesla invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Stre", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">announcer</span>}</div>"}, {"index": 22, "class": "Date", "text": "May 5, 2022", "color": "#F9DEDC", "startPos": 525, "endPos": 536, "beforeText": "26, 1950, the Constitution of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on ", "extractionText": "May 5, 2022", "afterText": ", that Tesla invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the resid", "attributesHtml": "<div><strong>class:</strong> Date</div><div><strong>attributes:</strong> {}</div>"}, {"index": 23, "class": "Organization", "text": "Tesla", "color": "#C8E6C9", "startPos": 543, "endPos": 548, "beforeText": "titution of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that ", "extractionText": "Tesla", "afterText": " invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sher", "attributesHtml": "<div><strong>class:</strong> Organization</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">investor</span>}</div>"}, {"index": 24, "class": "Event", "text": "invested", "color": "#FFDDBE", "startPos": 549, "endPos": 557, "beforeText": "on of India came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla ", "extractionText": "invested", "afterText": " $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holm", "attributesHtml": "<div><strong>class:</strong> Event</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">financial</span>}</div>"}, {"index": 25, "class": "Amount", "text": "$1.5 billion", "color": "#C8E6C9", "startPos": 558, "endPos": 570, "beforeText": "ia came into effect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla invested ", "extractionText": "$1.5 billion", "afterText": " in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr.", "attributesHtml": "<div><strong>class:</strong> Amount</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">currency</span>: <span class=\"lx-attr-value\">USD</span>}</div>"}, {"index": 26, "class": "Object", "text": "Bitcoin", "color": "#D2E3FC", "startPos": 574, "endPos": 581, "beforeText": "ect, establishing Dr. Rajendra Prasad as the first President of the Republic.\nElon Musk announced on May 5, 2022, that Tesla invested $1.5 billion in ", "extractionText": "Bitcoin", "afterText": ", marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr. Watson adm", "attributesHtml": "<div><strong>class:</strong> Object</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">_unused</span>: <span class=\"lx-attr-value\">cryptocurrency</span>}</div>"}, {"index": 27, "class": "Address", "text": "221B Baker Street", "color": "#D2E3FC", "startPos": 646, "endPos": 663, "beforeText": "blic.\nElon Musk announced on May 5, 2022, that Tesla invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n", "extractionText": "221B Baker Street", "afterText": ", London, was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs appro", "attributesHtml": "<div><strong>class:</strong> Address</div><div><strong>attributes:</strong> {}</div>"}, {"index": 28, "class": "Location", "text": "London", "color": "#C4E9E4", "startPos": 665, "endPos": 671, "beforeText": "ounced on May 5, 2022, that Tesla invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, ", "extractionText": "London", "afterText": ", was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately", "attributesHtml": "<div><strong>class:</strong> Location</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">city</span>}</div>"}, {"index": 29, "class": "Person", "text": "Sherlock Holmes", "color": "#FEF0C3", "startPos": 694, "endPos": 709, "beforeText": "esla invested $1.5 billion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of ", "extractionText": "Sherlock Holmes", "afterText": ", where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">resident</span>}</div>"}, {"index": 30, "class": "Person", "text": "Dr. Watson", "color": "#FEF0C3", "startPos": 717, "endPos": 727, "beforeText": "ion in Bitcoin, marking one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where ", "extractionText": "Dr. Watson", "afterText": " admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Person</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">role</span>: <span class=\"lx-attr-value\">admirer</span>}</div>"}, {"index": 31, "class": "Artifact", "text": "violin", "color": "#FEF0C3", "startPos": 740, "endPos": 746, "beforeText": " one of the largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr. Watson admired his ", "extractionText": "violin", "afterText": ".\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Artifact</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">musical instrument</span>}</div>"}, {"index": 32, "class": "Monument", "text": "Eiffel Tower", "color": "#DDE8E8", "startPos": 752, "endPos": 764, "beforeText": "largest corporate cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe ", "extractionText": "Eiffel Tower", "afterText": " in Paris stands 300 meters tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Monument</div><div><strong>attributes:</strong> {}</div>"}, {"index": 33, "class": "Location", "text": "Paris", "color": "#C4E9E4", "startPos": 768, "endPos": 773, "beforeText": "e cryptocurrency purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in ", "extractionText": "Paris", "afterText": " stands 300 meters tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Location</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">city</span>}</div>"}, {"index": 34, "class": "Measurement", "text": "300 meters", "color": "#E8EAED", "startPos": 781, "endPos": 791, "beforeText": "ncy purchases.\n221B Baker Street, London, was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands ", "extractionText": "300 meters", "afterText": " tall and weighs approximately 10,100 tons of iron.\n", "attributesHtml": "<div><strong>class:</strong> Measurement</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">height</span>}</div>"}, {"index": 35, "class": "Measurement", "text": "10,100 tons", "color": "#E8EAED", "startPos": 822, "endPos": 833, "beforeText": " was the residence of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately ", "extractionText": "10,100 tons", "afterText": " of iron.\n", "attributesHtml": "<div><strong>class:</strong> Measurement</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">weight</span>}</div>"}, {"index": 36, "class": "Material", "text": "iron", "color": "#FCE4EC", "startPos": 837, "endPos": 841, "beforeText": "nce of Sherlock Holmes, where Dr. Watson admired his violin.\nThe Eiffel Tower in Paris stands 300 meters tall and weighs approximately 10,100 tons of ", "extractionText": "iron", "afterText": ".\n", "attributesHtml": "<div><strong>class:</strong> Material</div><div><strong>attributes:</strong> {}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
