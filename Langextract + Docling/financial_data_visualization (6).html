@@ -1,0 +1,189 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+<div class="lx-animated-wrapper lx-gif-optimized">
+  <div class="lx-attributes-panel">
+    <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">date</span> <span class="lx-label" style="background-color:#C8E6C9;">party</span></div>
+    <div id="attributesContainer"></div>
+  </div>
+  <div class="lx-text-window" id="textWindow">
+    ## <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#C8E6C9;">GATES FOUNDATION</span> Consolidated Financial Statements <span class="lx-highlight" data-idx="1" style="background-color:#D2E3FC;">December 31, 2024</span> and <span class="lx-highlight" data-idx="2" style="background-color:#D2E3FC;">2023</span> (With Independent Auditors&#x27; Report Thereon) <span class="lx-highlight" data-idx="3" style="background-color:#C8E6C9;">The Trustees Gates Foundation</span>: Opinion We have audited the consolidated financial statements of <span class="lx-highlight" data-idx="4" style="background-color:#C8E6C9;">Gates Foundation</span> and its subsidiaries (the Foundation), which comprise the consolidated statements of financial position as of <span class="lx-highlight" data-idx="5" style="background-color:#D2E3FC;">December 31, 2024</span> and <span class="lx-highlight" data-idx="6" style="background-color:#D2E3FC;">2023</span>, and the related consolidated statements of activities and cash flows for the years then ended, and the related notes to the consolidated financial statements. In our opinion, the accompanying consolidated financial statements present fairly, in all material respects, the financial position of the Foundation as of <span class="lx-highlight" data-idx="7" style="background-color:#D2E3FC;">December 31, 2024</span> and <span class="lx-highlight" data-idx="8" style="background-color:#D2E3FC;">2023</span>, and the changes in its net assets and its cash flows for the years then ended in accordance with U.S. generally accepted accounting principles. ## Basis for Opinion We conducted our audits in accordance with auditing standards generally accepted in the United States of America (GAAS). Our responsibilities under those standards are further described in the Auditors&#x27; Responsibilities for the Audit of the Consolidated Financial Statements section of our report. We are required to be independent of the Foundation and to meet our other ethical responsibilities, in accordance with the relevant ethical requirements relating to our audits. We believe that the audit evidence we have obtained is sufficient and appropriate to provide a basis for our audit opinion. ## Responsibilities of Management for the Consolidated Financial Statements Management is responsible for the preparation and fair presentation of the consolidated financial statements in accordance with U.S. generally accepted accounting principles, and for the design, implementation, and maintenance of internal control relevant to the preparation and fair presentation of consolidated financial statements that are free from material misstatement, whether due to fraud or error. In preparing the consolidated financial statements, management is required to evaluate whether there are conditions or events, considered in the aggregate, that raise substantial doubt about the Foundation&#x27;s ability to continue as a going concern for one year after the date that the consolidated financial statements are available to be issued. ## Auditors&#x27; Responsibilities for the Audit of the Consolidated Financial Statements Our objectives are to obtain reasonable assurance about whether the consolidated financial statements as a whole are free from material misstatement, whether due to fraud or error, and to issue an auditors&#x27; report that includes our opinion. Reasonable assurance is a high level of assurance but is not absolute assurance and therefore is not a guarantee that an audit conducted in accordance with GAAS will always detect a material misstatement when it exists. The risk of not detecting a material misstatement resulting from fraud is higher than for one resulting from error, as fraud may involve collusion, forgery, intentional omissions, misrepresentations, or the override of internal control. Misstatements are considered material if there is a substantial likelihood that, individually or in the aggregate, they would influence the judgment made by a reasonable user based on the consolidated financial statements. <span class="lx-highlight" data-idx="9" style="background-color:#C8E6C9;">KPMG LLP</span> Suite 2800 401 Union Street Seattle, WA 98101 ## Independent Auditors&#x27; Report In performing an audit in accordance with GAAS, we: - Exercise professional judgment and maintain professional skepticism throughout the audit. - Identify and assess the risks of material misstatement of the consolidated financial statements, whether due to fraud or error, and design and perform audit procedures responsive to those risks. Such procedures include examining, on a test basis, evidence regarding the amounts and disclosures in the consolidated financial statements. - Obtain an understanding of internal control relevant to the audit in order to design audit procedures that are appropriate in the circumstances, but not for the purpose of expressing an opinion on the effectiveness of <span class="lx-highlight" data-idx="10" style="background-color:#C8E6C9;">the Foundation</span>&#x27;s internal control. Accordingly, no such opinion is expressed. - Evaluate the appropriateness of accounting policies used and the reasonableness of significant accounting estimates made by <span class="lx-highlight" data-idx="11" style="background-color:#C8E6C9;">management</span>, as well as evaluate the overall presentation of the consolidated financial statements. - Conclude whether, in our judgment, there are conditions or events, considered in the aggregate, that raise substantial doubt about the Foundation&#x27;s ability to continue as a going concern for a reasonable period of time. We are required to communicate with those charged with governance regarding, among other matters, the planned scope and timing of the audit, significant audit findings, and certain internal control related matters that we identified during the audit. Seattle, Washington <span class="lx-highlight" data-idx="12" style="background-color:#D2E3FC;">May 13, 2025</span> ## <span class="lx-highlight" data-idx="13" style="background-color:#C8E6C9;">GATES FOUNDATION</span> ## Consolidated Statements of Financial Position ## <span class="lx-highlight" data-idx="14" style="background-color:#D2E3FC;">December 31</span>,
+  </div>
+  <div class="lx-controls">
+    <div class="lx-button-row">
+      <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+      <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+      <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+    </div>
+    <div class="lx-progress-container">
+      <input type="range" id="progressSlider" class="lx-progress-slider"
+             min="0" max="14" value="0"
+             onchange="jumpToExtraction(this.value)">
+    </div>
+    <div class="lx-status-text">
+      Entity <span id="entityInfo">1/15</span> |
+      Pos <span id="posInfo">[3-19]</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const extractions = [{"index": 0, "class": "party", "text": "GATES FOUNDATION", "color": "#C8E6C9", "startPos": 3, "endPos": 19, "beforeText": "## ", "extractionText": "GATES FOUNDATION", "afterText": " Consolidated Financial Statements December 31, 2024 and 2023 (With Independent Auditors&#x27; Report Thereon) The Trustees Gates Foundation: Opinion We ha", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">institution</span>}</div>"}, {"index": 1, "class": "date", "text": "December 31, 2024", "color": "#D2E3FC", "startPos": 54, "endPos": 71, "beforeText": "## GATES FOUNDATION Consolidated Financial Statements ", "extractionText": "December 31, 2024", "afterText": " and 2023 (With Independent Auditors&#x27; Report Thereon) The Trustees Gates Foundation: Opinion We have audited the consolidated financial statements of ", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_statement_date</span>}</div>"}, {"index": 2, "class": "date", "text": "2023", "color": "#D2E3FC", "startPos": 76, "endPos": 80, "beforeText": "## GATES FOUNDATION Consolidated Financial Statements December 31, 2024 and ", "extractionText": "2023", "afterText": " (With Independent Auditors&#x27; Report Thereon) The Trustees Gates Foundation: Opinion We have audited the consolidated financial statements of Gates Fou", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_statement_date</span>}</div>"}, {"index": 3, "class": "party", "text": "The Trustees Gates Foundation", "color": "#C8E6C9", "startPos": 125, "endPos": 154, "beforeText": "## GATES FOUNDATION Consolidated Financial Statements December 31, 2024 and 2023 (With Independent Auditors&#x27; Report Thereon) ", "extractionText": "The Trustees Gates Foundation", "afterText": ": Opinion We have audited the consolidated financial statements of Gates Foundation and its subsidiaries (the Foundation), which comprise the consolid", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">institution</span>}</div>"}, {"index": 4, "class": "party", "text": "Gates Foundation", "color": "#C8E6C9", "startPos": 221, "endPos": 237, "beforeText": " and 2023 (With Independent Auditors&#x27; Report Thereon) The Trustees Gates Foundation: Opinion We have audited the consolidated financial statements of ", "extractionText": "Gates Foundation", "afterText": " and its subsidiaries (the Foundation), which comprise the consolidated statements of financial position as of December 31, 2024 and 2023, and the rel", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">institution</span>}</div>"}, {"index": 5, "class": "date", "text": "December 31, 2024", "color": "#D2E3FC", "startPos": 348, "endPos": 365, "beforeText": "inancial statements of Gates Foundation and its subsidiaries (the Foundation), which comprise the consolidated statements of financial position as of ", "extractionText": "December 31, 2024", "afterText": " and 2023, and the related consolidated statements of activities and cash flows for the years then ended, and the related notes to the consolidated fi", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_position_date</span>}</div>"}, {"index": 6, "class": "date", "text": "2023", "color": "#D2E3FC", "startPos": 370, "endPos": 374, "beforeText": " Gates Foundation and its subsidiaries (the Foundation), which comprise the consolidated statements of financial position as of December 31, 2024 and ", "extractionText": "2023", "afterText": ", and the related consolidated statements of activities and cash flows for the years then ended, and the related notes to the consolidated financial s", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_position_date</span>}</div>"}, {"index": 7, "class": "date", "text": "December 31, 2024", "color": "#D2E3FC", "startPos": 691, "endPos": 708, "beforeText": " opinion, the accompanying consolidated financial statements present fairly, in all material respects, the financial position of the Foundation as of ", "extractionText": "December 31, 2024", "afterText": " and 2023, and the changes in its net assets and its cash flows for the years then ended in accordance with U.S. generally accepted accounting princip", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_position_date</span>}</div>"}, {"index": 8, "class": "date", "text": "2023", "color": "#D2E3FC", "startPos": 713, "endPos": 717, "beforeText": "ying consolidated financial statements present fairly, in all material respects, the financial position of the Foundation as of December 31, 2024 and ", "extractionText": "2023", "afterText": ", and the changes in its net assets and its cash flows for the years then ended in accordance with U.S. generally accepted accounting principles. ## B", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_position_date</span>}</div>"}, {"index": 9, "class": "party", "text": "KPMG LLP", "color": "#C8E6C9", "startPos": 3318, "endPos": 3326, "beforeText": "d that, individually or in the aggregate, they would influence the judgment made by a reasonable user based on the consolidated financial statements. ", "extractionText": "KPMG LLP", "afterText": " Suite 2800 401 Union Street Seattle, WA 98101 ## Independent Auditors&#x27; Report In performing an audit in accordance with GAAS, we: - Exercise professi", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">auditing firm</span>}</div>"}, {"index": 10, "class": "party", "text": "the Foundation", "color": "#C8E6C9", "startPos": 4107, "endPos": 4121, "beforeText": " order to design audit procedures that are appropriate in the circumstances, but not for the purpose of expressing an opinion on the effectiveness of ", "extractionText": "the Foundation", "afterText": "&#x27;s internal control. Accordingly, no such opinion is expressed. - Evaluate the appropriateness of accounting policies used and the reasonableness of s", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">institution</span>}</div>"}, {"index": 11, "class": "party", "text": "management", "color": "#C8E6C9", "startPos": 4311, "endPos": 4321, "beforeText": "h opinion is expressed. - Evaluate the appropriateness of accounting policies used and the reasonableness of significant accounting estimates made by ", "extractionText": "management", "afterText": ", as well as evaluate the overall presentation of the consolidated financial statements. - Conclude whether, in our judgment, there are conditions or ", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">party</span>}</div>"}, {"index": 12, "class": "date", "text": "May 13, 2025", "color": "#D2E3FC", "startPos": 4903, "endPos": 4915, "beforeText": "iming of the audit, significant audit findings, and certain internal control related matters that we identified during the audit. Seattle, Washington ", "extractionText": "May 13, 2025", "afterText": " ## GATES FOUNDATION ## Consolidated Statements of Financial Position ## December 31,", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">report_date</span>}</div>"}, {"index": 13, "class": "party", "text": "GATES FOUNDATION", "color": "#C8E6C9", "startPos": 4919, "endPos": 4935, "beforeText": "it, significant audit findings, and certain internal control related matters that we identified during the audit. Seattle, Washington May 13, 2025 ## ", "extractionText": "GATES FOUNDATION", "afterText": " ## Consolidated Statements of Financial Position ## December 31,", "attributesHtml": "<div><strong>class:</strong> party</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">type</span>: <span class=\"lx-attr-value\">foundation</span>}</div>"}, {"index": 14, "class": "date", "text": "December 31", "color": "#D2E3FC", "startPos": 4988, "endPos": 4999, "beforeText": "matters that we identified during the audit. Seattle, Washington May 13, 2025 ## GATES FOUNDATION ## Consolidated Statements of Financial Position ## ", "extractionText": "December 31", "afterText": ",", "attributesHtml": "<div><strong>class:</strong> date</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">date_type</span>: <span class=\"lx-attr-value\">financial_statement_date</span>}</div>"}];
+    let currentIndex = 0;
+    let isPlaying = false;
+    let animationInterval = null;
+    let animationSpeed = 1.0;
+
+    function updateDisplay() {
+      const extraction = extractions[currentIndex];
+      if (!extraction) return;
+
+      document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+      document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+      document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+      document.getElementById('progressSlider').value = currentIndex;
+
+      const playBtn = document.querySelector('.lx-control-btn');
+      if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+      const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+      if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+      const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+      if (currentSpan) {
+        currentSpan.classList.add('lx-current-highlight');
+        currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+      }
+    }
+
+    function nextExtraction() {
+      currentIndex = (currentIndex + 1) % extractions.length;
+      updateDisplay();
+    }
+
+    function prevExtraction() {
+      currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+      updateDisplay();
+    }
+
+    function jumpToExtraction(index) {
+      currentIndex = parseInt(index);
+      updateDisplay();
+    }
+
+    function playPause() {
+      if (isPlaying) {
+        clearInterval(animationInterval);
+        isPlaying = false;
+      } else {
+        animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+        isPlaying = true;
+      }
+      updateDisplay();
+    }
+
+    window.playPause = playPause;
+    window.nextExtraction = nextExtraction;
+    window.prevExtraction = prevExtraction;
+    window.jumpToExtraction = jumpToExtraction;
+
+    updateDisplay();
+  })();
+</script>
