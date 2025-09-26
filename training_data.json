@@ -1,0 +1,1 @@
+{"classes":["DATE","PERSON","COMPANY","MONEY","LOCATION"],"annotations":[["In 2022, Sundar Pichai announced that Google earned $280 billion in revenue from its offices in California.\r",{"entities":[[3,7,"DATE"],[9,22,"PERSON"],[38,44,"COMPANY"],[52,64,"MONEY"],[96,106,"LOCATION"]]}],["",{"entities":[]}]]}
