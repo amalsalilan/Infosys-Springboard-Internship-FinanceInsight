@@ -1,1 +1,21 @@
+# Flask backend
+flask
+flask-cors
+
+# HTTP requests (optional but useful)
+requests
+
+# PyTorch with CUDA (GPU support)
+torch
+torchvision
+torchaudio
+
+# Docling core
+docling
+
+# Docling OCR plugin with GPU support
+docling-ocr-onnxtr[gpu]
+
+# HuggingFace Xet (optional, improves download speed)
+huggingface_hub[hf_xet]
 
