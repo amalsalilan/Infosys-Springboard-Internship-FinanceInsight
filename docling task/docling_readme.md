@@ -1,7 +1,5 @@
-Perfect! Here’s your README content formatted neatly so you can copy-paste directly into your GitHub repo:
 
-````markdown
-# PDF Table Extraction Project
+## PDF Table Extraction Project
 
 ## Overview
 This project demonstrates how to extract structured text and tables from PDF documents using Python. It leverages the Docling library to convert PDFs into structured formats, including plain text and tables.
