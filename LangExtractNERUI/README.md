@@ -1,3 +1,8 @@
+#  Contributors:
+## 1. Thanseera
+## 2. SriLakshmi
+## 3. Atharav
+
 #  Financial Document Analysis AI
 
 A powerful full-stack application designed to extract, analyze, and visualize information from financial documents. This tool leverages a suite of advanced AI libraries to process both digital and scanned PDFs, providing structured data and insights through a clean, modern user interface.
