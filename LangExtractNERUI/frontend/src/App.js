@@ -1,111 +1,7 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const UploadIcon = () => (
-//   <svg className="w-12 h-12 mx-auto text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-//     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-//   </svg>
-// );
-
-// function App() {
-//   const [file, setFile] = useState(null);
-//   const [fileName, setFileName] = useState('');
-//   const [extractedText, setExtractedText] = useState('');
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState('');
-
-//   const handleFileChange = (e) => {
-//     const selectedFile = e.target.files[0];
-//     if (selectedFile) {
-//       setFile(selectedFile);
-//       setFileName(selectedFile.name);
-//       setError('');
-//       setExtractedText('');
-//     }
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     if (!file) {
-//       setError('Please select a PDF file to analyze.');
-//       return;
-//     }
-
-//     setIsLoading(true);
-//     setError('');
-//     setExtractedText('');
-
-//     const formData = new FormData();
-//     formData.append('file', file);
-
-//     try {
-//       // This URL points to your Flask backend
-//       const response = await axios.post('http://localhost:5000/api/extract-text', formData);
-//       setExtractedText(response.data.extractedText);
-//     } catch (err) {
-//       const errorMessage = err.response ? err.response.data.error : 'Network or server error occurred.';
-//       setError(errorMessage);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="bg-gray-50 min-h-screen flex items-center justify-center p-4">
-//       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
-
-//         <div className="text-center">
-//           <h1 className="text-3xl font-bold text-gray-800">DocuExtract AI</h1>
-//           <p className="text-gray-500 mt-2">Instantly extract text from any PDF document.</p>
-//         </div>
-
-//         <form onSubmit={handleSubmit} className="space-y-6">
-//           <div>
-//             <label htmlFor="file-upload" className="relative block w-full h-48 border-2 border-gray-300 border-dashed rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 hover:bg-gray-50 transition-colors">
-//               <div className="flex flex-col items-center justify-center h-full">
-//                 <UploadIcon />
-//                 <span className="mt-2 block text-sm font-medium text-gray-900">
-//                   {fileName ? fileName : 'Click to upload or drag and drop'}
-//                 </span>
-//                 <span className="block text-xs text-gray-500">PDF only</span>
-//               </div>
-//               <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} accept=".pdf" />
-//             </label>
-//           </div>
-
-//           <button
-//             type="submit"
-//             disabled={isLoading}
-//             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-//           >
-//             {isLoading ? 'Analyzing...' : 'Extract Text'}
-//           </button>
-//         </form>
-
-//         {error && (
-//           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
-//             <strong className="font-bold">Error: </strong>
-//             <span className="block sm:inline">{error}</span>
-//           </div>
-//         )}
-
-//         {extractedText && (
-//           <div className="space-y-3">
-//             <h2 className="text-xl font-semibold text-gray-800">Extracted Text</h2>
-//             <div className="w-full bg-gray-50 rounded-lg p-4 border border-gray-200 max-h-80 overflow-y-auto">
-//               <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono">{extractedText}</pre>
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { useState } from 'react';
 import axios from 'axios';
+
+// --- Helper Components ---
 
 const UploadIcon = () => (
   <svg className="w-12 h-12 mx-auto text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -113,14 +9,20 @@ const UploadIcon = () => (
   </svg>
 );
 
-const ResultCard = ({ title, children }) => (
-  <div className="bg-white rounded-lg shadow-md border border-gray-200">
-    <h2 className="text-lg font-semibold text-gray-700 p-4 border-b border-gray-200">{title}</h2>
-    <div className="p-4 max-h-80 overflow-y-auto">
-      {children}
-    </div>
-  </div>
+const TabButton = ({ isActive, onClick, children }) => (
+    <button
+        onClick={onClick}
+        className={`py-2 px-4 font-medium text-sm rounded-t-lg transition-colors ${
+            isActive
+                ? 'border-b-2 border-blue-500 text-blue-600 bg-blue-50'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+        }`}
+    >
+        {children}
+    </button>
 );
+
+// --- Main App Component ---
 
 function App() {
   const [file, setFile] = useState(null);
@@ -130,6 +32,7 @@ function App() {
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('spacy');
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -151,6 +54,7 @@ function App() {
     setIsLoading(true);
     setError('');
     setResults(null);
+    setActiveTab('spacy'); // Reset to the first tab on new submission
 
     const formData = new FormData();
     formData.append('file', file);
@@ -212,7 +116,7 @@ function App() {
           >
             {isLoading ? (
                 <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w-3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -225,22 +129,45 @@ function App() {
         {error && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert"><p>{error}</p></div>}
 
         {results && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t">
-            <ResultCard title="SpaCy NER Entities (Visualized)">
-              <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: results.spacy_html }} />
-            </ResultCard>
+          <div className="pt-6 border-t">
+            <div className="border-b border-gray-200">
+                <nav className="-mb-px flex space-x-6" aria-label="Tabs">
+                    <TabButton isActive={activeTab === 'spacy'} onClick={() => setActiveTab('spacy')}>SpaCy Visualizer</TabButton>
+                    <TabButton isActive={activeTab === 'langextract_viz'} onClick={() => setActiveTab('langextract_viz')}>LangExtract Visualizer</TabButton>
+                    <TabButton isActive={activeTab === 'langextract_table'} onClick={() => setActiveTab('langextract_table')}>LangExtract Table</TabButton>
+                    <TabButton isActive={activeTab === 'raw'} onClick={() => setActiveTab('raw')}>Raw Text</TabButton>
+                </nav>
+            </div>
             
-            <ResultCard title="LangExtract Entities (Visualized)">
-              <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: results.langextract_html }} />
-            </ResultCard>
-            
-            <ResultCard title="Raw Extracted Text">
-              <pre className="whitespace-pre-wrap font-mono text-xs">{results.raw_text}</pre>
-            </ResultCard>
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg border max-h-96 overflow-y-auto">
+                {activeTab === 'spacy' && <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: results.spacy_html }} />}
+                
+                {activeTab === 'langextract_viz' && <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: results.langextract_html }} />}
 
-            <ResultCard title="LangExtract Entities (JSON)">
-              <pre className="whitespace-pre-wrap font-mono text-xs">{JSON.stringify(results.langextract_entities, null, 2)}</pre>
-            </ResultCard>
+                {activeTab === 'langextract_table' && (
+                    <table className="min-w-full bg-white divide-y divide-gray-200">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                {/* --- CHANGE 1: Swapped column headers --- */}
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Label</th>
+                                {/* --- CHANGE 2: Renamed this column header --- */}
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Extracted Text</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {results.langextract_entities.map((entity, index) => (
+                                <tr key={index} className="odd:bg-white even:bg-gray-50">
+                                    {/* --- CHANGE 1: Swapped column data --- */}
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entity.extraction_class}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{String(entity.extraction_text)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+                
+                {activeTab === 'raw' && <pre className="whitespace-pre-wrap font-mono text-xs">{results.raw_text}</pre>}
+            </div>
           </div>
         )}
       </div>
