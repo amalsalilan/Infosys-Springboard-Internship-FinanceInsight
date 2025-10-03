@@ -1,0 +1,80 @@
+[
+  {
+    "sentence": "## Company Overview\n\nThe company has demonstrated strong growth in the last quarter, expanding into new markets and achieving record customer satisfaction ratings.",
+    "class": "positive",
+    "position": {
+      "start": 0,
+      "end": 163
+    },
+    "confidence_scores": {
+      "positive": 0.9519185423851013,
+      "negative": 0.01699533872306347,
+      "neutral": 0.0310861486941576
+    }
+  },
+  {
+    "sentence": "Its commitment to innovation and employee development has positioned it as a leader in the industry.",
+    "class": "positive",
+    "position": {
+      "start": 164,
+      "end": 264
+    },
+    "confidence_scores": {
+      "positive": 0.9271101951599121,
+      "negative": 0.009992342442274094,
+      "neutral": 0.0628974512219429
+    }
+  },
+  {
+    "sentence": "Despite recent achievements, the company has faced criticism for delays in product delivery and limited transparency in its communication.",
+    "class": "negative",
+    "position": {
+      "start": 266,
+      "end": 404
+    },
+    "confidence_scores": {
+      "positive": 0.012561087496578693,
+      "negative": 0.9596877694129944,
+      "neutral": 0.027751177549362183
+    }
+  },
+  {
+    "sentence": "Some employees have also reported concerns about increasing workload pressure.",
+    "class": "negative",
+    "position": {
+      "start": 405,
+      "end": 483
+    },
+    "confidence_scores": {
+      "positive": 0.008890695869922638,
+      "negative": 0.9709722399711609,
+      "neutral": 0.020137054845690727
+    }
+  },
+  {
+    "sentence": "The company currently employs over 5,000 people worldwide and operates in 12 countries.",
+    "class": "neutral",
+    "position": {
+      "start": 485,
+      "end": 572
+    },
+    "confidence_scores": {
+      "positive": 0.058335334062576294,
+      "negative": 0.012938163243234158,
+      "neutral": 0.9287264943122864
+    }
+  },
+  {
+    "sentence": "It continues to maintain its headquarters in New York City, with plans to expand operations steadily over the next few years.",
+    "class": "positive",
+    "position": {
+      "start": 573,
+      "end": 698
+    },
+    "confidence_scores": {
+      "positive": 0.8888239860534668,
+      "negative": 0.008266783319413662,
+      "neutral": 0.10290922969579697
+    }
+  }
+]
