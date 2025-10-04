@@ -15,10 +15,26 @@ interface Extraction {
 
 interface ExtractionsTableProps {
   extractions: Extraction[];
+  htmlVisualization?: string | null;
+  analysisType?: "sentiment" | "ner" | "langextract";
 }
 
-const ExtractionsTable = ({ extractions }: ExtractionsTableProps) => {
+const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: ExtractionsTableProps) => {
   const hasScores = extractions.some((e) => e.score !== undefined);
+
+  // For LangExtract, render the HTML visualization instead of the table
+  if (analysisType === "langextract" && htmlVisualization) {
+    return (
+      <div className="bg-white border-t border-border p-6">
+        <div className="bg-white rounded-lg overflow-hidden border border-border">
+          <div
+            className="w-full h-full overflow-auto"
+            dangerouslySetInnerHTML={{ __html: htmlVisualization }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   const getClassColor = (className: string) => {
     const colors: Record<string, string> = {

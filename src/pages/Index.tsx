@@ -18,6 +18,7 @@ const Index = () => {
   const [analysisResults, setAnalysisResults] = useState<SentimentResponse | NERResponse | LangExtractResponse | null>(null);
   const [conversionData, setConversionData] = useState<ConversionResponse | null>(null);
   const [showLangExtractDialog, setShowLangExtractDialog] = useState(false);
+  const [langExtractVisualization, setLangExtractVisualization] = useState<string | null>(null);
   const { toast } = useToast();
 
   // Handle analysis mode switching - clear analysis-specific results but keep document and conversion
@@ -26,6 +27,7 @@ const Index = () => {
     // Clear analysis-specific results
     setAnalysisResults(null);
     setExtractions([]);
+    setLangExtractVisualization(null);
     // Reset preview to original converted HTML if available
     if (conversionData) {
       setHtmlPreview(conversionData.html);
@@ -68,6 +70,7 @@ const Index = () => {
     setExtractions([]);
     setAnalysisResults(null);
     setConversionData(null);
+    setLangExtractVisualization(null);
   };
 
   const handleProcess = async () => {
@@ -184,9 +187,11 @@ const Index = () => {
       );
 
       setAnalysisResults(analysis);
-      setHtmlPreview(analysis.html_visualization);
+      // Keep the original document preview in the main view
+      // Store the LangExtract visualization for the bottom panel
+      setLangExtractVisualization(analysis.html_visualization);
 
-      // Extract structured data for table
+      // Extract structured data for table (used as fallback if visualization fails)
       setExtractions(
         analysis.extractions.map((extraction) => ({
           text: extraction.extraction_text,
@@ -233,7 +238,11 @@ const Index = () => {
               analysisType={selectedAnalysis}
             />
           </div>
-          <ExtractionsTable extractions={extractions} />
+          <ExtractionsTable
+            extractions={extractions}
+            htmlVisualization={langExtractVisualization}
+            analysisType={selectedAnalysis}
+          />
         </div>
       </div>
 
