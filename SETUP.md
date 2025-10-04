@@ -14,12 +14,15 @@
 
 ### System Requirements
 - **Operating System**: Windows, macOS, or Linux
-- **Python**: 3.8 or higher (3.11+ recommended)
+- **Python**: 3.10 or higher (3.11+ recommended)
 - **uv**: Latest version (Python package manager)
 - **Node.js**: 16.0 or higher (22.x recommended)
 - **Git**: Latest version
 - **RAM**: Minimum 8GB (16GB recommended for ML models)
 - **Disk Space**: At least 5GB free space
+
+### Why Python 3.10+?
+The project requires Python 3.10+ due to dependencies like `langextract` that require modern Python features.
 
 ### Required Tools
 
@@ -97,8 +100,9 @@ uv sync
 
 This single command will:
 - Create a virtual environment in `.venv/`
-- Install all packages from `requirements.txt`
-- Lock dependencies for reproducibility
+- Install all packages from `pyproject.toml`
+- Use `uv.lock` for deterministic, reproducible builds
+- Ensure all dependencies are compatible
 
 **Packages installed:**
 - `fastapi==0.115.5` - Web framework for backend services

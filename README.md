@@ -25,7 +25,7 @@ FinSight provides three core analysis modules:
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.10+
 - uv (Python package manager)
 - Node.js 16+
 - Git
