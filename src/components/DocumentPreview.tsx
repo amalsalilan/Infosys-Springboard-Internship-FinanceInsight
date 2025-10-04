@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Upload, X, FileText } from "lucide-react";
+import { Upload, X, FileText, Play, Loader2 } from "lucide-react";
 import { useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface DocumentPreviewProps {
   document: File | null;
@@ -83,14 +84,29 @@ const DocumentPreview = ({ document, htmlPreview, onFileUpload, onClear, onProce
           accept=".txt,.pdf,.doc,.docx"
         />
       </div>
-      <div className="h-14 bg-white border-t border-r border-border flex items-center justify-center">
+      <div className="h-14 bg-white border-t border-r border-border flex items-center justify-center px-6">
         <Button
-          variant="ghost"
-          className="text-sm text-muted-foreground hover:text-foreground hover:bg-secondary"
+          size="default"
           onClick={onProcess}
           disabled={!document || isProcessing}
+          className={cn(
+            "shadow-lg transition-all duration-200",
+            !document || isProcessing
+              ? "bg-muted text-muted-foreground cursor-not-allowed hover:bg-muted opacity-60"
+              : "bg-foreground hover:bg-foreground/90 text-white"
+          )}
         >
-          {isProcessing ? "Analyzing..." : "Process Document"}
+          {isProcessing ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Analyzing...
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Process Document
+            </>
+          )}
         </Button>
       </div>
     </div>
