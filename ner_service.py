@@ -126,13 +126,13 @@ def highlight_entities_in_html(text: str, entities: List[Dict]) -> str:
         score = entity['score']
         color = get_entity_color(entity_type)
 
-        # Create highlighted span with tooltip
-        highlighted = f'<span style="background-color: {color}; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="{entity_type} (confidence: {score:.2f})">{entity_text}</span>'
+        # Create highlighted span with inline label showing entity type
+        highlighted = f'<span style="background-color: {color}; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: {score:.2f}">{entity_text} <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[{entity_type}]</sup></span>'
 
         # Replace in text
         highlighted_text = highlighted_text[:start] + highlighted + highlighted_text[end:]
 
-    # Wrap in HTML structure
+    # Wrap in HTML structure (legend removed - using inline labels instead)
     html_output = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -144,26 +144,7 @@ def highlight_entities_in_html(text: str, entities: List[Dict]) -> str:
             max-width: 900px;
             margin: 40px auto;
             padding: 20px;
-            line-height: 1.6;
-        }}
-        .legend {{
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f5f5f5;
-            border-radius: 5px;
-        }}
-        .legend-item {{
-            display: inline-block;
-            margin-right: 15px;
-            margin-bottom: 5px;
-        }}
-        .legend-color {{
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            vertical-align: middle;
-            border-radius: 3px;
+            line-height: 1.8;
         }}
         .content {{
             padding: 20px;
@@ -174,17 +155,6 @@ def highlight_entities_in_html(text: str, entities: List[Dict]) -> str:
     </style>
 </head>
 <body>
-    <h1>Financial Entity Recognition Results</h1>
-    <div class="legend">
-        <strong>Entity Types:</strong><br>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFB6C1;"></span>Person</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #ADD8E6;"></span>Organization</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #90EE90;"></span>Location</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #98FB98;"></span>Money</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #F0E68C;"></span>Date</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFDAB9;"></span>Percent</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFE4B5;"></span>Miscellaneous</div>
-    </div>
     <div class="content">
         {highlighted_text}
     </div>

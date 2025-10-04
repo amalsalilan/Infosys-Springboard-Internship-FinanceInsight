@@ -9,26 +9,7 @@
             max-width: 900px;
             margin: 40px auto;
             padding: 20px;
-            line-height: 1.6;
-        }
-        .legend {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f5f5f5;
-            border-radius: 5px;
-        }
-        .legend-item {
-            display: inline-block;
-            margin-right: 15px;
-            margin-bottom: 5px;
-        }
-        .legend-color {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            vertical-align: middle;
-            border-radius: 3px;
+            line-height: 1.8;
         }
         .content {
             padding: 20px;
@@ -39,17 +20,6 @@
     </style>
 </head>
 <body>
-    <h1>Financial Entity Recognition Results</h1>
-    <div class="legend">
-        <strong>Entity Types:</strong><br>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFB6C1;"></span>Person</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #ADD8E6;"></span>Organization</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #90EE90;"></span>Location</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #98FB98;"></span>Money</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #F0E68C;"></span>Date</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFDAB9;"></span>Percent</div>
-        <div class="legend-item"><span class="legend-color" style="background-color: #FFE4B5;"></span>Miscellaneous</div>
-    </div>
     <div class="content">
         ## Company Overview and Sentiment Report
 
@@ -61,11 +31,11 @@ Overall, the sentiment analysis presents a mix: 55% positive (growth, customer t
 
 ## Entity Recognition and Financial Details
 
-Key entities identified in the company's operations include: <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Alpha Finance Corp</span>. (parent company), <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Beta Telecom Services</span> (primary client), and <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Delta Partners LLC</span> (supplier). Contracts executed in 2024 reveal commitments of over USD 25 million, with major revenue streams tied to long-term service agreements. Specific financial terms include:
+Key entities identified in the company's operations include: <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 1.00">Alpha Finance Corp <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span>. (parent company), <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 1.00">Beta Telecom Services <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> (primary client), and <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 1.00">Delta Partners LLC <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> (supplier). Contracts executed in 2024 reveal commitments of over USD 25 million, with major revenue streams tied to long-term service agreements. Specific financial terms include:
 
-- - Contract Value: USD 2,500,000 with <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Beta Telecom Services</span> - Service Agreement Duration: Valid until December 31, 2026 - Renewal Clause: Automatic 2-year extension unless terminated by either party - Governing Law: <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 0.58)">State</span> of <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 0.53)">New</span> <span style="background-color: #90EE90; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="LOC (confidence: 0.98)">York</span>
+- - Contract Value: USD 2,500,000 with <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 1.00">Beta Telecom Services <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> - Service Agreement Duration: Valid until December 31, 2026 - Renewal Clause: Automatic 2-year extension unless terminated by either party - Governing Law: <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 0.58">State <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> of <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 0.53">New <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> <span style="background-color: #90EE90; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 0.98">York <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[LOC]</sup></span>
 
-Additionally, the company has signed a memorandum of understanding with <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Gamma Data Systems</span> for a strategic <span style="background-color: #FFE4B5; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="MISC (confidence: 0.98)">AI</span> partnership. Named entities such as board members, regulatory agencies, and financial institutions were also highlighted during analysis.
+Additionally, the company has signed a memorandum of understanding with <span style="background-color: #ADD8E6; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 1.00">Gamma Data Systems <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[ORG]</sup></span> for a strategic <span style="background-color: #FFE4B5; padding: 2px 6px; border-radius: 3px; margin: 0 2px; display: inline-block;" title="Confidence: 0.98">AI <sup style="font-size: 0.65em; font-weight: bold; opacity: 0.8;">[MISC]</sup></span> partnership. Named entities such as board members, regulatory agencies, and financial institutions were also highlighted during analysis.
 
 ## Contract Terms and Termination Clauses
 
