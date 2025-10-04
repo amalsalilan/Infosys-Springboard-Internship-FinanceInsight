@@ -2,14 +2,30 @@
 
 A comprehensive full-stack application for analyzing financial documents using AI-powered services including sentiment analysis, named entity recognition, and structured information extraction.
 
+![FinSight Platform](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)
+![React](https://img.shields.io/badge/React-18.3-61DAFB)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB)
+
 ## 🚀 Features
 
+### 📊 Core Capabilities
 - **Document Conversion**: Converts various document formats (PDF, DOCX, XLSX, PPTX, HTML, CSV, Markdown) to text/markdown/HTML
 - **Sentiment Analysis**: Analyzes financial sentiment using FinBERT with visual highlighting
-- **Named Entity Recognition (NER)**: Identifies and extracts entities like organizations, people, locations
-- **LangExtract**: Structured information extraction using AI language models
+- **Named Entity Recognition (NER)**: Identifies and extracts entities with inline type labels (ORG, LOC, PER, MONEY, DATE)
+- **LangExtract**: Structured information extraction using Google Gemini with custom prompts and examples
 - **Interactive Visualizations**: Real-time charts and insights for analysis results
 - **Modern UI**: Built with React, TypeScript, Tailwind CSS, and shadcn/ui components
+
+### ✨ Latest Enhancements (v1.1.0)
+- ✅ **Auto-scaling Layout**: LangExtract bottom panel auto-scales with content (max-height: 70vh)
+- ✅ **Navigation Controls**: Play/Previous/Next buttons for stepping through LangExtract extractions
+- ✅ **Inline Entity Labels**: NER entities display with [TYPE] labels directly in text (removed legend)
+- ✅ **Custom LangExtract Configuration**: Interactive dialog with Form Builder and JSON input modes
+- ✅ **Fallback Examples**: Default contract-based examples when no user examples provided
+- ✅ **Unicode Support**: Full support for special characters (✓, ✗, emojis, international text)
+- ✅ **Improved Error Handling**: Specific error messages with actionable solutions
+- ✅ **Fixed Layout**: Stable 400px top preview prevents squeezing on long documents
 
 ## 📋 Prerequisites
 
@@ -237,18 +253,36 @@ finsight/
 - Uses FinBERT (Financial BERT model)
 - Visual highlighting with confidence scores
 - Pie chart distribution
+- Color-coded: 🟢 Green (Positive), 🔴 Red (Negative), ⚪ Gray (Neutral)
 
-### Named Entity Recognition
-- Identifies entities: People, Organizations, Locations, Money, Dates
-- Color-coded entity highlighting
-- Confidence scores for each entity
+### Named Entity Recognition (NER)
+- Identifies entities: People, Organizations, Locations, Money, Dates, Percent, etc.
+- **Inline entity labels**: Text displays as `Beta Telecom [ORG]`, `New York [LOC]`, `$2,500,000 [MONEY]`
+- Color-coded highlighting (no separate legend):
+  - 🔵 Light Blue = Organization (ORG)
+  - 🟢 Light Green = Location (LOC)
+  - 🟠 Light Pink = Person (PER)
+  - 💵 Pale Green = Money (MONEY)
+  - 📅 Khaki = Date (DATE)
+  - 📊 Peach = Percent (PERCENT)
 - Entity distribution chart
+- Confidence scores shown on hover
 
-### Language Extract
-- Extracts structured information using AI
-- Customizable extraction classes
-- Example-based learning
-- Supports complex financial data extraction
+### LangExtract (Language Extract)
+- Extracts structured information using Google Gemini
+- **Interactive Configuration Dialog**:
+  - Form Builder mode: Visual interface for building extraction config
+  - JSON Input mode: Direct JSON configuration
+  - Optional examples (auto-fallback to contract extraction)
+- **Navigation Controls** (Play/Previous/Next):
+  - Step through extractions with visual highlighting
+  - Auto-scroll to current extraction in viewer
+  - Counter shows position (e.g., "3 / 10")
+- **Auto-scaling Visualization**:
+  - Bottom panel grows with content (max 70vh)
+  - Fixed top preview (400px) for stable layout
+- Customizable extraction classes with attributes
+- Example-based learning for accurate extraction
 
 ## 🐛 Troubleshooting
 
