@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NER Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .legend {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .legend-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+        .content {
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Financial Entity Recognition Results</h1>
+    <div class="legend">
+        <strong>Entity Types:</strong><br>
+        <div class="legend-item"><span class="legend-color" style="background-color: #FFB6C1;"></span>Person</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #ADD8E6;"></span>Organization</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #90EE90;"></span>Location</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #98FB98;"></span>Money</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #F0E68C;"></span>Date</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #FFDAB9;"></span>Percent</div>
+        <div class="legend-item"><span class="legend-color" style="background-color: #FFE4B5;"></span>Miscellaneous</div>
+    </div>
+    <div class="content">
+        <span style="background-color: #ADD8E6; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="ORG (confidence: 1.00)">Apple Inc</span>. reported quarterly revenue of $89.5 billion on January 27, 2023. CEO <span style="background-color: #FFB6C1; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="PER (confidence: 1.00)">Tim Cook</span> announced expansion plans for their <span style="background-color: #90EE90; padding: 2px 4px; border-radius: 3px; margin: 0 2px;" title="LOC (confidence: 0.99)">Cupertino</span> headquarters.
+    </div>
+</body>
+</html>
