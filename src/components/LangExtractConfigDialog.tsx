@@ -24,6 +24,51 @@ import { Plus, Trash2, BookOpen, FileJson, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 
+// Default fallback examples for contract-based extraction
+const DEFAULT_EXAMPLES: ExtractionExample[] = [
+  {
+    text: "Either Party may terminate this Agreement with ninety (90) days' prior written notice to the other Party. Upon termination, all outstanding obligations shall be fulfilled, including payment of any amounts due and the return of Confidential Information.",
+    extractions: [
+      {
+        extraction_class: "termination_clause",
+        extraction_text: "terminate this Agreement with ninety (90) days' prior written notice",
+        attributes: {
+          notice_period_days: "90",
+          type: "without cause"
+        }
+      },
+      {
+        extraction_class: "obligation",
+        extraction_text: "all outstanding obligations shall be fulfilled, including payment of any amounts due and the return of Confidential Information",
+        attributes: {
+          category: "financial_and_confidentiality"
+        }
+      }
+    ]
+  },
+  {
+    text: "This Agreement shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of law provisions. Any disputes arising under this Agreement shall be subject to the exclusive jurisdiction of the courts located in New York County.",
+    extractions: [
+      {
+        extraction_class: "governing_law",
+        extraction_text: "governed by and construed in accordance with the laws of the State of New York",
+        attributes: {
+          jurisdiction: "New York",
+          excludes_conflict_provisions: "true"
+        }
+      },
+      {
+        extraction_class: "dispute_resolution",
+        extraction_text: "disputes arising under this Agreement shall be subject to the exclusive jurisdiction of the courts located in New York County",
+        attributes: {
+          venue: "New York County",
+          type: "exclusive_jurisdiction"
+        }
+      }
+    ]
+  }
+];
+
 export interface ExtractionExample {
   text: string;
   extractions: Array<{
@@ -142,9 +187,13 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
           return;
         }
 
+        // Check if examples are empty or all have empty text - inject fallback
+        const hasValidExamples = parsed.examples.length > 0 &&
+          parsed.examples.some((ex: any) => ex.text && ex.text.trim().length > 0);
+
         onSubmit({
           promptDescription: parsed.prompt_description,
-          examples: parsed.examples,
+          examples: hasValidExamples ? parsed.examples : DEFAULT_EXAMPLES,
           modelId: parsed.model_id || "gemini-2.0-flash-exp",
         });
 
@@ -156,9 +205,13 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
         return;
       }
     } else {
+      // Check if user-provided examples are empty or all have empty text
+      const hasValidExamples = examples.length > 0 &&
+        examples.some(ex => ex.text && ex.text.trim().length > 0);
+
       onSubmit({
         promptDescription,
-        examples,
+        examples: hasValidExamples ? examples : DEFAULT_EXAMPLES,
         modelId,
       });
 
@@ -183,9 +236,8 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
     if (inputMode === "json") {
       return jsonInput.trim().length > 0;
     }
-    if (!promptDescription.trim()) return false;
-    if (examples.length === 0) return false;
-    return examples.every((ex) => ex.text.trim() && ex.extractions.length > 0);
+    // Only require prompt description - examples are optional (fallback will be used)
+    return promptDescription.trim().length > 0;
   };
 
   return (
@@ -244,12 +296,15 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
           {/* Examples */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label className="text-base">Examples *</Label>
+              <Label className="text-base">Examples (Optional)</Label>
               <Button onClick={addExample} variant="outline" size="sm">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Example
               </Button>
             </div>
+            <p className="text-xs text-muted-foreground">
+              If no examples are provided, default contract-based examples will be used automatically.
+            </p>
 
             {examples.map((example, exampleIndex) => (
               <Card key={exampleIndex}>
