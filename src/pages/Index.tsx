@@ -53,9 +53,21 @@ const Index = () => {
       });
     } catch (error) {
       console.error("Conversion error:", error);
+
+      // Provide specific error messages for common issues
+      let errorMessage = "Failed to convert document.";
+      let errorTitle = "Conversion failed";
+
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        errorTitle = "Backend service unavailable";
+        errorMessage = "Cannot connect to document converter service (port 8000). Make sure the backend is running with: python start_backend.py";
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
       toast({
-        title: "Conversion failed",
-        description: error instanceof Error ? error.message : "Failed to convert document.",
+        title: errorTitle,
+        description: errorMessage,
         variant: "destructive",
       });
       // Keep the document reference so user can try processing again
