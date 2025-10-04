@@ -18,6 +18,18 @@ const Index = () => {
   const [conversionData, setConversionData] = useState<ConversionResponse | null>(null);
   const { toast } = useToast();
 
+  // Handle analysis mode switching - clear analysis-specific results but keep document and conversion
+  const handleAnalysisChange = (type: "sentiment" | "ner" | "langextract") => {
+    setSelectedAnalysis(type);
+    // Clear analysis-specific results
+    setAnalysisResults(null);
+    setExtractions([]);
+    // Reset preview to original converted HTML if available
+    if (conversionData) {
+      setHtmlPreview(conversionData.html);
+    }
+  };
+
   const handleFileUpload = async (file: File) => {
     setDocument(file);
     setHtmlPreview(null);
@@ -170,7 +182,7 @@ const Index = () => {
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar
-          onAnalysisSelect={setSelectedAnalysis}
+          onAnalysisSelect={handleAnalysisChange}
           selectedAnalysis={selectedAnalysis}
         />
         <div className="flex-1 flex flex-col">
