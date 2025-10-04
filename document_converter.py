@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from pydantic import BaseModel
 import tempfile
 import os
+import json
 from pathlib import Path
 from docling.document_converter import DocumentConverter
 import httpx
@@ -181,15 +182,16 @@ async def convert_with_sentiment_analysis(
         result = converter.convert(temp_file_path)
         markdown_content = result.document.export_to_markdown()
         text_content = result.document.export_to_text()
+        html_content = result.document.export_to_html()
 
         # Use markdown for better structure preservation, fallback to text if markdown is poor
         analysis_text = markdown_content if markdown_content and len(markdown_content) > len(text_content) * 0.5 else text_content
 
-        # Call sentiment analysis API
+        # Call sentiment analysis API with both text and HTML
         async with httpx.AsyncClient(timeout=30.0) as client:
             sentiment_response = await client.post(
                 sentiment_api_url,
-                json={"text": analysis_text, "analyze_by_paragraph": True}
+                json={"text": analysis_text, "html": html_content}
             )
 
             if sentiment_response.status_code != 200:
@@ -200,56 +202,68 @@ async def convert_with_sentiment_analysis(
 
             sentiment_data = sentiment_response.json()
 
-        # Import HTML annotator
-        from html_annotator import create_simple_annotated_html
+        # Get sentiment results and highlighted HTML
+        sentiment_results = sentiment_data.get("sentiment_results", [])
+        annotated_html = sentiment_data.get("highlighted_html", "")
 
-        # Create annotated HTML
-        sentiment_results = [
-            {
-                "text": p["text"],
-                "sentiment": p["sentiment"],
-                "confidence": p["confidence"]
-            }
-            for p in sentiment_data.get("paragraphs", [])
-        ]
+        # Save outputs if enabled
+        saved_files = {}
+        if OUTPUT_SAVING == 1:
+            output_dir = Path("output")
+            output_dir.mkdir(exist_ok=True)
 
-        # Use the same text for annotation that was used for analysis
-        annotated_html = create_simple_annotated_html(sentiment_results, analysis_text)
+            base_name = Path(file.filename).stem
 
-        # Save HTML to file automatically
-        output_filename = f"{Path(file.filename).stem}_sentiment_analysis.html"
-        output_path = os.path.join(os.getcwd(), "output", output_filename)
+            # Save text
+            text_path = output_dir / f"{base_name}.txt"
+            with open(text_path, 'w', encoding='utf-8') as f:
+                f.write(text_content)
+            saved_files["text"] = str(text_path)
 
-        # Create output directory if it doesn't exist
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            # Save markdown
+            md_path = output_dir / f"{base_name}.md"
+            with open(md_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            saved_files["markdown"] = str(md_path)
 
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(annotated_html)
+            # Save sentiment results as JSON
+            sentiment_json_path = output_dir / f"{base_name}_sentiment.json"
+            with open(sentiment_json_path, 'w', encoding='utf-8') as f:
+                json.dump(sentiment_results, f, indent=2, ensure_ascii=False)
+            saved_files["sentiment_json"] = str(sentiment_json_path)
 
-        return JSONResponse(
-            status_code=200,
-            content={
-                "success": True,
-                "filename": file.filename,
-                "format": file_extension,
-                "markdown": markdown_content,
-                "text": text_content,
-                "sentiment_analysis": {
-                    "overall_sentiment": sentiment_data.get("overall_sentiment"),
-                    "overall_confidence": sentiment_data.get("overall_confidence"),
-                    "paragraphs": sentiment_results
-                },
-                "annotated_html": annotated_html,
-                "html_saved_to": output_path
-            }
-        )
+            # Save annotated HTML if available
+            if annotated_html:
+                html_path = output_dir / f"{base_name}_sentiment.html"
+                with open(html_path, 'w', encoding='utf-8') as f:
+                    f.write(annotated_html)
+                saved_files["annotated_html"] = str(html_path)
+
+        response_data = {
+            "success": True,
+            "filename": file.filename,
+            "format": file_extension,
+            "markdown": markdown_content,
+            "text": text_content,
+            "sentiment_results": sentiment_results,
+            "annotated_html": annotated_html
+        }
+
+        if OUTPUT_SAVING == 1:
+            response_data["saved_files"] = saved_files
+
+        return JSONResponse(status_code=200, content=response_data)
 
     except httpx.HTTPError as e:
+        print(f"HTTP Error: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Error communicating with sentiment API: {str(e)}"
         )
     except Exception as e:
+        print(f"Exception occurred: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=f"Error processing document: {str(e)}"
