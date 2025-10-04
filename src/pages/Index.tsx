@@ -235,8 +235,9 @@ const Index = () => {
           onAnalysisSelect={handleAnalysisChange}
           selectedAnalysis={selectedAnalysis}
         />
-        <div className="flex-1 flex flex-col">
-          <div className="flex flex-1 overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Top section: Preview + Insights Panel - Fixed at 60% of vertical space */}
+          <div className="flex h-[60%] overflow-hidden border-b border-border">
             <DocumentPreview
               document={document}
               htmlPreview={htmlPreview}
@@ -250,11 +251,14 @@ const Index = () => {
               analysisType={selectedAnalysis}
             />
           </div>
-          <ExtractionsTable
-            extractions={extractions}
-            htmlVisualization={langExtractVisualization}
-            analysisType={selectedAnalysis}
-          />
+          {/* Bottom section: Extractions Table - Fixed at 40% of vertical space */}
+          <div className="h-[40%] overflow-hidden">
+            <ExtractionsTable
+              extractions={extractions}
+              htmlVisualization={langExtractVisualization}
+              analysisType={selectedAnalysis}
+            />
+          </div>
         </div>
       </div>
 

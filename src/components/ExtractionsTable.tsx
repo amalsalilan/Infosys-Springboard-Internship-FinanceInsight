@@ -25,10 +25,10 @@ const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: Extr
   // For LangExtract, render the HTML visualization instead of the table
   if (analysisType === "langextract" && htmlVisualization) {
     return (
-      <div className="bg-white border-t border-border p-6">
-        <div className="bg-white rounded-lg overflow-hidden border border-border">
+      <div className="h-full bg-white overflow-hidden flex flex-col">
+        <div className="flex-1 overflow-auto p-6">
           <div
-            className="w-full h-full overflow-auto"
+            className="bg-white rounded-lg border border-border p-4"
             dangerouslySetInnerHTML={{ __html: htmlVisualization }}
           />
         </div>
@@ -55,9 +55,10 @@ const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: Extr
   };
 
   return (
-    <div className="bg-white border-t border-border p-6">
-      <div className="bg-white rounded-lg overflow-hidden border border-border">
-        <Table>
+    <div className="h-full bg-white overflow-hidden flex flex-col">
+      <div className="flex-1 overflow-auto p-6">
+        <div className="bg-white rounded-lg overflow-hidden border border-border">
+          <Table>
           <TableHeader>
             <TableRow className="bg-muted/50 hover:bg-muted/70">
               <TableHead className="text-center font-medium text-foreground">Extractions</TableHead>
@@ -104,6 +105,7 @@ const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: Extr
             )}
           </TableBody>
         </Table>
+        </div>
       </div>
     </div>
   );
