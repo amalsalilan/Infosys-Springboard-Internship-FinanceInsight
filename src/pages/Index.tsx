@@ -236,8 +236,8 @@ const Index = () => {
           selectedAnalysis={selectedAnalysis}
         />
         <div className="flex-1 flex flex-col overflow-hidden">
-          {/* Top section: Preview + Insights Panel - Fixed at 60% of vertical space */}
-          <div className="flex h-[60%] overflow-hidden border-b border-border">
+          {/* Top section: Preview + Insights Panel - Fixed height for stable layout */}
+          <div className="flex h-[400px] overflow-hidden border-b border-border">
             <DocumentPreview
               document={document}
               htmlPreview={htmlPreview}
@@ -251,8 +251,8 @@ const Index = () => {
               analysisType={selectedAnalysis}
             />
           </div>
-          {/* Bottom section: Extractions Table - Fixed at 40% of vertical space */}
-          <div className="h-[40%] overflow-hidden">
+          {/* Bottom section: Extractions Table - Auto-scale for LangExtract, fixed for others */}
+          <div className={selectedAnalysis === "langextract" ? "overflow-y-auto max-h-[70vh]" : "h-[40%] overflow-hidden"}>
             <ExtractionsTable
               extractions={extractions}
               htmlVisualization={langExtractVisualization}
