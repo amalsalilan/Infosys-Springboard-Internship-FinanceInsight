@@ -84,6 +84,29 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
     if (analysisType === "sentiment" && isSentimentResponse(analysisResults)) {
       try {
         const data = getSentimentChartData(analysisResults);
+
+        // Custom label rendering function for outside positioning
+        const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }: any) => {
+          const RADIAN = Math.PI / 180;
+          const radius = outerRadius + 25; // Position outside the pie
+          const x = cx + radius * Math.cos(-midAngle * RADIAN);
+          const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+          return (
+            <text
+              x={x}
+              y={y}
+              fill="#374151"
+              textAnchor={x > cx ? 'start' : 'end'}
+              dominantBaseline="central"
+              fontSize="12px"
+              fontWeight="500"
+            >
+              {`${name}: ${(percent * 100).toFixed(0)}%`}
+            </text>
+          );
+        };
+
         return (
         <div className="border-2 border-border p-4 rounded-lg h-64 bg-white">
           <h3 className="text-sm font-medium mb-2">Sentiment Distribution</h3>
@@ -93,9 +116,9 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
                 data={data}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                outerRadius={60}
+                labelLine={true}
+                label={renderCustomLabel}
+                outerRadius={55}
                 fill="#8884d8"
                 dataKey="value"
               >
