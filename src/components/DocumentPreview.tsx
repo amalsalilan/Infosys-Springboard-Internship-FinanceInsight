@@ -90,7 +90,7 @@ const DocumentPreview = ({ document, htmlPreview, onFileUpload, onClear, onProce
           onClick={onProcess}
           disabled={!document || isProcessing}
         >
-          {isProcessing ? "Analyzing..." : htmlPreview ? "Run Analysis" : "Converting..."}
+          {isProcessing ? "Analyzing..." : "Process Document"}
         </Button>
       </div>
     </div>

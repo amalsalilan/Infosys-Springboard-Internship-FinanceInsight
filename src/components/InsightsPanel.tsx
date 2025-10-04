@@ -8,6 +8,19 @@ interface InsightsPanelProps {
 }
 
 const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) => {
+  // Type guards to ensure safe access to properties
+  const isSentimentResponse = (data: any): data is SentimentResponse => {
+    return data && 'sentiment_results' in data;
+  };
+
+  const isNERResponse = (data: any): data is NERResponse => {
+    return data && 'entities' in data;
+  };
+
+  const isLangExtractResponse = (data: any): data is LangExtractResponse => {
+    return data && 'extractions' in data;
+  };
+
   // Sentiment Analysis Chart Data
   const getSentimentChartData = (results: SentimentResponse) => {
     const counts = { positive: 0, negative: 0, neutral: 0 };
@@ -68,9 +81,10 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
       );
     }
 
-    if (analysisType === "sentiment") {
-      const data = getSentimentChartData(analysisResults as SentimentResponse);
-      return (
+    if (analysisType === "sentiment" && isSentimentResponse(analysisResults)) {
+      try {
+        const data = getSentimentChartData(analysisResults);
+        return (
         <div className="border-2 border-border p-4 rounded-lg h-64 bg-white">
           <h3 className="text-sm font-medium mb-2">Sentiment Distribution</h3>
           <ResponsiveContainer width="100%" height="85%">
@@ -93,12 +107,17 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
             </PieChart>
           </ResponsiveContainer>
         </div>
-      );
+        );
+      } catch (error) {
+        console.error("Error rendering sentiment chart:", error);
+        return null;
+      }
     }
 
-    if (analysisType === "ner") {
-      const data = getNERChartData(analysisResults as NERResponse);
-      return (
+    if (analysisType === "ner" && isNERResponse(analysisResults)) {
+      try {
+        const data = getNERChartData(analysisResults);
+        return (
         <div className="border-2 border-border p-4 rounded-lg h-64 bg-white">
           <h3 className="text-sm font-medium mb-2">Entity Distribution</h3>
           <ResponsiveContainer width="100%" height="85%">
@@ -121,12 +140,17 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
             </PieChart>
           </ResponsiveContainer>
         </div>
-      );
+        );
+      } catch (error) {
+        console.error("Error rendering NER chart:", error);
+        return null;
+      }
     }
 
-    if (analysisType === "langextract") {
-      const stats = getLangExtractStats(analysisResults as LangExtractResponse);
-      return (
+    if (analysisType === "langextract" && isLangExtractResponse(analysisResults)) {
+      try {
+        const stats = getLangExtractStats(analysisResults);
+        return (
         <div className="border-2 border-border p-4 rounded-lg h-64 bg-white overflow-y-auto">
           <h3 className="text-sm font-medium mb-3">Extraction Classes</h3>
           <div className="space-y-2">
@@ -138,7 +162,11 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
             ))}
           </div>
         </div>
-      );
+        );
+      } catch (error) {
+        console.error("Error rendering LangExtract chart:", error);
+        return null;
+      }
     }
 
     return null;
@@ -153,8 +181,8 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
       );
     }
 
-    if (analysisType === "sentiment") {
-      const results = analysisResults as SentimentResponse;
+    if (analysisType === "sentiment" && isSentimentResponse(analysisResults)) {
+      const results = analysisResults;
       const total = results.sentiment_results.length;
       const positive = results.sentiment_results.filter((r) => r.class === "positive").length;
       const negative = results.sentiment_results.filter((r) => r.class === "negative").length;
@@ -183,8 +211,8 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
       );
     }
 
-    if (analysisType === "ner") {
-      const results = analysisResults as NERResponse;
+    if (analysisType === "ner" && isNERResponse(analysisResults)) {
+      const results = analysisResults;
       const total = results.entities.length;
       const avgScore = (
         results.entities.reduce((sum, e) => sum + e.score, 0) / total
@@ -209,8 +237,8 @@ const InsightsPanel = ({ analysisResults, analysisType }: InsightsPanelProps) =>
       );
     }
 
-    if (analysisType === "langextract") {
-      const results = analysisResults as LangExtractResponse;
+    if (analysisType === "langextract" && isLangExtractResponse(analysisResults)) {
+      const results = analysisResults;
       const total = results.extractions.length;
       const classes = new Set(results.extractions.map((e) => e.extraction_class)).size;
 
