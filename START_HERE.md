@@ -2,14 +2,18 @@
 
 ## Step-by-Step Guide to Get Everything Running
 
-### ✅ Step 1: Verify Python Dependencies
+### ✅ Step 1: Install uv and Python Dependencies
 
 ```bash
 # Make sure you're in the project directory
 cd "c:\Users\thefl\Documents\Code\internship\Batch 2\finsight"
 
-# Install all Python dependencies
-pip install -r requirements.txt
+# Install uv (if not already installed)
+# Windows PowerShell:
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Install all Python dependencies with uv
+uv sync
 ```
 
 **Expected output**: Should install without errors.
@@ -33,7 +37,7 @@ npm install
 
 ```bash
 cd "c:\Users\thefl\Documents\Code\internship\Batch 2\finsight"
-python start_backend.py
+uv run python start_backend.py
 ```
 
 **Expected output**:
@@ -104,7 +108,7 @@ Testing Document Converter
 
 **If you see errors**:
 - ❌ "Cannot connect to backend" → Backend not running (go back to Step 3)
-- ❌ "ModuleNotFoundError" → Dependencies not installed (go back to Step 1)
+- ❌ "ModuleNotFoundError" → Run `uv sync` (go back to Step 1)
 
 ---
 
@@ -209,7 +213,7 @@ netstat -ano | findstr :8000
 taskkill /PID <PID> /F
 
 # Then restart backend
-python start_backend.py
+uv run python start_backend.py
 ```
 
 ### Issue: Frontend shows blank page
