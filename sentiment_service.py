@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -11,6 +12,15 @@ app = FastAPI(
     title="Sentiment Analysis Service",
     description="API for analyzing sentiment in financial documents using FinBERT",
     version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Global model and tokenizer (loaded once at startup)

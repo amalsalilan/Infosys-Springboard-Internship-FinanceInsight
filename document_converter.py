@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import tempfile
 import os
@@ -13,6 +14,15 @@ app = FastAPI(
     title="Document to Markdown Converter",
     description="API for converting documents (DOCX, XLSX, PPTX, PDF, HTML, CSV, Markdown, AsciiDoc) to Markdown format",
     version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Development setting: Save outputs to folder (1=save, 0=don't save)
@@ -87,7 +97,47 @@ async def convert_to_markdown(file: UploadFile = File(...)):
         result = converter.convert(temp_file_path)
         markdown_content = result.document.export_to_markdown()
         text_content = result.document.export_to_text()
-        html_content = result.document.export_to_html()
+        html_content_raw = result.document.export_to_html()
+
+        # Inject custom CSS to make content fill full width (remove card-style layout)
+        custom_css = """
+        <style>
+            /* Override Docling's default card/centered layout */
+            html, body {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 30px !important;
+                box-sizing: border-box !important;
+                background-color: #ffffff !important;
+                background: #ffffff !important;
+            }
+            .document, main, article, .container, .content {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                background-color: #ffffff !important;
+            }
+            /* Ensure headings and paragraphs use full width */
+            h1, h2, h3, h4, h5, h6, p, div, section {
+                max-width: 100% !important;
+            }
+        </style>
+        """
+
+        # Insert custom CSS before </head> or at the beginning if no </head>
+        if "</head>" in html_content_raw:
+            html_content = html_content_raw.replace("</head>", f"{custom_css}</head>")
+        elif "<head>" in html_content_raw:
+            html_content = html_content_raw.replace("<head>", f"<head>{custom_css}")
+        else:
+            # No head tag, wrap content
+            html_content = f"<!DOCTYPE html><html><head>{custom_css}</head><body>{html_content_raw}</body></html>"
 
         # Save outputs if enabled
         saved_files = {}
@@ -182,7 +232,46 @@ async def convert_with_sentiment_analysis(
         result = converter.convert(temp_file_path)
         markdown_content = result.document.export_to_markdown()
         text_content = result.document.export_to_text()
-        html_content = result.document.export_to_html()
+        html_content_raw = result.document.export_to_html()
+
+        # Inject custom CSS to make content fill full width (same as /convert endpoint)
+        custom_css = """
+        <style>
+            /* Override Docling's default card/centered layout */
+            html, body {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 30px !important;
+                box-sizing: border-box !important;
+                background-color: #ffffff !important;
+                background: #ffffff !important;
+            }
+            .document, main, article, .container, .content {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                background-color: #ffffff !important;
+            }
+            /* Ensure headings and paragraphs use full width */
+            h1, h2, h3, h4, h5, h6, p, div, section {
+                max-width: 100% !important;
+            }
+        </style>
+        """
+
+        # Insert custom CSS before </head> or at the beginning if no </head>
+        if "</head>" in html_content_raw:
+            html_content = html_content_raw.replace("</head>", f"{custom_css}</head>")
+        elif "<head>" in html_content_raw:
+            html_content = html_content_raw.replace("<head>", f"<head>{custom_css}")
+        else:
+            html_content = f"<!DOCTYPE html><html><head>{custom_css}</head><body>{html_content_raw}</body></html>"
 
         # Use markdown for better structure preservation, fallback to text if markdown is poor
         analysis_text = markdown_content if markdown_content and len(markdown_content) > len(text_content) * 0.5 else text_content
