@@ -185,6 +185,24 @@ async def extract_information(request: ExtractRequest):
         else:
             html_output = html_content
 
+        # Add data-extraction-index attributes to HTML for navigation
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(html_output, 'html.parser')
+
+        # Find all highlighted spans (LangExtract uses marks or specific classes)
+        # The exact selector depends on how lx.visualize() structures the HTML
+        highlighted_elements = soup.find_all('mark') or soup.find_all(class_=lambda x: x and 'highlight' in x.lower() if x else False)
+
+        # If we can't find marks, look for spans with background colors or specific attributes
+        if not highlighted_elements:
+            highlighted_elements = soup.find_all('span', style=lambda x: x and 'background' in x.lower() if x else False)
+
+        # Add index to each highlighted element
+        for index, element in enumerate(highlighted_elements):
+            element['data-extraction-index'] = str(index)
+
+        html_output = str(soup)
+
         # Save HTML visualization
         html_file = os.path.join(output_dir, "extraction_visualization.html")
         with open(html_file, "w", encoding="utf-8") as f:

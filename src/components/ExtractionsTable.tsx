@@ -6,6 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Extraction {
   text: string;
@@ -17,10 +20,17 @@ interface ExtractionsTableProps {
   extractions: Extraction[];
   htmlVisualization?: string | null;
   analysisType?: "sentiment" | "ner" | "langextract";
+  currentIndex?: number;
+  onNavigate?: {
+    onPlay: () => void;
+    onPrevious: () => void;
+    onNext: () => void;
+  };
 }
 
-const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: ExtractionsTableProps) => {
+const ExtractionsTable = ({ extractions, htmlVisualization, analysisType, currentIndex = -1, onNavigate }: ExtractionsTableProps) => {
   const hasScores = extractions.some((e) => e.score !== undefined);
+  const hasExtractions = extractions.length > 0;
 
   // For LangExtract, render the HTML visualization instead of the table
   if (analysisType === "langextract" && htmlVisualization) {
@@ -56,6 +66,45 @@ const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: Extr
 
   return (
     <div className="h-full bg-white overflow-hidden flex flex-col">
+      {/* Navigation Controls - Only for LangExtract */}
+      {onNavigate && analysisType === "langextract" && (
+        <div className="border-b border-border p-4 bg-muted/30">
+          <div className="flex items-center justify-center gap-2">
+            <Button
+              onClick={onNavigate.onPlay}
+              disabled={!hasExtractions}
+              variant="outline"
+              size="sm"
+              className="gap-2"
+            >
+              <Play className="h-4 w-4" />
+              Play
+            </Button>
+            <Button
+              onClick={onNavigate.onPrevious}
+              disabled={!hasExtractions || currentIndex <= 0}
+              variant="outline"
+              size="sm"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Previous
+            </Button>
+            <span className="text-sm text-muted-foreground px-3">
+              {hasExtractions ? `${currentIndex + 1} / ${extractions.length}` : "0 / 0"}
+            </span>
+            <Button
+              onClick={onNavigate.onNext}
+              disabled={!hasExtractions || currentIndex >= extractions.length - 1}
+              variant="outline"
+              size="sm"
+            >
+              Next
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
       <div className="flex-1 overflow-auto p-6">
         <div className="bg-white rounded-lg overflow-hidden border border-border">
           <Table>
@@ -82,7 +131,14 @@ const ExtractionsTable = ({ extractions, htmlVisualization, analysisType }: Extr
               </TableRow>
             ) : (
               extractions.map((extraction, index) => (
-                <TableRow key={index} className="hover:bg-muted/30 transition-colors">
+                <TableRow
+                  key={index}
+                  data-table-row={index}
+                  className={cn(
+                    "hover:bg-muted/30 transition-colors",
+                    currentIndex === index && "bg-primary/10 border-l-4 border-l-primary"
+                  )}
+                >
                   <TableCell className="text-center max-w-md truncate" title={extraction.text}>
                     {extraction.text}
                   </TableCell>

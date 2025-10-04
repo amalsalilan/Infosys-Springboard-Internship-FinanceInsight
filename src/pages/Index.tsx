@@ -19,6 +19,7 @@ const Index = () => {
   const [conversionData, setConversionData] = useState<ConversionResponse | null>(null);
   const [showLangExtractDialog, setShowLangExtractDialog] = useState(false);
   const [langExtractVisualization, setLangExtractVisualization] = useState<string | null>(null);
+  const [currentExtractionIndex, setCurrentExtractionIndex] = useState<number>(-1);
   const { toast } = useToast();
 
   // Handle analysis mode switching - clear analysis-specific results but keep document and conversion
@@ -28,6 +29,7 @@ const Index = () => {
     setAnalysisResults(null);
     setExtractions([]);
     setLangExtractVisualization(null);
+    setCurrentExtractionIndex(-1);
     // Reset preview to original converted HTML if available
     if (conversionData) {
       setHtmlPreview(conversionData.html);
@@ -83,6 +85,7 @@ const Index = () => {
     setAnalysisResults(null);
     setConversionData(null);
     setLangExtractVisualization(null);
+    setCurrentExtractionIndex(-1);
   };
 
   const handleProcess = async () => {
@@ -211,6 +214,9 @@ const Index = () => {
         }))
       );
 
+      // Reset navigation index
+      setCurrentExtractionIndex(-1);
+
       toast({
         title: "Extraction complete",
         description: `Found ${analysis.extractions.length} extraction(s) using ${config.modelId}.`,
@@ -224,6 +230,44 @@ const Index = () => {
       });
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  // Navigation handlers
+  const handlePlayExtraction = () => {
+    if (extractions.length > 0) {
+      setCurrentExtractionIndex(0);
+      scrollToExtraction(0);
+    }
+  };
+
+  const handlePreviousExtraction = () => {
+    if (currentExtractionIndex > 0) {
+      const newIndex = currentExtractionIndex - 1;
+      setCurrentExtractionIndex(newIndex);
+      scrollToExtraction(newIndex);
+    }
+  };
+
+  const handleNextExtraction = () => {
+    if (currentExtractionIndex < extractions.length - 1) {
+      const newIndex = currentExtractionIndex + 1;
+      setCurrentExtractionIndex(newIndex);
+      scrollToExtraction(newIndex);
+    }
+  };
+
+  const scrollToExtraction = (index: number) => {
+    // Scroll in preview area - find the highlighted element
+    const previewElement = document.querySelector(`[data-extraction-index="${index}"]`);
+    if (previewElement) {
+      previewElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Scroll in table - find the row
+    const tableRow = document.querySelector(`[data-table-row="${index}"]`);
+    if (tableRow) {
+      tableRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
 
@@ -257,6 +301,12 @@ const Index = () => {
               extractions={extractions}
               htmlVisualization={langExtractVisualization}
               analysisType={selectedAnalysis}
+              currentIndex={currentExtractionIndex}
+              onNavigate={{
+                onPlay: handlePlayExtraction,
+                onPrevious: handlePreviousExtraction,
+                onNext: handleNextExtraction,
+              }}
             />
           </div>
         </div>
