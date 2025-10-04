@@ -5,7 +5,7 @@ import DocumentPreview from "@/components/DocumentPreview";
 import InsightsPanel from "@/components/InsightsPanel";
 import ExtractionsTable from "@/components/ExtractionsTable";
 import { useToast } from "@/hooks/use-toast";
-import { processDocument, convertDocument, SentimentResponse, NERResponse, LangExtractResponse, ConversionResponse } from "@/services/api";
+import { processDocument, convertDocument, analyzeSentiment, recognizeEntities, extractInformation, SentimentResponse, NERResponse, LangExtractResponse, ConversionResponse } from "@/services/api";
 
 const Index = () => {
   const [selectedAnalysis, setSelectedAnalysis] = useState<"sentiment" | "ner" | "langextract">("sentiment");
@@ -73,13 +73,10 @@ const Index = () => {
 
       // Run the selected analysis on the converted text
       if (selectedAnalysis === "sentiment") {
-        const { analyzeSentiment } = await import("@/services/api");
         analysis = await analyzeSentiment(conversion.text, conversion.html);
       } else if (selectedAnalysis === "ner") {
-        const { recognizeEntities } = await import("@/services/api");
         analysis = await recognizeEntities(conversion.text);
       } else {
-        const { extractInformation } = await import("@/services/api");
         analysis = await extractInformation(
           conversion.text,
           'Extract financial entities, amounts, dates, and key metrics from the document',

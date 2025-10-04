@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { BarChart3, Tag, Languages } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   onAnalysisSelect: (type: string) => void;
@@ -17,18 +18,20 @@ const Sidebar = ({ onAnalysisSelect, selectedAnalysis }: SidebarProps) => {
     <aside className="w-64 bg-[hsl(var(--sidebar))] p-3 flex flex-col gap-1 border-r border-border">
       {analysisTypes.map((type) => {
         const Icon = type.icon;
+        const isActive = selectedAnalysis === type.id;
+
         return (
           <Button
             key={type.id}
             variant="ghost"
-            className={`justify-start text-sm h-10 gap-3 transition-colors ${
-              selectedAnalysis === type.id 
-                ? "bg-secondary text-foreground" 
-                : "text-sidebar-foreground hover:bg-secondary"
-            }`}
+            className={cn(
+              "justify-start text-sm h-10 gap-3 transition-all duration-200 border-l-4 border-transparent",
+              isActive && "bg-accent font-semibold border-l-primary shadow-sm",
+              !isActive && "text-sidebar-foreground hover:bg-accent/50 hover:border-l-accent"
+            )}
             onClick={() => onAnalysisSelect(type.id)}
           >
-            <Icon className="h-4 w-4" />
+            <Icon className={cn("h-4 w-4", isActive && "text-primary")} />
             {type.label}
           </Button>
         );
