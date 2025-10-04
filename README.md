@@ -26,6 +26,7 @@ FinSight provides three core analysis modules:
 ## Prerequisites
 
 - Python 3.8+
+- uv (Python package manager)
 - Node.js 16+
 - Git
 
@@ -38,8 +39,12 @@ FinSight provides three core analysis modules:
 git clone <repository-url>
 cd finsight
 
-# Install Python dependencies
-pip install -r requirements.txt
+# Install uv (if not already installed)
+# Windows: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+# macOS/Linux: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install Python dependencies with uv
+uv sync
 
 # Install Node dependencies
 npm install
@@ -49,7 +54,7 @@ npm install
 
 **Start Backend Services:**
 ```bash
-python start_backend.py
+uv run python start_backend.py
 ```
 
 Services will run on:

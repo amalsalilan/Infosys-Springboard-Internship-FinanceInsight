@@ -4,14 +4,18 @@
 
 ### First Time Setup
 ```bash
-pip install -r requirements.txt
+# Install uv (Python package manager)
+# Windows: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+# macOS/Linux: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+uv sync
 npm install
 ```
 
 ### Run Application
 ```bash
 # Terminal 1
-python start_backend.py
+uv run python start_backend.py
 
 # Terminal 2
 npm run dev
@@ -112,10 +116,10 @@ finsight/
 ### Backend
 ```bash
 # Start all services
-python start_backend.py
+uv run python start_backend.py
 
 # Individual service
-uvicorn sentiment_service:app --port 8001 --reload
+uv run uvicorn sentiment_service:app --port 8001 --reload
 
 # Check health
 curl http://localhost:8001/health
@@ -139,8 +143,8 @@ npm run lint
 ### Dependencies
 ```bash
 # Python
-pip install -r requirements.txt
-pip list
+uv sync
+uv pip list
 
 # Node
 npm install
@@ -152,7 +156,7 @@ npm list --depth=0
 | Issue | Solution |
 |-------|----------|
 | Port in use | `taskkill /PID <PID> /F` (Windows)<br>`lsof -ti:8000 \| xargs kill -9` (Mac/Linux) |
-| Module not found | `pip install -r requirements.txt` |
+| Module not found | `uv sync` |
 | CORS error | Restart backend services |
 | Build error | `rm -rf node_modules && npm install` |
 | Model not loading | Wait for download, check internet |
@@ -202,8 +206,12 @@ Upload → Convert → Analyze → Visualize
 ## 🔑 Environment Variables
 
 ```bash
-# LangExtract API Key (optional, already hardcoded)
-export LANGEXTRACT_API_KEY="your-key-here"
+# Google Gemini API Key (for LangExtract)
+# Using uv
+uv run --env GEMINI_API_KEY=your_key python start_backend.py
+
+# Or create .env file
+echo "GEMINI_API_KEY=your_key" > .env
 ```
 
 ## 📦 Dependencies
@@ -227,7 +235,7 @@ export LANGEXTRACT_API_KEY="your-key-here"
 
 ## 🧪 Test Workflow
 
-1. Start backend: `python start_backend.py`
+1. Start backend: `uv run python start_backend.py`
 2. Start frontend: `npm run dev`
 3. Open: http://localhost:8080
 4. Upload: test.txt (or any doc)

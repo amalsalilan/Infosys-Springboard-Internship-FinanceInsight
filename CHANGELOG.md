@@ -266,7 +266,7 @@ python start_backend.py
 - [ ] Improved error recovery
 
 ### Under Consideration
-- [ ] Additional LLM providers (OpenAI, Claude)
+- [ ] Additional LLM providers (OpenAI, Anthropic)
 - [ ] Real-time collaborative analysis
 - [ ] Document comparison feature
 - [ ] Custom model fine-tuning
