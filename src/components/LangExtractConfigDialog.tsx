@@ -13,13 +13,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Trash2, BookOpen } from "lucide-react";
+import { Plus, Trash2, BookOpen, FileJson, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 
 export interface ExtractionExample {
@@ -44,6 +46,7 @@ interface LangExtractConfigDialogProps {
 }
 
 const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractConfigDialogProps) => {
+  const [inputMode, setInputMode] = useState<"form" | "json">("form");
   const [promptDescription, setPromptDescription] = useState("");
   const [modelId, setModelId] = useState("gemini-2.0-flash-exp");
   const [examples, setExamples] = useState<ExtractionExample[]>([
@@ -58,6 +61,8 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
       ],
     },
   ]);
+  const [jsonInput, setJsonInput] = useState("");
+  const [jsonError, setJsonError] = useState<string | null>(null);
 
   const addExample = () => {
     setExamples([
@@ -127,28 +132,57 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
   };
 
   const handleSubmit = () => {
-    onSubmit({
-      promptDescription,
-      examples,
-      modelId,
-    });
-    // Reset form
-    setPromptDescription("");
-    setExamples([
-      {
-        text: "",
-        extractions: [
-          {
-            extraction_class: "",
-            extraction_text: "",
-            attributes: {},
-          },
-        ],
-      },
-    ]);
+    if (inputMode === "json") {
+      try {
+        const parsed = JSON.parse(jsonInput);
+
+        // Validate JSON structure
+        if (!parsed.prompt_description || !Array.isArray(parsed.examples)) {
+          setJsonError("JSON must include 'prompt_description' and 'examples' array");
+          return;
+        }
+
+        onSubmit({
+          promptDescription: parsed.prompt_description,
+          examples: parsed.examples,
+          modelId: parsed.model_id || "gemini-2.0-flash-exp",
+        });
+
+        // Reset
+        setJsonInput("");
+        setJsonError(null);
+      } catch (error) {
+        setJsonError(error instanceof Error ? error.message : "Invalid JSON format");
+        return;
+      }
+    } else {
+      onSubmit({
+        promptDescription,
+        examples,
+        modelId,
+      });
+
+      // Reset form
+      setPromptDescription("");
+      setExamples([
+        {
+          text: "",
+          extractions: [
+            {
+              extraction_class: "",
+              extraction_text: "",
+              attributes: {},
+            },
+          ],
+        },
+      ]);
+    }
   };
 
   const isValid = () => {
+    if (inputMode === "json") {
+      return jsonInput.trim().length > 0;
+    }
     if (!promptDescription.trim()) return false;
     if (examples.length === 0) return false;
     return examples.every((ex) => ex.text.trim() && ex.extractions.length > 0);
@@ -167,21 +201,30 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
-          {/* Prompt Description */}
-          <div className="space-y-2">
-            <Label htmlFor="prompt">Extraction Instructions *</Label>
-            <Textarea
-              id="prompt"
-              placeholder="Describe what information you want to extract from the document..."
-              value={promptDescription}
-              onChange={(e) => setPromptDescription(e.target.value)}
-              className="min-h-[100px]"
-            />
-            <p className="text-xs text-muted-foreground">
-              Example: "Extract character names, emotional states, and relationships from the text"
-            </p>
-          </div>
+        <Tabs value={inputMode} onValueChange={(value) => setInputMode(value as "form" | "json")} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="form">Form Builder</TabsTrigger>
+            <TabsTrigger value="json">
+              <FileJson className="h-4 w-4 mr-2" />
+              JSON Input
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="form" className="space-y-6 py-4">
+            {/* Prompt Description */}
+            <div className="space-y-2">
+              <Label htmlFor="prompt">Extraction Instructions *</Label>
+              <Textarea
+                id="prompt"
+                placeholder="Extract contract parties, values, and key dates from the document"
+                value={promptDescription}
+                onChange={(e) => setPromptDescription(e.target.value)}
+                className="min-h-[100px]"
+              />
+              <p className="text-xs text-muted-foreground">
+                Example: "Extract contract parties, financial amounts, effective dates, and contract durations"
+              </p>
+            </div>
 
           {/* Model Selection */}
           <div className="space-y-2">
@@ -231,7 +274,7 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
                   <div className="space-y-2">
                     <Label>Sample Text *</Label>
                     <Textarea
-                      placeholder="Enter sample text that demonstrates the extraction pattern..."
+                      placeholder="Alpha Finance Corp. enters into agreement with Beta Holdings for $2,500,000, valid until December 31, 2026..."
                       value={example.text}
                       onChange={(e) => updateExampleText(exampleIndex, e.target.value)}
                       className="min-h-[80px]"
@@ -262,7 +305,7 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
                             <div className="space-y-1">
                               <Label className="text-xs">Class</Label>
                               <Input
-                                placeholder="e.g., character"
+                                placeholder="party, contract_value, duration"
                                 value={extraction.extraction_class}
                                 onChange={(e) =>
                                   updateExtraction(
@@ -278,7 +321,7 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
                             <div className="space-y-1">
                               <Label className="text-xs">Text</Label>
                               <Input
-                                placeholder="e.g., ROMEO"
+                                placeholder="Alpha Finance Corp., $2,500,000"
                                 value={extraction.extraction_text}
                                 onChange={(e) =>
                                   updateExtraction(
@@ -347,26 +390,32 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
             ))}
           </div>
 
-          {/* Reference Guide */}
-          <Accordion type="single" collapsible className="border rounded-lg">
-            <AccordionItem value="reference" className="border-none">
-              <AccordionTrigger className="px-4 hover:no-underline">
-                <span className="text-sm font-medium">📖 JSON Format Reference</span>
-              </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4">
-                <pre className="text-xs bg-muted p-4 rounded-md overflow-x-auto">
-                  {`{
-  "text": "<auto-filled from uploaded document>",
-  "prompt_description": "User's extraction instructions",
+            {/* Reference Guide */}
+            <Accordion type="single" collapsible className="border rounded-lg">
+              <AccordionItem value="reference" className="border-none">
+                <AccordionTrigger className="px-4 hover:no-underline">
+                  <span className="text-sm font-medium">📖 JSON Format Reference</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4">
+                  <pre className="text-xs bg-muted p-4 rounded-md overflow-x-auto">
+                    {`{
+  "prompt_description": "Extract contract parties, values, and dates",
   "examples": [
     {
-      "text": "Sample input text",
+      "text": "Alpha Finance Corp. and Beta Holdings...",
       "extractions": [
         {
-          "extraction_class": "character",
-          "extraction_text": "ROMEO",
+          "extraction_class": "party",
+          "extraction_text": "Alpha Finance Corp.",
           "attributes": {
-            "emotional_state": "wonder"
+            "role": "provider"
+          }
+        },
+        {
+          "extraction_class": "contract_value",
+          "extraction_text": "$2,500,000",
+          "attributes": {
+            "currency": "USD"
           }
         }
       ]
@@ -374,11 +423,85 @@ const LangExtractConfigDialog = ({ open, onOpenChange, onSubmit }: LangExtractCo
   ],
   "model_id": "gemini-2.0-flash-exp"
 }`}
-                </pre>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
+                  </pre>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </TabsContent>
+
+          <TabsContent value="json" className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="json-input">JSON Configuration</Label>
+              <Textarea
+                id="json-input"
+                placeholder={`{
+  "prompt_description": "Extract contract parties, financial amounts, and dates",
+  "examples": [
+    {
+      "text": "Alpha Finance Corp. enters into agreement with Beta Holdings for $2,500,000, valid until December 31, 2026.",
+      "extractions": [
+        {
+          "extraction_class": "party",
+          "extraction_text": "Alpha Finance Corp.",
+          "attributes": {"role": "provider"}
+        },
+        {
+          "extraction_class": "contract_value",
+          "extraction_text": "$2,500,000",
+          "attributes": {"currency": "USD"}
+        },
+        {
+          "extraction_class": "end_date",
+          "extraction_text": "December 31, 2026",
+          "attributes": {"type": "contract_expiry"}
+        }
+      ]
+    }
+  ],
+  "model_id": "gemini-2.0-flash-exp"
+}`}
+                value={jsonInput}
+                onChange={(e) => {
+                  setJsonInput(e.target.value);
+                  setJsonError(null);
+                }}
+                className="min-h-[400px] font-mono text-xs"
+              />
+              <p className="text-xs text-muted-foreground">
+                Paste a complete JSON configuration. The "text" field will be auto-filled from your uploaded document.
+              </p>
+            </div>
+
+            {jsonError && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{jsonError}</AlertDescription>
+              </Alert>
+            )}
+
+            {/* JSON Reference */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm">Required JSON Structure</CardTitle>
+                <CardDescription>Your JSON must include these fields</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2 text-xs">
+                <div>
+                  <code className="bg-muted px-1 py-0.5 rounded">prompt_description</code>
+                  <span className="text-muted-foreground ml-2">(string) - Extraction instructions</span>
+                </div>
+                <div>
+                  <code className="bg-muted px-1 py-0.5 rounded">examples</code>
+                  <span className="text-muted-foreground ml-2">(array) - List of example extractions</span>
+                </div>
+                <div>
+                  <code className="bg-muted px-1 py-0.5 rounded">model_id</code>
+                  <span className="text-muted-foreground ml-2">(string, optional) - AI model to use</span>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
 
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
@@ -411,13 +534,13 @@ const AttributeAdder = ({ onAdd }: { onAdd: (key: string, value: string) => void
       <Input
         value={key}
         onChange={(e) => setKey(e.target.value)}
-        placeholder="Key"
+        placeholder="role, currency, type"
         className="h-7 text-xs flex-1"
       />
       <Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="Value"
+        placeholder="provider, USD, fiscal_year"
         className="h-7 text-xs flex-1"
       />
       <Button
