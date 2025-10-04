@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import DocumentPreview from "@/components/DocumentPreview";
 import InsightsPanel from "@/components/InsightsPanel";
 import ExtractionsTable from "@/components/ExtractionsTable";
+import LangExtractConfigDialog, { LangExtractConfig } from "@/components/LangExtractConfigDialog";
 import { useToast } from "@/hooks/use-toast";
 import { processDocument, convertDocument, analyzeSentiment, recognizeEntities, extractInformation, SentimentResponse, NERResponse, LangExtractResponse, ConversionResponse } from "@/services/api";
 
@@ -16,6 +17,7 @@ const Index = () => {
   const [extractions, setExtractions] = useState<Array<{ text: string; class: string; score?: number }>>([]);
   const [analysisResults, setAnalysisResults] = useState<SentimentResponse | NERResponse | LangExtractResponse | null>(null);
   const [conversionData, setConversionData] = useState<ConversionResponse | null>(null);
+  const [showLangExtractDialog, setShowLangExtractDialog] = useState(false);
   const { toast } = useToast();
 
   // Handle analysis mode switching - clear analysis-specific results but keep document and conversion
@@ -71,6 +73,12 @@ const Index = () => {
   const handleProcess = async () => {
     if (!document) return;
 
+    // For LangExtract, show configuration dialog instead of processing directly
+    if (selectedAnalysis === "langextract") {
+      setShowLangExtractDialog(true);
+      return;
+    }
+
     setIsProcessing(true);
 
     try {
@@ -89,32 +97,8 @@ const Index = () => {
       } else if (selectedAnalysis === "ner") {
         analysis = await recognizeEntities(conversion.text);
       } else {
-        analysis = await extractInformation(
-          conversion.text,
-          'Extract financial entities, amounts, dates, and key metrics from the document',
-          [
-            {
-              text: 'Apple Inc. reported revenue of $394.3 billion for fiscal year 2022.',
-              extractions: [
-                {
-                  extraction_class: 'Company',
-                  extraction_text: 'Apple Inc.',
-                  attributes: { type: 'organization' },
-                },
-                {
-                  extraction_class: 'Financial Metric',
-                  extraction_text: 'revenue of $394.3 billion',
-                  attributes: { amount: '$394.3 billion', metric: 'revenue' },
-                },
-                {
-                  extraction_class: 'Time Period',
-                  extraction_text: 'fiscal year 2022',
-                  attributes: { year: '2022', type: 'fiscal year' },
-                },
-              ],
-            },
-          ]
-        );
+        // This should not be reached anymore as langextract opens dialog
+        throw new Error("Invalid analysis type");
       }
 
       setAnalysisResults(analysis);
@@ -177,6 +161,55 @@ const Index = () => {
     }
   };
 
+  const handleLangExtractSubmit = async (config: LangExtractConfig) => {
+    setShowLangExtractDialog(false);
+    setIsProcessing(true);
+
+    try {
+      let conversion = conversionData;
+
+      // If document hasn't been converted yet, convert it first
+      if (!conversion) {
+        if (!document) return;
+        conversion = await convertDocument(document);
+        setConversionData(conversion);
+      }
+
+      // Call LangExtract API with user-provided config and auto-filled document text
+      const analysis = await extractInformation(
+        conversion.text, // Auto-filled from converted document
+        config.promptDescription,
+        config.examples,
+        config.modelId
+      );
+
+      setAnalysisResults(analysis);
+      setHtmlPreview(analysis.html_visualization);
+
+      // Extract structured data for table
+      setExtractions(
+        analysis.extractions.map((extraction) => ({
+          text: extraction.extraction_text,
+          class: extraction.extraction_class,
+        }))
+      );
+
+      toast({
+        title: "Extraction complete",
+        description: `Found ${analysis.extractions.length} extraction(s) using ${config.modelId}.`,
+      });
+    } catch (error) {
+      console.error("LangExtract error:", error);
+      toast({
+        title: "Extraction failed",
+        description: error instanceof Error ? error.message : "Failed to extract information.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col bg-background">
       <Header />
@@ -203,6 +236,13 @@ const Index = () => {
           <ExtractionsTable extractions={extractions} />
         </div>
       </div>
+
+      {/* LangExtract Configuration Dialog */}
+      <LangExtractConfigDialog
+        open={showLangExtractDialog}
+        onOpenChange={setShowLangExtractDialog}
+        onSubmit={handleLangExtractSubmit}
+      />
     </div>
   );
 };
