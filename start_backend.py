@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Unified startup script for all backend services
 Starts all FastAPI services on different ports
@@ -8,6 +9,12 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
+# Ensure UTF-8 encoding for console output on Windows
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Service configurations
 SERVICES = [
@@ -50,7 +57,8 @@ def main():
 
             # Start the service using uvicorn
             cmd = [
-                "uvicorn",
+                sys.executable,
+                "-m", "uvicorn",
                 f"{Path(service['file']).stem}:app",
                 "--host", service['host'],
                 "--port", str(service['port']),
