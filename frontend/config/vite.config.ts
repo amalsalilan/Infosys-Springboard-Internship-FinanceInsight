@@ -34,10 +34,10 @@ export default defineConfig(({ mode }) => ({
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./frontend/src"),
+      "@": path.resolve(__dirname, "../src"),
     },
   },
-  publicDir: path.resolve(__dirname, "./frontend/public"),
+  root: path.resolve(__dirname, "../.."),
   build: {
     rollupOptions: {
       output: {

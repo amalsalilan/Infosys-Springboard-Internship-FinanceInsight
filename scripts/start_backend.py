@@ -16,29 +16,32 @@ if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
+# Get the project root directory (parent of scripts/)
+PROJECT_ROOT = Path(__file__).parent.parent
+
 # Service configurations
 SERVICES = [
     {
         "name": "Document Converter",
-        "file": "document_converter.py",
+        "file": "backend.services.document_converter",
         "port": 8000,
         "host": "127.0.0.1"
     },
     {
         "name": "Sentiment Analysis",
-        "file": "sentiment_service.py",
+        "file": "backend.services.sentiment_service",
         "port": 8001,
         "host": "127.0.0.1"
     },
     {
         "name": "NER Service",
-        "file": "ner_service.py",
+        "file": "backend.services.ner_service",
         "port": 8002,
         "host": "127.0.0.1"
     },
     {
         "name": "LangExtract Service",
-        "file": "langextract_service.py",
+        "file": "backend.services.langextract_service",
         "port": 8003,
         "host": "127.0.0.1"
     }
@@ -59,7 +62,7 @@ def main():
             cmd = [
                 sys.executable,
                 "-m", "uvicorn",
-                f"{Path(service['file']).stem}:app",
+                f"{service['file']}:app",
                 "--host", service['host'],
                 "--port", str(service['port']),
                 "--reload"
@@ -67,6 +70,7 @@ def main():
 
             process = subprocess.Popen(
                 cmd,
+                cwd=str(PROJECT_ROOT),
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
