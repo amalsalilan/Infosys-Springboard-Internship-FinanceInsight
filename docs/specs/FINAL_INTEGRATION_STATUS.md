@@ -275,7 +275,7 @@
 
 ### ✅ Deployment Checklist
 
-- [x] All dependencies listed in requirements.txt
+- [x] All dependencies listed in pyproject.toml and uv.lock
 - [x] All dependencies listed in package.json
 - [x] Environment variables documented
 - [x] CORS configured properly
@@ -322,7 +322,7 @@
 
 ```bash
 # Terminal 1 - Backend
-python start_backend.py
+uv run python scripts/start_backend.py
 
 # Terminal 2 - Frontend
 npm run dev
@@ -377,14 +377,14 @@ npm run dev
 
 2. **Install Dependencies**
    ```bash
-   pip install -r requirements.txt
+   uv sync
    npm install
    ```
 
 3. **Start Services**
    ```bash
    # Terminal 1
-   python start_backend.py
+   uv run python scripts/start_backend.py
 
    # Terminal 2
    npm run dev

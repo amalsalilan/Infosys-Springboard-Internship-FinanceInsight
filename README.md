@@ -5,6 +5,7 @@
 - Python 3.10+
 - Node.js 16+
 - Git
+- uv (Python package manager)
 
 ## Setup
 
@@ -14,12 +15,21 @@ git clone https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceI
 cd Infosys-Springboard-Internship-FinanceInsight
 ```
 
-**2. Install Python dependencies:**
+**2. Install uv (if not already installed):**
 ```bash
-pip install -r requirements.txt
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**3. Install Node dependencies:**
+**3. Install Python dependencies:**
+```bash
+uv sync
+```
+
+**4. Install Node dependencies:**
 ```bash
 npm install
 ```
@@ -28,7 +38,7 @@ npm install
 
 **1. Start backend services:**
 ```bash
-python scripts/start_backend.py
+uv run python scripts/start_backend.py
 ```
 
 **2. Start frontend (in a new terminal):**

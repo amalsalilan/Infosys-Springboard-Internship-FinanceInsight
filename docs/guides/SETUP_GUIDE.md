@@ -4,25 +4,32 @@
 
 Follow these steps to set up the project for the first time:
 
-### Step 1: Install Backend Dependencies
+### Step 1: Install uv Package Manager
 
 ```bash
-# Make sure you're in the project directory
-cd finsight
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-# Install Python dependencies
-pip install -r requirements.txt
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Step 2: Install Backend Dependencies
+
+```bash
+# Install Python dependencies (creates .venv automatically)
+uv sync
 ```
 
 **Note**: This will install:
 - FastAPI, Uvicorn
 - Docling (document conversion)
 - Transformers, PyTorch (AI models) - ~2GB download
-- BeautifulSoup4, httpx, langextract
+- BeautifulSoup4, httpx, langextract, python-dotenv
 
 **First-time note**: AI model downloads happen on first run (FinBERT, NER model)
 
-### Step 2: Install Frontend Dependencies
+### Step 3: Install Frontend Dependencies
 
 ```bash
 # Install Node.js dependencies
@@ -31,11 +38,11 @@ npm install
 
 **Note**: This will install React, Vite, TypeScript, Tailwind, and UI libraries
 
-### Step 3: Verify Installation
+### Step 4: Verify Installation
 
 ```bash
 # Check Python packages
-pip list | grep -E "fastapi|uvicorn|transformers|docling"
+uv pip list | grep -E "fastapi|uvicorn|transformers|docling"
 
 # Check Node packages
 npm list --depth=0
@@ -47,7 +54,7 @@ npm list --depth=0
 
 **Terminal 1 - Backend Services:**
 ```bash
-python start_backend.py
+uv run python scripts/start_backend.py
 ```
 
 Wait for all services to start (you'll see ✅ messages)
@@ -63,22 +70,22 @@ npm run dev
 
 **Terminal 1 - Document Converter:**
 ```bash
-uvicorn document_converter:app --host 127.0.0.1 --port 8000 --reload
+uv run uvicorn backend.services.document_converter:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 **Terminal 2 - Sentiment Analysis:**
 ```bash
-uvicorn sentiment_service:app --host 127.0.0.1 --port 8001 --reload
+uv run uvicorn backend.services.sentiment_service:app --host 127.0.0.1 --port 8001 --reload
 ```
 
 **Terminal 3 - NER Service:**
 ```bash
-uvicorn ner_service:app --host 127.0.0.1 --port 8002 --reload
+uv run uvicorn backend.services.ner_service:app --host 127.0.0.1 --port 8002 --reload
 ```
 
 **Terminal 4 - LangExtract:**
 ```bash
-uvicorn langextract_service:app --host 127.0.0.1 --port 8003 --reload
+uv run uvicorn backend.services.langextract_service:app --host 127.0.0.1 --port 8003 --reload
 ```
 
 **Terminal 5 - Frontend:**

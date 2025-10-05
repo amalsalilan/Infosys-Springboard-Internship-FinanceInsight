@@ -13,19 +13,21 @@ FastAPI service for converting various document formats to Markdown using Doclin
 ## Installation
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## Running the Server
 
+Using the automated startup script (recommended):
+
 ```bash
-python document_converter.py
+uv run python scripts/start_backend.py
 ```
 
-Or with uvicorn:
+Or run this service individually with uvicorn:
 
 ```bash
-uvicorn document_converter:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn backend.services.document_converter:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at `http://localhost:8000`

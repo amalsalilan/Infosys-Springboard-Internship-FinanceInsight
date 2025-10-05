@@ -81,10 +81,10 @@ sudo apt install git
 
 ```bash
 # Clone the repository
-git clone https://github.com/amalsalilan/shiny-meme.git
+git clone https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceInsight.git
 
 # Navigate to project directory
-cd shiny-meme
+cd Infosys-Springboard-Internship-FinanceInsight
 ```
 
 ### Step 2: Python Environment Setup with uv
