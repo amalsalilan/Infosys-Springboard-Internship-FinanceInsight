@@ -49,14 +49,14 @@ SERVICES = [
 
 def main():
     print("=" * 60)
-    print("Starting FinSight Backend Services")
+    print("🚀 Starting FinSight Backend Services")
     print("=" * 60)
 
     processes = []
 
     try:
         for service in SERVICES:
-            print(f"\n🚀 Starting {service['name']} on http://{service['host']}:{service['port']}")
+            print(f"\n📦 Starting {service['name']} on port {service['port']}...")
 
             # Start the service using uvicorn
             cmd = [
@@ -68,13 +68,10 @@ def main():
                 "--reload"
             ]
 
+            # Don't capture output - let it print to console
             process = subprocess.Popen(
                 cmd,
-                cwd=str(PROJECT_ROOT),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                bufsize=1
+                cwd=str(PROJECT_ROOT)
             )
 
             processes.append({
@@ -84,20 +81,22 @@ def main():
             })
 
             # Give it a moment to start
-            time.sleep(1)
+            time.sleep(2)
 
         print("\n" + "=" * 60)
         print("✅ All services started successfully!")
         print("=" * 60)
-        print("\nRunning services:")
+        print("\n📍 Running services:")
         for p in processes:
             print(f"  • {p['name']}: http://127.0.0.1:{p['port']}")
 
-        print("\n📝 API Documentation:")
+        print("\n📚 API Documentation:")
         for p in processes:
             print(f"  • {p['name']}: http://127.0.0.1:{p['port']}/docs")
 
-        print("\n⚠️  Press Ctrl+C to stop all services\n")
+        print("\n⚠️  Press Ctrl+C to stop all services")
+        print("=" * 60)
+        print("\n💡 Waiting for models to load... Check logs above\n")
 
         # Wait for all processes
         while True:

@@ -1,14 +1,32 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import tempfile
 import os
 import json
+import logging
+import sys
+import warnings
 from pathlib import Path
 from docling.document_converter import DocumentConverter
 import httpx
 from typing import Optional
+
+# Suppress warnings from external libraries
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('logs/document_converter.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Document to Markdown Converter",
@@ -29,7 +47,9 @@ app.add_middleware(
 OUTPUT_SAVING = 1
 
 # Initialize Docling converter
+logger.info("Initializing Docling DocumentConverter...")
 converter = DocumentConverter()
+logger.info("DocumentConverter initialized successfully")
 
 # Supported file extensions
 SUPPORTED_FORMATS = {
@@ -73,10 +93,13 @@ async def convert_to_markdown(file: UploadFile = File(...)):
     Returns:
         JSON response with markdown content
     """
+    logger.info(f"Received conversion request for file: {file.filename}")
+
     # Check file extension
     file_extension = Path(file.filename).suffix.lower()
 
     if file_extension not in SUPPORTED_FORMATS:
+        logger.warning(f"Unsupported file format attempted: {file_extension}")
         raise HTTPException(
             status_code=400,
             detail=f"Unsupported file format: {file_extension}. Supported formats: {', '.join(SUPPORTED_FORMATS)}"
@@ -87,17 +110,21 @@ async def convert_to_markdown(file: UploadFile = File(...)):
     try:
         # Read file content
         content = await file.read()
+        logger.info(f"Read {len(content)} bytes from uploaded file")
 
         # Create temporary file with proper extension
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
             temp_file.write(content)
             temp_file_path = temp_file.name
+        logger.debug(f"Created temporary file: {temp_file_path}")
 
         # Convert document to markdown using Docling
+        logger.info(f"Converting document {file.filename} to markdown...")
         result = converter.convert(temp_file_path)
         markdown_content = result.document.export_to_markdown()
         text_content = result.document.export_to_text()
         html_content_raw = result.document.export_to_html()
+        logger.info(f"Conversion completed successfully. Generated {len(text_content)} chars of text")
 
         # Inject custom CSS to make content fill full width (remove card-style layout)
         custom_css = """
@@ -152,18 +179,21 @@ async def convert_to_markdown(file: UploadFile = File(...)):
             with open(text_path, 'w', encoding='utf-8') as f:
                 f.write(text_content)
             saved_files["text"] = str(text_path)
+            logger.debug(f"Saved text output to {text_path}")
 
             # Save markdown
             md_path = output_dir / f"{base_name}.md"
             with open(md_path, 'w', encoding='utf-8') as f:
                 f.write(markdown_content)
             saved_files["markdown"] = str(md_path)
+            logger.debug(f"Saved markdown output to {md_path}")
 
             # Save HTML
             html_path = output_dir / f"{base_name}.html"
             with open(html_path, 'w', encoding='utf-8') as f:
                 f.write(html_content)
             saved_files["html"] = str(html_path)
+            logger.debug(f"Saved HTML output to {html_path}")
 
         response_data = {
             "success": True,
@@ -177,9 +207,11 @@ async def convert_to_markdown(file: UploadFile = File(...)):
         if OUTPUT_SAVING == 1:
             response_data["saved_files"] = saved_files
 
+        logger.info(f"Successfully converted {file.filename}")
         return JSONResponse(status_code=200, content=response_data)
 
     except Exception as e:
+        logger.error(f"Error converting document {file.filename}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error converting document: {str(e)}"
@@ -209,10 +241,13 @@ async def convert_with_sentiment_analysis(
     Returns:
         JSON response with markdown, text, sentiment analysis, and annotated HTML
     """
+    logger.info(f"Received conversion with sentiment analysis request for file: {file.filename}")
+
     # Check file extension
     file_extension = Path(file.filename).suffix.lower()
 
     if file_extension not in SUPPORTED_FORMATS:
+        logger.warning(f"Unsupported file format attempted: {file_extension}")
         raise HTTPException(
             status_code=400,
             detail=f"Unsupported file format: {file_extension}. Supported formats: {', '.join(SUPPORTED_FORMATS)}"
@@ -277,6 +312,7 @@ async def convert_with_sentiment_analysis(
         analysis_text = markdown_content if markdown_content and len(markdown_content) > len(text_content) * 0.5 else text_content
 
         # Call sentiment analysis API with both text and HTML
+        logger.info(f"Calling sentiment analysis API at {sentiment_api_url}")
         async with httpx.AsyncClient(timeout=30.0) as client:
             sentiment_response = await client.post(
                 sentiment_api_url,
@@ -284,12 +320,14 @@ async def convert_with_sentiment_analysis(
             )
 
             if sentiment_response.status_code != 200:
+                logger.error(f"Sentiment analysis failed with status {sentiment_response.status_code}: {sentiment_response.text}")
                 raise HTTPException(
                     status_code=500,
                     detail=f"Sentiment analysis failed: {sentiment_response.text}"
                 )
 
             sentiment_data = sentiment_response.json()
+        logger.info("Sentiment analysis completed successfully")
 
         # Get sentiment results and highlighted HTML
         sentiment_results = sentiment_data.get("sentiment_results", [])
@@ -341,18 +379,17 @@ async def convert_with_sentiment_analysis(
         if OUTPUT_SAVING == 1:
             response_data["saved_files"] = saved_files
 
+        logger.info(f"Successfully converted {file.filename} with sentiment analysis")
         return JSONResponse(status_code=200, content=response_data)
 
     except httpx.HTTPError as e:
-        print(f"HTTP Error: {str(e)}")
+        logger.error(f"HTTP Error communicating with sentiment API: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error communicating with sentiment API: {str(e)}"
         )
     except Exception as e:
-        print(f"Exception occurred: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        logger.error(f"Error processing document {file.filename}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error processing document: {str(e)}"

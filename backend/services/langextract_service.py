@@ -1,14 +1,18 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Dict, Optional
-import langextract as lx
 import os
 import sys
 import io
 import json
 import unicodedata
+import warnings
+
+# Suppress warnings from external libraries
+warnings.filterwarnings("ignore", category=SyntaxWarning)
+warnings.filterwarnings("ignore", message="Valid config keys have changed in V2")
 
 # Force UTF-8 encoding for stdout/stderr on Windows to handle special Unicode characters
 if sys.platform == "win32":
@@ -18,6 +22,21 @@ if sys.platform == "win32":
 # Set environment variable for UTF-8 mode (Python 3.7+)
 if hasattr(sys, 'set_int_max_str_digits'):
     os.environ["PYTHONIOENCODING"] = "utf-8"
+
+# Configure logging
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('logs/langextract_service.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Import langextract after configuring warnings
+import langextract as lx
 
 app = FastAPI(
     title="LangExtract Service",
@@ -40,6 +59,15 @@ app.add_middleware(
 API_KEY = os.getenv("LANGEXTRACT_API_KEY", "AIzaSyCJH2lOrks1C_faZxubvEYAIb2rw7yHIV8")
 if API_KEY and API_KEY != "":
     os.environ["LANGEXTRACT_API_KEY"] = API_KEY
+
+# Pre-load LangExtract to avoid loading plugins on every request
+logger.info("Pre-loading LangExtract provider plugins...")
+try:
+    # Initialize LangExtract by importing and testing availability
+    _ = lx.data.Extraction
+    logger.info("LangExtract pre-loaded successfully")
+except Exception as e:
+    logger.warning(f"Could not pre-load LangExtract: {e}")
 
 
 def normalize_unicode_text(text: str) -> str:
@@ -82,7 +110,7 @@ class ExtractRequest(BaseModel):
     text: str
     prompt_description: str
     examples: List[Example]
-    model_id: str = "gemini-2.0-flash-exp"
+    model_id: str = "gemini-2.0-flash-exp"  # Using experimental flash model
 
 
 @app.get("/")
@@ -118,19 +146,24 @@ async def extract_information(request: ExtractRequest):
     Returns:
         JSON response with extractions and HTML visualization
     """
+    logger.info(f"Received extraction request for text of length {len(request.text)} with {len(request.examples)} examples")
+
     try:
         # Check if API key is configured
         if not API_KEY or API_KEY == "":
+            logger.error("LangExtract API key not configured")
             raise HTTPException(
                 status_code=503,
                 detail="LangExtract API key not configured. Please set LANGEXTRACT_API_KEY environment variable."
             )
 
         # Normalize input text to handle Unicode characters properly
+        logger.debug("Normalizing input text and prompt...")
         normalized_text = normalize_unicode_text(request.text)
         normalized_prompt = normalize_unicode_text(request.prompt_description)
 
         # Convert request examples to LangExtract format
+        logger.debug(f"Converting {len(request.examples)} examples to LangExtract format...")
         lx_examples = []
         for example in request.examples:
             lx_extractions = [
@@ -148,32 +181,45 @@ async def extract_information(request: ExtractRequest):
                     extractions=lx_extractions
                 )
             )
+        logger.debug("Examples converted successfully")
 
         # Run the extraction with normalized text and timeout handling
         import asyncio
+        import time
         from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 
         def run_extraction():
-            return lx.extract(
+            start_time = time.time()
+            logger.info(f"Running extraction with model {request.model_id}...")
+            result = lx.extract(
                 text_or_documents=normalized_text,
                 prompt_description=normalized_prompt,
                 examples=lx_examples,
                 model_id=request.model_id,
             )
+            elapsed_time = time.time() - start_time
+            logger.info(f"Extraction completed in {elapsed_time:.2f} seconds")
+            return result
 
-        # Run extraction in thread pool with 60 second timeout
+        # Run extraction in thread pool with 30 second timeout
+        logger.info("Starting extraction in thread pool with 30s timeout...")
+        extraction_start = time.time()
         with ThreadPoolExecutor() as executor:
             future = executor.submit(run_extraction)
             try:
-                result = future.result(timeout=60)
+                result = future.result(timeout=30)
+                total_time = time.time() - extraction_start
+                logger.info(f"Total extraction time (including overhead): {total_time:.2f}s")
             except FuturesTimeoutError:
+                logger.error("Extraction timed out after 30 seconds")
                 raise HTTPException(
                     status_code=504,
-                    detail="Extraction timed out after 60 seconds. The Gemini API may be unavailable."
+                    detail="Extraction timed out after 30 seconds. The Gemini API may be unavailable or the text is too long."
                 )
             except Exception as e:
                 # Catch specific API errors
                 error_msg = str(e)
+                logger.error(f"Extraction failed: {error_msg}")
                 if "invalid argument" in error_msg.lower() or "errno 22" in error_msg.lower():
                     raise HTTPException(
                         status_code=500,
@@ -182,30 +228,47 @@ async def extract_information(request: ExtractRequest):
                 raise
 
         # Save results to JSONL file with explicit UTF-8 encoding
+        logger.info("Saving extraction results...")
         output_dir = "output"
         os.makedirs(output_dir, exist_ok=True)
 
         output_file = os.path.join(output_dir, "extraction_results.jsonl")
 
-        # Manually save to avoid Windows path issues with lx.io.save_annotated_documents()
+        # Calculate positions using LangExtract's CharInterval format
+        text_for_search = result.text if hasattr(result, 'text') else ""
+        extractions_with_positions = []
+
+        for ext in (result.extractions if hasattr(result, 'extractions') else []):
+            ext_dict = {
+                "extraction_class": ext.extraction_class,
+                "extraction_text": ext.extraction_text,
+                "attributes": ext.attributes
+            }
+
+            # Try to find position in text and add char_interval
+            if text_for_search and ext.extraction_text:
+                start_pos = text_for_search.find(ext.extraction_text)
+                if start_pos != -1:
+                    # Use LangExtract's char_interval format with start_pos and end_pos
+                    ext_dict["char_interval"] = {
+                        "start_pos": start_pos,
+                        "end_pos": start_pos + len(ext.extraction_text)
+                    }
+
+            extractions_with_positions.append(ext_dict)
+
         result_dict = {
-            "text": result.text if hasattr(result, 'text') else "",
-            "extractions": [
-                {
-                    "extraction_class": ext.extraction_class,
-                    "extraction_text": ext.extraction_text,
-                    "attributes": ext.attributes,
-                    "start_char": ext.start_char if hasattr(ext, 'start_char') else None,
-                    "end_char": ext.end_char if hasattr(ext, 'end_char') else None,
-                }
-                for ext in (result.extractions if hasattr(result, 'extractions') else [])
-            ]
+            "text": text_for_search,
+            "extractions": extractions_with_positions
         }
+
         with open(output_file, 'w', encoding='utf-8', errors='replace') as f:
             json.dump(result_dict, f, ensure_ascii=False)
             f.write('\n')
+        logger.info(f"Saved extraction results to {output_file} with {len(extractions_with_positions)} extractions")
 
         # Generate HTML visualization
+        logger.info("Generating HTML visualization...")
         html_content = lx.visualize(output_file)
 
         # Handle both Jupyter and regular output
@@ -236,6 +299,7 @@ async def extract_information(request: ExtractRequest):
         html_file = os.path.join(output_dir, "extraction_visualization.html")
         with open(html_file, "w", encoding="utf-8") as f:
             f.write(html_output)
+        logger.info(f"Saved HTML visualization to {html_file}")
 
         # Convert result to dictionary for JSON response
         extractions = []
@@ -252,6 +316,7 @@ async def extract_information(request: ExtractRequest):
                     ext_dict["end_char"] = ext.end_char
                 extractions.append(ext_dict)
 
+        logger.info(f"Extraction completed successfully with {len(extractions)} extractions")
         return JSONResponse(
             status_code=200,
             content={
@@ -266,8 +331,7 @@ async def extract_information(request: ExtractRequest):
         )
 
     except Exception as e:
-        import traceback
-        traceback.print_exc()
+        logger.error(f"Error during extraction: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error during extraction: {str(e)}"
@@ -294,3 +358,4 @@ async def get_visualization():
         html_content = f.read()
 
     return HTMLResponse(content=html_content)
+

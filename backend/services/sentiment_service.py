@@ -1,12 +1,30 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, List, Dict
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import re
+import logging
+import sys
+import warnings
 from bs4 import BeautifulSoup
+
+# Suppress warnings from external libraries
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", message=".*resume_download.*")
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('logs/sentiment_service.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Sentiment Analysis Service",
@@ -52,11 +70,19 @@ class SentimentResponse(BaseModel):
 async def load_model():
     """Load FinBERT model on startup"""
     global model, tokenizer
-    print("Loading FinBERT model...")
+    logger.info("Starting FinBERT model loading...")
     model_name = "ProsusAI/finbert"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
-    print("FinBERT model loaded successfully!")
+    try:
+        logger.info(f"Loading tokenizer from {model_name}...")
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        logger.info("Tokenizer loaded successfully")
+
+        logger.info(f"Loading model from {model_name}...")
+        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        logger.info("FinBERT model loaded successfully!")
+    except Exception as e:
+        logger.error(f"Failed to load FinBERT model: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/")
@@ -184,7 +210,10 @@ async def analyze_sentiment_endpoint(request: SentimentRequest):
     Returns:
         SentimentResponse with sentiment results and highlighted HTML
     """
+    logger.info(f"Received sentiment analysis request for text of length {len(request.text)}")
+
     if not model or not tokenizer:
+        logger.error("Model not loaded yet")
         raise HTTPException(
             status_code=503,
             detail="Model not loaded. Please wait for service to initialize."
@@ -192,9 +221,12 @@ async def analyze_sentiment_endpoint(request: SentimentRequest):
 
     try:
         # Split text into sentences
+        logger.debug("Splitting text into sentences...")
         sentences = split_into_sentences(request.text)
+        logger.info(f"Found {len(sentences)} sentences to analyze")
 
         if not sentences:
+            logger.warning("No sentences found in the provided text")
             raise HTTPException(
                 status_code=400,
                 detail="No sentences found in the provided text."
@@ -202,7 +234,8 @@ async def analyze_sentiment_endpoint(request: SentimentRequest):
 
         # Analyze sentiment for each sentence
         results = []
-        for sentence_data in sentences:
+        for idx, sentence_data in enumerate(sentences):
+            logger.debug(f"Analyzing sentence {idx+1}/{len(sentences)}")
             sentiment_class, scores = analyze_sentiment(sentence_data['text'])
 
             results.append({
@@ -215,10 +248,14 @@ async def analyze_sentiment_endpoint(request: SentimentRequest):
                 "confidence_scores": scores
             })
 
+        logger.info(f"Sentiment analysis completed for {len(results)} sentences")
+
         # Generate highlighted HTML if provided
         highlighted_html = None
         if request.html:
+            logger.info("Generating highlighted HTML...")
             highlighted_html = highlight_html(request.html, results)
+            logger.debug("HTML highlighting completed")
 
         return SentimentResponse(
             sentiment_results=results,
@@ -226,6 +263,7 @@ async def analyze_sentiment_endpoint(request: SentimentRequest):
         )
 
     except Exception as e:
+        logger.error(f"Error analyzing sentiment: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error analyzing sentiment: {str(e)}"

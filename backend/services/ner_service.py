@@ -1,10 +1,28 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Dict, Optional
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 import os
+import logging
+import sys
+import warnings
+
+# Suppress warnings from external libraries
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", message=".*resume_download.*")
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('logs/ner_service.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Financial NER Service",
@@ -52,11 +70,22 @@ class NERResponse(BaseModel):
 async def load_model():
     """Load NER model on startup"""
     global ner_pipeline
-    print(f"Loading NER model: {MODEL_NAME}...")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    model = AutoModelForTokenClassification.from_pretrained(MODEL_NAME)
-    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, aggregation_strategy="simple")
-    print("NER model loaded successfully!")
+    logger.info(f"Starting NER model loading from {MODEL_NAME}...")
+    try:
+        logger.info("Loading tokenizer...")
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+        logger.info("Tokenizer loaded successfully")
+
+        logger.info("Loading model...")
+        model = AutoModelForTokenClassification.from_pretrained(MODEL_NAME)
+        logger.info("Model loaded successfully")
+
+        logger.info("Creating NER pipeline...")
+        ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, aggregation_strategy="simple")
+        logger.info("NER model loaded successfully!")
+    except Exception as e:
+        logger.error(f"Failed to load NER model: {str(e)}", exc_info=True)
+        raise
 
 
 @app.get("/")
@@ -175,7 +204,10 @@ async def recognize_entities(request: NERRequest):
     Returns:
         JSON response with entities and highlighted HTML
     """
+    logger.info(f"Received NER request for text of length {len(request.text)}")
+
     if not ner_pipeline:
+        logger.error("NER model not loaded yet")
         raise HTTPException(
             status_code=503,
             detail="NER model not loaded. Please wait for service to initialize."
@@ -183,7 +215,9 @@ async def recognize_entities(request: NERRequest):
 
     try:
         # Run NER
+        logger.info("Running NER pipeline...")
         entities = ner_pipeline(request.text)
+        logger.info(f"Found {len(entities)} entities")
 
         # Convert numpy float32 to Python float for JSON serialization
         entities_json = []
@@ -195,8 +229,10 @@ async def recognize_entities(request: NERRequest):
                 "start": int(entity["start"]),
                 "end": int(entity["end"])
             })
+        logger.debug(f"Converted {len(entities_json)} entities to JSON format")
 
         # Generate highlighted HTML
+        logger.info("Generating highlighted HTML...")
         highlighted_html = highlight_entities_in_html(request.text, entities)
 
         # Save HTML to output folder
@@ -206,6 +242,7 @@ async def recognize_entities(request: NERRequest):
         html_file = os.path.join(output_dir, "ner_results.html")
         with open(html_file, "w", encoding="utf-8") as f:
             f.write(highlighted_html)
+        logger.info(f"Saved NER results to {html_file}")
 
         return JSONResponse(
             status_code=200,
@@ -218,8 +255,7 @@ async def recognize_entities(request: NERRequest):
         )
 
     except Exception as e:
-        import traceback
-        traceback.print_exc()
+        logger.error(f"Error during NER: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error during NER: {str(e)}"
