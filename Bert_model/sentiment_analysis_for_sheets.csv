@@ -1,0 +1,29 @@
+text,predicted_sentiment,Positive_Percentage,Negative_Percentage,Neutral_Percentage
+Company reports record quarterly profits exceeding expectations,Positive,97.05259203910828,2.0313840359449387,0.9160169400274754
+Stock market reaches all-time high with strong gains,Positive,97.26493954658508,1.514255441725254,1.2208065018057823
+Federal Reserve announces stimulus boosting investor confidence,Positive,97.59817719459534,1.3355656526982784,1.066263485699892
+Tech company shares surge 8% after innovation announcement,Positive,96.95811867713928,1.8012626096606255,1.240618247538805
+Strong job growth indicates economic recovery,Positive,97.21866846084595,1.5241495333611965,1.2571842409670353
+Merger announcement sends stocks soaring,Positive,97.38333225250244,1.4461535029113293,1.1705166660249233
+Bank adoption of cryptocurrency signals mainstream acceptance,Positive,97.21355438232422,1.7076127231121063,1.0788323357701302
+GDP growth exceeds forecasts showing economic expansion,Positive,97.48926162719727,1.5679100528359413,0.9428271092474461
+Company files for bankruptcy amid mounting debts,Negative,2.67585888504982,94.66061592102051,2.663513831794262
+Market crashes as recession fears grip investors,Negative,2.862766943871975,95.3380823135376,1.7991555854678154
+Unemployment rate rises sharply concerning economists,Negative,2.379702217876911,95.75332403182983,1.8669744953513145
+Major bank reports significant losses from bad loans,Negative,2.496812865138054,95.65452337265015,1.8486671149730682
+Trade war escalates causing market volatility,Negative,2.565872482955456,95.43110728263855,2.003023773431778
+Company shares plummet 20% after product recall,Negative,2.538413554430008,95.56041955947876,1.9011691212654114
+Economic indicators point to potential recession,Negative,2.57269274443388,95.26947736740112,2.157835476100445
+Corporate earnings disappoint leading to selloff,Negative,2.6733461767435074,95.30219435691833,2.0244570448994637
+Federal Reserve maintains interest rates unchanged,Neutral,1.507337298244238,1.1956781148910522,97.29698300361633
+Company releases earnings in line with expectations,Neutral,1.3880356214940548,1.060974132269621,97.55099415779114
+Trading volume remains steady as investors wait,Neutral,1.4420420862734318,1.124729122966528,97.43322730064392
+Board announces regular quarterly dividend,Neutral,1.4090079814195633,1.0846039280295372,97.50638604164124
+Market closes mixed with minor changes,Neutral,1.5462485142052174,1.3578682206571102,97.09588885307312
+Company announces CEO transition,Neutral,2.2468987852334976,1.0571489110589027,96.6959536075592
+Annual shareholder meeting scheduled,Neutral,1.1962393298745155,1.2256676331162453,97.57809042930603
+Regulatory filing submitted for compliance,Neutral,1.360534317791462,1.3292400166392326,97.3102331161499
+"Tech company announces breakthrough, stock jumps 12%",Positive,96.40012979507446,2.466738782823086,1.1331407353281975
+Global recession fears cause market crash,Negative,2.6846447959542274,95.64965963363647,1.6657019034028053
+Earnings report was slightly better than forecasted,Positive,83.47970843315125,1.8211295828223228,14.699169993400574
+Stock market shows positive momentum,Positive,96.7175841331482,2.2503022104501724,1.0321062989532948

@@ -1,0 +1,333 @@
+<html><head><title>Sentiment Analysis Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .sentiment-result {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border-left: 8px solid;
+            transition: transform 0.2s;
+        }
+        .positive { border-color: green; background-color: #e6ffe6; }
+        .negative { border-color: red; background-color: #ffe6e6; }
+        .neutral { border-color: #ffa500; background-color: #fff2e6; }
+        .text-sentiment { font-size: 1.1em; margin-bottom: 10px; }
+        .text-positive { color: green; font-weight: bold; }
+        .text-negative { color: red; font-weight: bold; }
+        .text-neutral { color: #ffa500; font-weight: bold; }
+        .probabilities p { margin: 3px 0; font-size: 0.9em; }
+        .probabilities { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ddd; }
+        .probabilities strong { display: inline-block; width: 100px; }
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 0; }
+        .test-section-title { color: #333; margin-top: 30px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+    </style>
+    </head><body><div class='container'><h2>Financial Sentiment Analysis Full Report</h2><h3 class='test-section-title'>Base Dataset Sentences (24 Samples)</h3>
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Company reports record quarterly profits exceeding expectations</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.05%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">2.03%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">0.92%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Stock market reaches all-time high with strong gains</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.26%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.51%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.22%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Federal Reserve announces stimulus boosting investor confidence</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.60%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.34%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.07%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Tech company shares surge 8% after innovation announcement</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">96.96%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.80%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.24%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Strong job growth indicates economic recovery</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.22%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.52%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.26%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Merger announcement sends stocks soaring</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.38%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.45%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.17%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Bank adoption of cryptocurrency signals mainstream acceptance</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.21%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.71%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.08%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">GDP growth exceeds forecasts showing economic expansion</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">97.49%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.57%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">0.94%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Company files for bankruptcy amid mounting debts</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.68%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">94.66%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">2.66%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Market crashes as recession fears grip investors</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.86%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.34%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.80%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Unemployment rate rises sharply concerning economists</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.38%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.75%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.87%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Major bank reports significant losses from bad loans</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.50%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.65%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.85%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Trade war escalates causing market volatility</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.57%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.43%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">2.00%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Company shares plummet 20% after product recall</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.54%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.56%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.90%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Economic indicators point to potential recession</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.57%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.27%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">2.16%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Corporate earnings disappoint leading to selloff</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.67%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.30%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">2.02%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Federal Reserve maintains interest rates unchanged</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.51%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.20%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.30%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Company releases earnings in line with expectations</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.39%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.06%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.55%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Trading volume remains steady as investors wait</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.44%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.12%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.43%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Board announces regular quarterly dividend</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.41%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.08%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.51%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Market closes mixed with minor changes</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.55%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.36%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.10%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Company announces CEO transition</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.25%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.06%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">96.70%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Annual shareholder meeting scheduled</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.20%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.23%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.58%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result neutral">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-neutral">Regulatory filing submitted for compliance</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: #ffa500; font-weight: bold;">Neutral</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">1.36%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.33%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">97.31%</span></p>
+                </div>
+            </div>
+            <h3 class='test-section-title'>Custom Test Sentences (3 Samples)</h3>
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Tech company announces breakthrough, stock jumps 12%</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">96.40%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">2.47%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.13%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result negative">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-negative">Global recession fears cause market crash</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: red; font-weight: bold;">Negative</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">2.68%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">95.65%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.67%</span></p>
+                </div>
+            </div>
+            
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Earnings report was slightly better than forecasted</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">83.48%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">1.82%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">14.70%</span></p>
+                </div>
+            </div>
+            <h3 class='test-section-title'>Model Loading Test Sentence (1 Samples)</h3>
+            <div class="sentiment-result positive">
+                <p class="text-sentiment"><strong>Text:</strong> <span class="text-positive">Stock market shows positive momentum</span></p>
+                <p><strong>Predicted Sentiment:</strong> <span style="color: green; font-weight: bold;">Positive</span></p>
+                
+                <div class="probabilities">
+                    <p><strong>Positive %:</strong> <span style="color: green;">96.72%</span></p>
+                    <p><strong>Negative %:</strong> <span style="color: red;">2.25%</span></p>
+                    <p><strong>Neutral %:</strong> <span style="color: #ffa500;">1.03%</span></p>
+                </div>
+            </div>
+            </div></body></html>
