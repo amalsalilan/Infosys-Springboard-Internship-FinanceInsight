@@ -34,9 +34,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Hardcoded Gemini API key (for testing only)
-API_KEY = "AIzaSyCJH2lOrks1C_faZxubvEYAIb2rw7yHIV8"
-os.environ["LANGEXTRACT_API_KEY"] = API_KEY
+# Gemini API key configuration
+# IMPORTANT: Get your own API key from https://ai.google.dev/gemini-api/docs/api-key
+# The hardcoded key below may be invalid or expired
+API_KEY = os.getenv("LANGEXTRACT_API_KEY", "AIzaSyCJH2lOrks1C_faZxubvEYAIb2rw7yHIV8")
+if API_KEY and API_KEY != "":
+    os.environ["LANGEXTRACT_API_KEY"] = API_KEY
 
 
 def normalize_unicode_text(text: str) -> str:
@@ -116,6 +119,13 @@ async def extract_information(request: ExtractRequest):
         JSON response with extractions and HTML visualization
     """
     try:
+        # Check if API key is configured
+        if not API_KEY or API_KEY == "":
+            raise HTTPException(
+                status_code=503,
+                detail="LangExtract API key not configured. Please set LANGEXTRACT_API_KEY environment variable."
+            )
+
         # Normalize input text to handle Unicode characters properly
         normalized_text = normalize_unicode_text(request.text)
         normalized_prompt = normalize_unicode_text(request.prompt_description)
@@ -139,13 +149,37 @@ async def extract_information(request: ExtractRequest):
                 )
             )
 
-        # Run the extraction with normalized text
-        result = lx.extract(
-            text_or_documents=normalized_text,
-            prompt_description=normalized_prompt,
-            examples=lx_examples,
-            model_id=request.model_id,
-        )
+        # Run the extraction with normalized text and timeout handling
+        import asyncio
+        from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+
+        def run_extraction():
+            return lx.extract(
+                text_or_documents=normalized_text,
+                prompt_description=normalized_prompt,
+                examples=lx_examples,
+                model_id=request.model_id,
+            )
+
+        # Run extraction in thread pool with 60 second timeout
+        with ThreadPoolExecutor() as executor:
+            future = executor.submit(run_extraction)
+            try:
+                result = future.result(timeout=60)
+            except FuturesTimeoutError:
+                raise HTTPException(
+                    status_code=504,
+                    detail="Extraction timed out after 60 seconds. The Gemini API may be unavailable."
+                )
+            except Exception as e:
+                # Catch specific API errors
+                error_msg = str(e)
+                if "invalid argument" in error_msg.lower() or "errno 22" in error_msg.lower():
+                    raise HTTPException(
+                        status_code=500,
+                        detail="API configuration error. The Gemini API key may be invalid or expired. Please check your API key."
+                    )
+                raise
 
         # Save results to JSONL file with explicit UTF-8 encoding
         output_dir = "output"
@@ -153,28 +187,23 @@ async def extract_information(request: ExtractRequest):
 
         output_file = os.path.join(output_dir, "extraction_results.jsonl")
 
-        # Save with explicit UTF-8 encoding to handle special characters
-        try:
-            # First, try using langextract's save function
-            lx.io.save_annotated_documents([result], output_name="extraction_results.jsonl", output_dir=output_dir)
-        except UnicodeEncodeError:
-            # If it fails due to encoding, manually save with UTF-8
-            result_dict = {
-                "text": result.text if hasattr(result, 'text') else "",
-                "extractions": [
-                    {
-                        "extraction_class": ext.extraction_class,
-                        "extraction_text": ext.extraction_text,
-                        "attributes": ext.attributes,
-                        "start_char": ext.start_char if hasattr(ext, 'start_char') else None,
-                        "end_char": ext.end_char if hasattr(ext, 'end_char') else None,
-                    }
-                    for ext in (result.extractions if hasattr(result, 'extractions') else [])
-                ]
-            }
-            with open(output_file, 'w', encoding='utf-8', errors='replace') as f:
-                json.dump(result_dict, f, ensure_ascii=False)
-                f.write('\n')
+        # Manually save to avoid Windows path issues with lx.io.save_annotated_documents()
+        result_dict = {
+            "text": result.text if hasattr(result, 'text') else "",
+            "extractions": [
+                {
+                    "extraction_class": ext.extraction_class,
+                    "extraction_text": ext.extraction_text,
+                    "attributes": ext.attributes,
+                    "start_char": ext.start_char if hasattr(ext, 'start_char') else None,
+                    "end_char": ext.end_char if hasattr(ext, 'end_char') else None,
+                }
+                for ext in (result.extractions if hasattr(result, 'extractions') else [])
+            ]
+        }
+        with open(output_file, 'w', encoding='utf-8', errors='replace') as f:
+            json.dump(result_dict, f, ensure_ascii=False)
+            f.write('\n')
 
         # Generate HTML visualization
         html_content = lx.visualize(output_file)
