@@ -10,7 +10,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/  # Commented out - was excluding frontend/src/lib
 lib64/
 parts/
 sdist/
