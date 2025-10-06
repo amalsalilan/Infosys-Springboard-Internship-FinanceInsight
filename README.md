@@ -1,6 +1,6 @@
-# Financial Named Entity Recognition (NER) – Full Stack Project
+# Financial Named Entity Recognition (NER) – 
 
-This repository contains both the **frontend** and **backend** of a full-stack **Financial Named Entity Recognition (NER)** system.
+This repository contains both the **frontend** and **backend** of a **Financial Named Entity Recognition (NER)** system.
 
 The project identifies **financial entities** such as company names, monetary amounts, and domain-specific terms using a fine-tuned **BERT model**, combined with **SpaCy** and **LangDetect**.
 
