@@ -112,11 +112,11 @@ Backend: Python (FastAPI / Flask)
 Frontend: TypeScript, React, Vite
 
 Styling: Tailwind CSS
+models : BERT - Sentiment Classification
+         Lang- Data Extraction
+         SpaCy-Entity Recognition
 
-models : 
-BERT - Sentiment Classification
-Lang- Data Extraction
-SpaCy-Entity Recognition
+
 ---
 
 ## 🖼️ Output Preview
@@ -132,7 +132,7 @@ Then open your browser → **[http://localhost:5173](http://localhost:5173)**
 
 ---
 
-## 🙏 Acknowledgements
+##  Acknowledgements
 
 * [Hugging Face Transformers](https://huggingface.co/transformers)
 * [SpaCy](https://spacy.io)
