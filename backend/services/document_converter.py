@@ -17,6 +17,9 @@ from typing import Optional
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
 
+# Ensure logs directory exists
+Path('logs').mkdir(exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,

@@ -9,6 +9,7 @@ import io
 import json
 import unicodedata
 import warnings
+from pathlib import Path
 
 # Suppress warnings from external libraries
 warnings.filterwarnings("ignore", category=SyntaxWarning)
@@ -22,6 +23,9 @@ if sys.platform == "win32":
 # Set environment variable for UTF-8 mode (Python 3.7+)
 if hasattr(sys, 'set_int_max_str_digits'):
     os.environ["PYTHONIOENCODING"] = "utf-8"
+
+# Ensure logs directory exists
+Path('logs').mkdir(exist_ok=True)
 
 # Configure logging
 import logging

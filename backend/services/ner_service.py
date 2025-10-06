@@ -8,10 +8,14 @@ import os
 import logging
 import sys
 import warnings
+from pathlib import Path
 
 # Suppress warnings from external libraries
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", message=".*resume_download.*")
+
+# Ensure logs directory exists
+Path('logs').mkdir(exist_ok=True)
 
 # Configure logging
 logging.basicConfig(
