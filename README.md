@@ -11,7 +11,7 @@ The project identifies **financial entities** such as company names, monetary am
 Due to **GitHub’s 100 MB file size limit**, the **trained model files** (`.safetensors`, `.bin`, etc.) are **not uploaded here**.  
 They are stored separately and can be downloaded from Google Drive.
 
-👉 [Download Model Files (Google Drive)]((https://drive.google.com/file/d/1B_Zc4cSfwQUp9kCMy-Uz5E49CcDKnSPT/view?usp=drive_link))
+👉 [Download Model Files (Google Drive)](https://drive.google.com/file/d/1B_Zc4cSfwQUp9kCMy-Uz5E49CcDKnSPT/view?usp=drive_link)
 
 After downloading, place them inside:
 ```
