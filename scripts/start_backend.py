@@ -59,13 +59,15 @@ def main():
             print(f"\n📦 Starting {service['name']} on port {service['port']}...")
 
             # Start the service using uvicorn
+            # Only watch the backend directory to avoid .venv and node_modules
             cmd = [
                 sys.executable,
                 "-m", "uvicorn",
                 f"{service['file']}:app",
                 "--host", service['host'],
                 "--port", str(service['port']),
-                "--reload"
+                "--reload",
+                "--reload-dir", str(PROJECT_ROOT / "backend")
             ]
 
             # Don't capture output - let it print to console
