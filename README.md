@@ -1,4 +1,4 @@
-# Financial Named Entity Recognition (NER) – 
+# Financial Named Entity Recognition (NER) 
 
 This repository contains both the **frontend** and **backend** of a **Financial Named Entity Recognition (NER)** system.
 
@@ -33,7 +33,7 @@ backend/FINAL_NER_MODEL/
 
 financial-ner/
 │
-├── backend/                  # Python backend (FastAPI / Flask)
+├── backend/                  # Python backend (FastAPI)
 │   ├── app.py                # Main API server
 │   ├── requirements.txt      # Backend dependencies
 │   ├── FINAL_NER_MODEL/      # Model configs (weights not uploaded)
@@ -58,7 +58,7 @@ financial-ner/
 
 ## ⚙️ Installation & Setup
 
-### 🧠 Backend Setup (FastAPI / Flask)
+### 🧠 Backend Setup 
 
 1️⃣ Navigate to the backend folder:
 ```bash
@@ -107,7 +107,7 @@ npm run dev
 
 ## 🧰 Technologies Used
 
-Backend: Python (FastAPI / Flask)
+Backend: Python (FastAPI)
 
 Frontend: TypeScript, React, Vite
 
