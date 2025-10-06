@@ -33,12 +33,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
-    alias: [
-      {
-        find: "@",
-        replacement: path.resolve(__dirname, "./frontend/src"),
-      },
-    ],
+    alias: {
+      "@": path.resolve(__dirname, "./frontend/src"),
+    },
   },
   publicDir: path.resolve(__dirname, "./frontend/public"),
   build: {
