@@ -27,6 +27,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 **3. Install Python dependencies:**
 ```bash
 uv sync
+
+# On Windows, also install libmagic for langextract service:
+uv pip install python-magic-bin
 ```
 
 **4. Install Node dependencies:**

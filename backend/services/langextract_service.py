@@ -40,7 +40,15 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Import langextract after configuring warnings
-import langextract as lx
+try:
+    import langextract as lx
+    LANGEXTRACT_AVAILABLE = True
+except ImportError as e:
+    LANGEXTRACT_AVAILABLE = False
+    LANGEXTRACT_ERROR = str(e)
+    logger.warning(f"LangExtract import failed: {e}")
+    logger.warning("The service will start but extraction endpoints will not work.")
+    logger.warning("On Windows, install libmagic: pip install python-magic-bin")
 
 app = FastAPI(
     title="LangExtract Service",
@@ -65,13 +73,18 @@ if API_KEY and API_KEY != "":
     os.environ["LANGEXTRACT_API_KEY"] = API_KEY
 
 # Pre-load LangExtract to avoid loading plugins on every request
-logger.info("Pre-loading LangExtract provider plugins...")
-try:
-    # Initialize LangExtract by importing and testing availability
-    _ = lx.data.Extraction
-    logger.info("LangExtract pre-loaded successfully")
-except Exception as e:
-    logger.warning(f"Could not pre-load LangExtract: {e}")
+if LANGEXTRACT_AVAILABLE:
+    logger.info("Pre-loading LangExtract provider plugins...")
+    try:
+        # Initialize LangExtract by importing and testing availability
+        _ = lx.data.Extraction
+        logger.info("LangExtract pre-loaded successfully")
+    except Exception as e:
+        logger.warning(f"Could not pre-load LangExtract: {e}")
+        LANGEXTRACT_AVAILABLE = False
+        LANGEXTRACT_ERROR = str(e)
+else:
+    logger.warning("LangExtract not available - skipping pre-load")
 
 
 def normalize_unicode_text(text: str) -> str:
@@ -153,6 +166,14 @@ async def extract_information(request: ExtractRequest):
     logger.info(f"Received extraction request for text of length {len(request.text)} with {len(request.examples)} examples")
 
     try:
+        # Check if LangExtract is available
+        if not LANGEXTRACT_AVAILABLE:
+            logger.error(f"LangExtract not available: {LANGEXTRACT_ERROR}")
+            raise HTTPException(
+                status_code=503,
+                detail=f"LangExtract service unavailable: {LANGEXTRACT_ERROR}. On Windows, try: pip install python-magic-bin"
+            )
+
         # Check if API key is configured
         if not API_KEY or API_KEY == "":
             logger.error("LangExtract API key not configured")

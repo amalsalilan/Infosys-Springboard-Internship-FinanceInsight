@@ -57,6 +57,9 @@ dev = [
     "mypy>=1.0.0,<2.0.0",
     "pre-commit>=3.0.0,<4.0.0",
 ]
+windows = [
+    "python-magic-bin>=0.4.14",  # Required for langextract on Windows
+]
 
 [project.urls]
 Homepage = "https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceInsight"
