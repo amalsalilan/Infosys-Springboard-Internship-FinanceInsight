@@ -1,39 +1,53 @@
-# Infosys-Springboard-Internship-FinanceInsight
+# FinSight - Financial Document Analysis
 
-This repository is part of the **Infosys Springboard Internship Project - Finance Insight**.  
-It focuses on building financial analytics and insights through data analysis, visualization, and automation.
+## Prerequisites
 
-## 🚀 Project Objectives
-- Analyze financial datasets.
-- Generate meaningful insights using Python libraries (Pandas, NumPy, Matplotlib, Seaborn, etc.).
-- Build dashboards/reports to present findings.
-- Provide recommendations for better financial decision-making.
+- Python 3.10+
+- Node.js 16+
+- Git
+- uv (Python package manager)
 
-## 📂 Repository Structure
-├── data/ # Raw & cleaned datasets
-├── notebooks/ # Jupyter notebooks for analysis
-├── scripts/ # Python scripts for automation
-├── reports/ # Generated reports or visualizations
-├── LICENSE # License file
-└── README.md # Project documentation
+## Setup
 
-## 🔧 How to Use
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceInsight.git
-Run analysis scripts or open Jupyter notebooks.
+**1. Clone the repository:**
+```bash
+git clone https://github.com/amalsalilan/Infosys-Springboard-Internship-FinanceInsight.git
+cd Infosys-Springboard-Internship-FinanceInsight
+```
 
-🛠️ Tech Stack
+**2. Install uv (if not already installed):**
+```bash
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-Python
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-Pandas, NumPy
+**3. Install Python dependencies:**
+```bash
+uv sync
 
-Matplotlib, Seaborn
+# On Windows, also install libmagic for langextract service:
+uv pip install python-magic-bin
+```
 
-Jupyter Notebook
+**4. Install Node dependencies:**
+```bash
+npm install
+```
 
-👩‍💻 Contributors
+## Running the Application
 
-Jahnavi Gajjela
+**1. Start backend services:**
+```bash
+uv run python scripts/start_backend.py
+```
 
+**2. Start frontend (in a new terminal):**
+```bash
+npm run dev
+```
+
+**3. Access the application:**
+Open your browser and navigate to `http://localhost:8080`
