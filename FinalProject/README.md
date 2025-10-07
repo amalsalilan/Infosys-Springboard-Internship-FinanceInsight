@@ -49,6 +49,7 @@ uv run python scripts/start_backend.py
 npm run dev
 ```
 
+
 **3. Access the application:**
 Open your browser and navigate to `http://localhost:8080`
 
