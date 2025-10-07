@@ -25,8 +25,9 @@ financial-ner/
 ├── backend/                  # Python backend (FastAPI)
 │   ├── app.py                # Main API server
 │   ├── requirements.txt      # Backend dependencies
-│   ├── FINAL_NER_MODEL/      # Model configs (weights not uploaded)
-│   ├── config.cfg
+│   ├── SPACY_MODEL
+|   ├── BERT_MODEL/      
+│   ├── config.cfg            # Model configs (weights not uploaded)
 │   ├── meta.json
 │
 ├── frontend/                 # TypeScript + React + Vite frontend
