@@ -9,21 +9,10 @@ The project identifies **financial entities** such as company names, monetary am
 ## ⚠️ Note
 
 Due to **GitHub’s 100 MB file size limit**, the **trained model files** (`.safetensors`, `.bin`, etc.) are **not uploaded here**.  
-They are stored separately and can be downloaded from Google Drive.
+The full prject is stored separately and can be downloaded from Google Drive.
 
-👉 [Download Model Files (Google Drive)](https://drive.google.com/file/d/1B_Zc4cSfwQUp9kCMy-Uz5E49CcDKnSPT/view?usp=drive_link)
+👉 [Download working model Files (Google Drive)](https://drive.google.com/file/d/1B_Zc4cSfwQUp9kCMy-Uz5E49CcDKnSPT/view?usp=drive_link)
 
-After downloading, place them inside:
-```
-
-backend/FINAL_NER_MODEL/
-├── bert_model/
-│   ├── model.safetensors
-│   ├── training_args.bin
-├── financial_bert_model/
-│   ├── model.safetensors
-
-```
 
 ---
 
@@ -121,6 +110,11 @@ models : BERT - Sentiment Classification
 ---
 
 ## 🖼️ Output Preview
+
+![Screenshot 2025-10-07 190153](https://github.com/user-attachments/assets/fe3df530-2d71-4bf8-a94e-f230434aeef1)
+<img width="1327" height="800" alt="image" src="https://github.com/user-attachments/assets/9ddd562f-6aa8-4952-bd89-fa10fb8ab9b2" />
+<img width="546" height="672" alt="image" src="https://github.com/user-attachments/assets/cc61b177-b020-4f3d-99a1-2c1c2d081977" />
+<img width="530" height="763" alt="image" src="https://github.com/user-attachments/assets/117a53b9-c3be-4c89-b71b-7dda79920e08" />
 
 
 
