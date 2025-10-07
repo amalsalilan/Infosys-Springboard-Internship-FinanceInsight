@@ -107,14 +107,54 @@ models : BERT - Sentiment Classification ;
          Lang- Data Extraction ;
          SpaCy-Entity Recognition ;
 
+Absolutely ✅ — here’s your **Example Output Summary section** rewritten in **clean Markdown format** so it displays perfectly inside your `README.md` file.
+
+---
+
+## ⚙️ Example Output Summary
+
+### 📄 Extracted Text
+
+```
+This Agreement is entered into on the 5th day of July, 2024...
+```
+
+---
+
+### 🟢 SpaCy Entities
+
+| Entity                       | Label |
+| ---------------------------- | ----- |
+| Alpha Technologies Pvt. Ltd. | ORG   |
+| July 5, 2024                 | DATE  |
+| USD 125,000                  | MONEY |
+
+---
+
+### 🔵 BERT Sentiment
+
+✅ **Positive tone**
+Confidence: **0.89**
+
+---
+
+### 🟣 LangExtract Table
+
+| Field            | Value                        |
+| ---------------- | ---------------------------- |
+| agreement_date   | July 5, 2024                 |
+| service_provider | Alpha Technologies Pvt. Ltd. |
+| client           | Delta Innovations Inc.       |
+| contract_value   | USD 125,000                  |
+| jurisdiction     | California                   |
+
 
 ---
 
 ## 🖼️ Output Preview
 
-![Screenshot 2025-10-07 190153](https://github.com/user-attachments/assets/fe3df530-2d71-4bf8-a94e-f230434aeef1)
+<img width="1897" height="982" alt="image" src="https://github.com/user-attachments/assets/5f4f804b-5ece-4945-879e-e10b6be9630a" />
 <img width="625" height="343" alt="image" src="https://github.com/user-attachments/assets/d96200a4-85b2-43cb-aeb0-03fbca1edb8a" />
-
 <img width="546" height="672" alt="image" src="https://github.com/user-attachments/assets/cc61b177-b020-4f3d-99a1-2c1c2d081977" />
 <img width="535" height="747" alt="image" src="https://github.com/user-attachments/assets/b259fd75-c16b-46da-b1c2-cf6a4303a8c5" />
 
