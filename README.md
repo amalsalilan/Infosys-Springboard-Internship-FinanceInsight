@@ -153,9 +153,10 @@ Confidence: **0.89**
 ## 🖼️ Output Preview
 
 <img width="1897" height="982" alt="image" src="https://github.com/user-attachments/assets/5f4f804b-5ece-4945-879e-e10b6be9630a" />
-<img width="625" height="343" alt="image" src="https://github.com/user-attachments/assets/d96200a4-85b2-43cb-aeb0-03fbca1edb8a" />
-<img width="546" height="672" alt="image" src="https://github.com/user-attachments/assets/cc61b177-b020-4f3d-99a1-2c1c2d081977" />
-<img width="535" height="747" alt="image" src="https://github.com/user-attachments/assets/b259fd75-c16b-46da-b1c2-cf6a4303a8c5" />
+<img width="1915" height="968" alt="image" src="https://github.com/user-attachments/assets/1d7fa180-49a9-4d8f-98dd-56a26f8bff6e" />
+<img width="1902" height="739" alt="image" src="https://github.com/user-attachments/assets/7b833174-eebd-4357-8b28-2cac66817f63" />
+<img width="1889" height="1001" alt="image" src="https://github.com/user-attachments/assets/532a2989-e2ef-4503-a183-f299120437e8" />
+
 
 ---
 
