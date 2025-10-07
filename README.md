@@ -112,11 +112,10 @@ models : BERT - Sentiment Classification
 ## 🖼️ Output Preview
 
 ![Screenshot 2025-10-07 190153](https://github.com/user-attachments/assets/fe3df530-2d71-4bf8-a94e-f230434aeef1)
-<img width="1327" height="800" alt="image" src="https://github.com/user-attachments/assets/9ddd562f-6aa8-4952-bd89-fa10fb8ab9b2" />
+<img width="625" height="343" alt="image" src="https://github.com/user-attachments/assets/d96200a4-85b2-43cb-aeb0-03fbca1edb8a" />
+
 <img width="546" height="672" alt="image" src="https://github.com/user-attachments/assets/cc61b177-b020-4f3d-99a1-2c1c2d081977" />
-<img width="530" height="763" alt="image" src="https://github.com/user-attachments/assets/117a53b9-c3be-4c89-b71b-7dda79920e08" />
-
-
+<img width="535" height="747" alt="image" src="https://github.com/user-attachments/assets/b259fd75-c16b-46da-b1c2-cf6a4303a8c5" />
 
 ---
 
