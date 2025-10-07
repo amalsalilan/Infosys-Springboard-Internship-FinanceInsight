@@ -102,9 +102,9 @@ Frontend: TypeScript, React, Vite
 
 Styling: Tailwind CSS
 
-models : BERT - Sentiment Classification
-         Lang- Data Extraction
-         SpaCy-Entity Recognition
+models : BERT - Sentiment Classification ;
+         Lang- Data Extraction ;
+         SpaCy-Entity Recognition ;
 
 
 ---
