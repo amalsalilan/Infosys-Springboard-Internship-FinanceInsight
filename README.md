@@ -122,11 +122,11 @@ This Agreement is entered into on the 5th day of July, 2024...
 
 ### 🟢 SpaCy Entities
 
-| Entity                       | Label |
-| ---------------------------- | ----- |
-| Alpha Technologies Pvt. Ltd. | ORG   |
-| July 5, 2024                 | DATE  |
-| USD 125,000                  | MONEY |
+Alpha Technologies Pvt. Ltd. → ORG
+
+July 5, 2024 → DATE
+
+USD 125,000 → MONEY
 
 ---
 
