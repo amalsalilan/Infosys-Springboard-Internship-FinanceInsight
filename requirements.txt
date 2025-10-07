@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-multipart
+transformers
+torch
+docling
+pydantic
+pymupdf
+sqlalchemy
+PyJWT
