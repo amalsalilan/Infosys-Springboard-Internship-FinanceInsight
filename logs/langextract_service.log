@@ -1,0 +1,66 @@
+2025-10-07 00:07:34,013 - backend.services.langextract_service - INFO - Pre-loading LangExtract provider plugins...
+2025-10-07 00:07:34,014 - backend.services.langextract_service - INFO - LangExtract pre-loaded successfully
+2025-10-07 00:21:11,531 - backend.services.langextract_service - INFO - Received extraction request for text of length 1178 with 2 examples
+2025-10-07 00:21:11,541 - backend.services.langextract_service - INFO - Starting extraction in thread pool with 30s timeout...
+2025-10-07 00:21:11,545 - backend.services.langextract_service - INFO - Running extraction with model gemini-2.0-flash-exp...
+2025-10-07 00:21:13,100 - absl - INFO - Starting document annotation.
+2025-10-07 00:21:13,108 - absl - INFO - Processing batch 0 with length 2
+2025-10-07 00:21:13,112 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-07 00:21:13,116 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-07 00:21:15,898 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-10-07 00:21:18,457 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-10-07 00:21:18,460 - absl - INFO - Starting resolver process for input text.
+2025-10-07 00:21:18,461 - absl - INFO - Starting string parsing.
+2025-10-07 00:21:18,462 - absl - INFO - Completed parsing of string.
+2025-10-07 00:21:18,462 - absl - INFO - Starting to extract and order extractions from data.
+2025-10-07 00:21:18,463 - absl - INFO - Completed extraction and ordering of extractions.
+2025-10-07 00:21:18,464 - absl - INFO - Starting alignment process for provided chunk text.
+2025-10-07 00:21:18,487 - absl - INFO - Completed alignment process for the provided source_text.
+2025-10-07 00:21:18,488 - absl - INFO - Starting resolver process for input text.
+2025-10-07 00:21:18,488 - absl - INFO - Starting string parsing.
+2025-10-07 00:21:18,489 - absl - INFO - Completed parsing of string.
+2025-10-07 00:21:18,490 - absl - INFO - Starting to extract and order extractions from data.
+2025-10-07 00:21:18,490 - absl - INFO - Completed extraction and ordering of extractions.
+2025-10-07 00:21:18,491 - absl - INFO - Starting alignment process for provided chunk text.
+2025-10-07 00:21:18,493 - absl - INFO - Completed alignment process for the provided source_text.
+2025-10-07 00:21:18,495 - absl - INFO - Finalizing annotation for document ID doc_3b9fd931.
+2025-10-07 00:21:18,497 - absl - INFO - Document annotation completed.
+2025-10-07 00:21:18,506 - backend.services.langextract_service - INFO - Extraction completed in 6.96 seconds
+2025-10-07 00:21:18,507 - backend.services.langextract_service - INFO - Total extraction time (including overhead): 6.97s
+2025-10-07 00:21:18,508 - backend.services.langextract_service - INFO - Saving extraction results...
+2025-10-07 00:21:18,511 - backend.services.langextract_service - INFO - Saved extraction results to output\extraction_results.jsonl with 7 extractions
+2025-10-07 00:21:18,511 - backend.services.langextract_service - INFO - Generating HTML visualization...
+2025-10-07 00:21:18,773 - backend.services.langextract_service - INFO - Saved HTML visualization to output\extraction_visualization.html
+2025-10-07 00:21:18,775 - backend.services.langextract_service - INFO - Extraction completed successfully with 7 extractions
+2025-10-07 00:25:14,951 - backend.services.langextract_service - INFO - Received extraction request for text of length 1178 with 2 examples
+2025-10-07 00:25:14,952 - backend.services.langextract_service - INFO - Starting extraction in thread pool with 30s timeout...
+2025-10-07 00:25:14,954 - backend.services.langextract_service - INFO - Running extraction with model gemini-2.0-flash-exp...
+2025-10-07 00:25:14,990 - absl - INFO - Starting document annotation.
+2025-10-07 00:25:14,993 - absl - INFO - Processing batch 0 with length 2
+2025-10-07 00:25:14,994 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-07 00:25:14,996 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-07 00:25:18,791 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-10-07 00:25:19,507 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-10-07 00:25:19,512 - absl - INFO - Starting resolver process for input text.
+2025-10-07 00:25:19,513 - absl - INFO - Starting string parsing.
+2025-10-07 00:25:19,513 - absl - INFO - Completed parsing of string.
+2025-10-07 00:25:19,513 - absl - INFO - Starting to extract and order extractions from data.
+2025-10-07 00:25:19,513 - absl - INFO - Completed extraction and ordering of extractions.
+2025-10-07 00:25:19,514 - absl - INFO - Starting alignment process for provided chunk text.
+2025-10-07 00:25:19,518 - absl - INFO - Completed alignment process for the provided source_text.
+2025-10-07 00:25:19,518 - absl - INFO - Starting resolver process for input text.
+2025-10-07 00:25:19,518 - absl - INFO - Starting string parsing.
+2025-10-07 00:25:19,519 - absl - INFO - Completed parsing of string.
+2025-10-07 00:25:19,519 - absl - INFO - Starting to extract and order extractions from data.
+2025-10-07 00:25:19,519 - absl - INFO - Completed extraction and ordering of extractions.
+2025-10-07 00:25:19,519 - absl - INFO - Starting alignment process for provided chunk text.
+2025-10-07 00:25:19,520 - absl - INFO - Completed alignment process for the provided source_text.
+2025-10-07 00:25:19,522 - absl - INFO - Finalizing annotation for document ID doc_7d37b438.
+2025-10-07 00:25:19,522 - absl - INFO - Document annotation completed.
+2025-10-07 00:25:19,528 - backend.services.langextract_service - INFO - Extraction completed in 4.57 seconds
+2025-10-07 00:25:19,529 - backend.services.langextract_service - INFO - Total extraction time (including overhead): 4.58s
+2025-10-07 00:25:19,529 - backend.services.langextract_service - INFO - Saving extraction results...
+2025-10-07 00:25:19,532 - backend.services.langextract_service - INFO - Saved extraction results to output\extraction_results.jsonl with 4 extractions
+2025-10-07 00:25:19,532 - backend.services.langextract_service - INFO - Generating HTML visualization...
+2025-10-07 00:25:19,571 - backend.services.langextract_service - INFO - Saved HTML visualization to output\extraction_visualization.html
+2025-10-07 00:25:19,571 - backend.services.langextract_service - INFO - Extraction completed successfully with 4 extractions
