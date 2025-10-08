@@ -1,0 +1,177 @@
+[
+  [
+    "Tesla opened a new factory in Texas.",
+    {
+      "entities": [
+        [
+          0,
+          5,
+          "ORG"
+        ],
+        [
+          31,
+          36,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Microsoft launched a new product in California.",
+    {
+      "entities": [
+        [
+          0,
+          9,
+          "ORG"
+        ],
+        [
+          38,
+          48,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Amazon India invested in Bengaluru startups.",
+    {
+      "entities": [
+        [
+          0,
+          6,
+          "ORG"
+        ],
+        [
+          7,
+          12,
+          "GPE"
+        ],
+        [
+          26,
+          35,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Google announced a new AI lab in New York.",
+    {
+      "entities": [
+        [
+          0,
+          6,
+          "ORG"
+        ],
+        [
+          38,
+          46,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "SpaceX started operations in Florida.",
+    {
+      "entities": [
+        [
+          0,
+          6,
+          "ORG"
+        ],
+        [
+          30,
+          37,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Apple is building a data center in Hyderabad.",
+    {
+      "entities": [
+        [
+          0,
+          5,
+          "ORG"
+        ],
+        [
+          36,
+          45,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Facebook plans a campus in London.",
+    {
+      "entities": [
+        [
+          0,
+          8,
+          "ORG"
+        ],
+        [
+          31,
+          37,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Netflix expanded its offices to Berlin.",
+    {
+      "entities": [
+        [
+          0,
+          7,
+          "ORG"
+        ],
+        [
+          35,
+          41,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "Intel is hiring in San Francisco.",
+    {
+      "entities": [
+        [
+          0,
+          5,
+          "ORG"
+        ],
+        [
+          19,
+          32,
+          "GPE"
+        ]
+      ]
+    }
+  ],
+  [
+    "IBM Research Lab opened in Tokyo.",
+    {
+      "entities": [
+        [
+          0,
+          3,
+          "ORG"
+        ],
+        [
+          28,
+          33,
+          "GPE"
+        ]
+      ]
+    }
+  ]
+]

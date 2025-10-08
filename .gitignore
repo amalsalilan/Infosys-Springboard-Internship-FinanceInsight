@@ -1,0 +1,21 @@
+﻿# Large model files
+*.safetensors
+*.bin
+**/financial_bert_model/
+**/financial_spacy_model/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

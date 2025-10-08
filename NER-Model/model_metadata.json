@@ -1,0 +1,14 @@
+{
+  "model_version": "1.0.0",
+  "created_at": "2025-10-08T10:41:17.744404",
+  "api_provider": "google-gemini",
+  "model_id": "gemini-2.5-flash",
+  "entity_classes": [
+    "company_name",
+    "person_name",
+    "financial_metric",
+    "product",
+    "location"
+  ],
+  "ready_for_deployment": true
+}

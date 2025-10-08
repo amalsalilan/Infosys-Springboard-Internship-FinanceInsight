@@ -1,0 +1,90 @@
+{
+  "model_id": "gemini-2.5-flash",
+  "max_workers": 1,
+  "prompt": "Extract financial entities from the document in order of appearance.\n\nEntity Types:\n- company_name: Any company, corporation, or business entity\n- person_name: Names of executives, analysts, or individuals\n- financial_metric: Revenue, profit, earnings, stock prices, percentages\n- product: Products, services, or product lines\n- location: Geographic locations, markets, regions\n\nRules:\n1. Use exact text from document (no paraphrasing)\n2. Extract in order of appearance\n3. Provide contextual attributes for each entity\n4. Avoid overlapping extractions\n",
+  "entity_classes": [
+    "company_name",
+    "person_name",
+    "financial_metric",
+    "product",
+    "location"
+  ],
+  "version": "1.0.0",
+  "created_at": "2025-10-08T10:41:17.744404",
+  "examples": [
+    {
+      "text": "Apple Inc reported Q4 revenue of $89.5 billion, a 12% increase. CEO Tim Cook announced the new iPhone 15 Pro will launch in Cupertino.",
+      "extractions": [
+        {
+          "class": "company_name",
+          "text": "Apple Inc",
+          "attributes": {
+            "ceo": "Tim Cook",
+            "location": "Cupertino"
+          }
+        },
+        {
+          "class": "financial_metric",
+          "text": "$89.5 billion",
+          "attributes": {
+            "type": "revenue",
+            "period": "Q4"
+          }
+        },
+        {
+          "class": "financial_metric",
+          "text": "12%",
+          "attributes": {
+            "type": "growth_rate"
+          }
+        },
+        {
+          "class": "person_name",
+          "text": "Tim Cook",
+          "attributes": {
+            "title": "CEO",
+            "company": "Apple Inc"
+          }
+        },
+        {
+          "class": "product",
+          "text": "iPhone 15 Pro",
+          "attributes": {
+            "company": "Apple Inc"
+          }
+        },
+        {
+          "class": "location",
+          "text": "Cupertino",
+          "attributes": {
+            "company": "Apple Inc"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Tesla missed earnings expectations with EPS of $0.85. Analysts at Goldman Sachs downgraded the stock.",
+      "extractions": [
+        {
+          "class": "company_name",
+          "text": "Tesla",
+          "attributes": null
+        },
+        {
+          "class": "financial_metric",
+          "text": "$0.85",
+          "attributes": {
+            "type": "EPS"
+          }
+        },
+        {
+          "class": "company_name",
+          "text": "Goldman Sachs",
+          "attributes": {
+            "type": "investment_bank"
+          }
+        }
+      ]
+    }
+  ]
+}
