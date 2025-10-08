@@ -1,0 +1,4 @@
+spacy
+pdfplumber
+torch
+transformers
