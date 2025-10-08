@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/22764146/README.md)
 # FinSight - Financial Document Analysis
 
 ## Prerequisites
